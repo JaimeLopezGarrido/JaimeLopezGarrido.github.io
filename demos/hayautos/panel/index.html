@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Panel · HAY AUTOS (demo)</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="../img/logo-hay-autos.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/hayautos.css">
+<link rel="stylesheet" href="../css/demo.css">
+</head>
+<body>
+
+<!-- Ingreso -->
+<div class="login" id="vista-login" hidden>
+  <section class="azul"><img src="../img/logo-hay-autos.webp" alt="HAY AUTOS"></section>
+  <section class="lado">
+    <div class="card">
+      <div class="stack" style="gap: 8px;">
+        <span class="label">Panel de HAY AUTOS</span>
+        <h1 style="font-size: 32px; line-height: 38px; font-weight: 500;">Ingresar</h1>
+        <p class="muted">Autos, personas, operaciones y documentos en un solo lugar.</p>
+      </div>
+      <button type="button" class="btn btn-secondary btn-big" id="entrar">
+        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5a5.6 5.6 0 0 1-2.4 3.6v3h3.9c2.3-2.1 3.5-5.2 3.5-8.8z"/><path fill="#34A853" d="M12 24c3.2 0 6-1.1 8-2.9l-3.9-3c-1.1.7-2.5 1.2-4.1 1.2-3.1 0-5.8-2.1-6.7-5H1.3v3.1A12 12 0 0 0 12 24z"/><path fill="#FBBC05" d="M5.3 14.3a7.2 7.2 0 0 1 0-4.6V6.6h-4a12 12 0 0 0 0 10.8l4-3.1z"/><path fill="#EA4335" d="M12 4.8c1.8 0 3.3.6 4.6 1.8l3.4-3.4A12 12 0 0 0 1.3 6.6l4 3.1c.9-2.9 3.6-4.9 6.7-4.9z"/></svg>
+        Entrar con Google
+      </button>
+      <div class="aviso-caja aviso-error" id="login-error" hidden></div>
+      <p class="caption" style="display: flex; gap: 8px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5a6472" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+        Solo pueden entrar las cuentas de Google autorizadas por HAY AUTOS.
+      </p>
+    </div>
+  </section>
+</div>
+
+<!-- Panel -->
+<div class="panel" id="vista-panel" hidden>
+  <aside class="lateral">
+    <img class="logo" src="../img/logo-hay-autos-blanco.png" alt="HAY AUTOS">
+    <nav class="stack" style="gap: 4px;" aria-label="Secciones" id="menu"></nav>
+    <div class="yo"><span class="avatar" id="yo-inicial">·</span><span class="grow" id="yo-nombre"></span><button type="button" data-salir>Salir</button></div>
+  </aside>
+  <header class="barra-celu">
+    <img src="../img/logo-hay-autos-blanco.png" alt="HAY AUTOS">
+    <button type="button" data-salir aria-label="Salir"><span class="avatar" id="yo-inicial-celu">·</span></button>
+  </header>
+  <main class="contenido" id="contenido" tabindex="-1"></main>
+  <nav class="tabs" aria-label="Secciones" id="tabs"></nav>
+</div>
+
+<script src="../js/config.js"></script>
+<script src="../js/demo.js"></script>
+<script src="../js/documentos_core.js"></script>
+<script src="../js/webapp_core.js"></script>
+<script src="../js/matches_core.js"></script>
+<script src="../js/tablero_core.js"></script>
+<script type="module" src="../js/panel.js"></script>
+</body>
+</html>

@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HAY AUTOS · Cargá tus datos (demo)</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="img/logo-hay-autos.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/hayautos.css">
+<link rel="stylesheet" href="css/demo.css">
+</head>
+<body>
+<div class="cliente-layout">
+<aside class="cliente-marca" aria-hidden="true">
+  <img src="img/logo-hay-autos-blanco.png" alt="">
+  <div class="stack" style="gap: 20px;">
+    <p class="marca-frase">Compraventa de autos.</p>
+    <ol class="marca-pasos">
+      <li><b>1</b><span>Elegí cómo participás de la operación.</span></li>
+      <li><b>2</b><span>Subí las fotos de tus documentos.</span></li>
+      <li><b>3</b><span>Revisá los datos y confirmá.</span></li>
+    </ol>
+  </div>
+</aside>
+<div class="cliente">
+
+  <!-- Paso 1: rol -->
+  <section id="paso-rol" style="display: contents;">
+    <header class="cliente-header"><img src="img/logo-hay-autos-blanco.png" alt="HAY AUTOS"></header>
+    <main>
+      <div class="stack" style="gap: 8px;">
+        <h1 style="font-size: 28px; line-height: 34px;">¿Cómo participás de la operación?</h1>
+        <p class="muted">Elegí una opción y subí las fotos de tus documentos. Te lleva dos minutos.</p>
+      </div>
+      <div class="stack" style="gap: 12px;" role="group" aria-label="Rol en la operación">
+        <button type="button" class="rol" data-rol="vendedor">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#006bc4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 17h14M6 17l1.5-5h9L18 17M8 12l1.2-3.5h5.6L16 12"/><circle cx="8" cy="17" r="1.6"/><circle cx="16" cy="17" r="1.6"/></svg>
+          <span><b>Vendo mi auto</b><span>Soy el titular del auto que deja HAY AUTOS a la venta.</span></span>
+        </button>
+        <button type="button" class="rol" data-rol="comprador">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#006bc4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 11V8a5 5 0 0 1 10 0v3"/><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M12 15v2"/></svg>
+          <span><b>Compro un auto</b><span>Voy a reservar o comprar un auto de HAY AUTOS.</span></span>
+        </button>
+        <button type="button" class="rol" data-rol="otro">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#006bc4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.5c1.8.8 3 2.9 3 5.5"/></svg>
+          <span><b>Otro</b><span>Cotitular, cónyuge o apoderado.</span></span>
+        </button>
+        <p class="label" style="margin: 8px 0 0;">¿Todavía no hay operación?</p>
+        <button type="button" class="rol" data-ir="busqueda">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#006bc4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4-4"/></svg>
+          <span><b>Busco un auto que no tienen</b><span>Te avisamos por WhatsApp si nos entra algo así.</span></span>
+        </button>
+        <button type="button" class="rol" data-ir="oferta">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#006bc4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v6M9 5l3 3 3-3"/><path d="M5 17h14M6 17l1.5-5h9L18 17"/><circle cx="8" cy="17" r="1.6"/><circle cx="16" cy="17" r="1.6"/></svg>
+          <span><b>Quiero vender sin dejarlo en la agencia</b><span>Lo tenés que seguir usando: te avisamos si aparece un interesado.</span></span>
+        </button>
+      </div>
+      <p class="caption" style="margin-top: auto; display: flex; gap: 8px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5a6472" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+        Tus datos se usan solo para armar los documentos de la operación.
+      </p>
+    </main>
+  </section>
+
+  <!-- Paso 1b: a nombre de quién / relación -->
+  <section id="paso-tipo" hidden style="display: contents;">
+    <header class="cliente-header"><img src="img/logo-hay-autos-blanco.png" alt="HAY AUTOS"></header>
+    <main>
+      <div class="row" style="justify-content: space-between;">
+        <button type="button" class="btn btn-ghost" data-volver="rol" style="padding: 0; color: var(--brand-strong);">‹ Volver</button>
+        <span class="label">Paso 1 de 3</span>
+      </div>
+      <div class="stack" style="gap: 8px;">
+        <h1 id="tipo-titulo">¿A nombre de quién es la operación?</h1>
+        <p class="muted" id="tipo-sub">Si es de una empresa, cargás tus datos como su representante.</p>
+      </div>
+      <div class="stack" style="gap: 12px;" role="group" id="tipo-opciones"></div>
+    </main>
+  </section>
+
+  <!-- Paso 2: fotos -->
+  <section id="paso-fotos" hidden style="display: contents;">
+    <header class="cliente-header"><img src="img/logo-hay-autos-blanco.png" alt="HAY AUTOS"></header>
+    <main>
+      <div class="row" style="justify-content: space-between;">
+        <button type="button" class="btn btn-ghost" data-volver="tipo" style="padding: 0; color: var(--brand-strong);">‹ Volver</button>
+        <span class="label">Paso 2 de 3</span>
+      </div>
+      <div class="pasos" aria-hidden="true"><span class="hecho"></span><span class="hecho"></span><span></span></div>
+      <div class="stack" style="gap: 6px;">
+        <h1>Subí tus fotos</h1>
+        <p class="muted" id="fotos-sub">Necesitamos tu DNI de los dos lados.</p>
+      </div>
+      <div class="stack" style="gap: 10px;" id="fotos-lista"></div>
+      <div class="aviso-caja aviso-info">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#006bc4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+        <span>Apoyá el documento sobre una mesa, con buena luz, sin reflejos ni dedos tapando los datos.</span>
+      </div>
+      <div id="robot"></div>
+      <div class="aviso-caja aviso-error" id="fotos-error" hidden></div>
+    </main>
+    <div class="pie-fijo"><button type="button" class="btn btn-primary btn-big" id="leer" disabled>Leer mis datos</button></div>
+  </section>
+
+  <!-- Paso 3: revisar -->
+  <section id="paso-revisar" hidden style="display: contents;">
+    <header class="cliente-header"><img src="img/logo-hay-autos-blanco.png" alt="HAY AUTOS"></header>
+    <main>
+      <div class="row" style="justify-content: space-between;">
+        <button type="button" class="btn btn-ghost" data-volver="fotos" style="padding: 0; color: var(--brand-strong);">‹ Volver</button>
+        <span class="label">Paso 3 de 3</span>
+      </div>
+      <div class="pasos" aria-hidden="true"><span class="hecho"></span><span class="hecho"></span><span class="hecho"></span></div>
+      <div class="stack" style="gap: 6px;">
+        <h1>Revisá tus datos</h1>
+        <p class="muted" id="revisar-sub">Los leímos de tus fotos. Si algo está mal, corregilo antes de confirmar.</p>
+      </div>
+      <form id="form-datos" class="stack" novalidate>
+        <section class="card stack" style="gap: 14px; padding: 16px; box-shadow: none;">
+          <h2 id="titulo-tus-datos">Tus datos</h2>
+          <label class="campo"><span class="label">Nombre y apellido</span><input class="input" name="nombre" autocomplete="name" required></label>
+          <div class="grid2">
+            <label class="campo"><span class="label">DNI</span><input class="input num" name="dni" inputmode="numeric" required></label>
+            <label class="campo"><span class="label">Nacimiento</span><input class="input" name="nacimiento" type="date"></label>
+          </div>
+          <label class="campo"><span class="label">CUIL</span><input class="input num" name="cuil" inputmode="numeric" placeholder="20-12345678-9"><span class="nota" id="nota-cuil"></span></label>
+          <label class="campo"><span class="label">Domicilio</span><input class="input" name="domicilio" autocomplete="street-address"></label>
+          <label class="campo"><span class="label">Celular</span><input class="input" name="telefono" type="tel" autocomplete="tel" placeholder="11 1234-5678" required><span class="caption">Para avisarte por WhatsApp cuando esté todo listo.</span></label>
+          <label class="campo"><span class="label">Email</span><input class="input" name="email" type="email" autocomplete="email" placeholder="nombre@mail.com"></label>
+        </section>
+        <section class="card stack" style="gap: 14px; padding: 16px; box-shadow: none;" id="sec-empresa" hidden>
+          <h2>La empresa</h2>
+          <label class="campo"><span class="label">Razón social</span><input class="input" name="razon_social" placeholder="Ej. Logística Norte S.R.L."></label>
+          <label class="campo"><span class="label">CUIT de la empresa</span><input class="input num" name="cuit" inputmode="numeric" placeholder="30-12345678-9"><span class="nota" id="nota-cuit"></span></label>
+          <label class="campo"><span class="label">Tu cargo</span><select class="input" name="cargo"><option value="">Elegí…</option><option>Presidente</option><option>Socio gerente</option><option>Apoderado</option><option>Director</option><option>Otro</option></select></label>
+          <label class="campo"><span class="label">Domicilio de la empresa</span><input class="input" name="domicilio_empresa"></label>
+        </section>
+        <section class="card stack" style="gap: 14px; padding: 16px; box-shadow: none;" id="sec-relacion" hidden>
+          <h2 id="titulo-relacion">¿De quién sos cónyuge?</h2>
+          <label class="campo"><span class="label">Nombre y apellido del titular</span><input class="input" name="titular_nombre"></label>
+          <label class="campo"><span class="label">DNI del titular (si lo sabés)</span><input class="input num" name="titular_dni" inputmode="numeric"></label>
+        </section>
+        <section class="card stack" style="gap: 14px; padding: 16px; box-shadow: none;" id="sec-civil" hidden>
+          <h2>Estado civil</h2>
+          <label class="campo"><span class="label">Estado civil</span><select class="input" name="estado_civil"><option value="">Elegí…</option><option>Soltero/a</option><option>Casado/a</option><option>Divorciado/a</option><option>Viudo/a</option><option>Unión convivencial</option></select></label>
+          <div class="stack" style="gap: 14px;" id="sec-conyuge" hidden>
+            <p class="caption" id="nota-conyuge">Lo pide el formulario 08: si el auto se compró estando casado/a, el cónyuge también tiene que dar su conformidad.</p>
+            <label class="campo"><span class="label">Nombre y apellido del cónyuge</span><input class="input" name="conyuge_nombre"></label>
+            <label class="campo"><span class="label">DNI del cónyuge</span><input class="input num" name="conyuge_dni" inputmode="numeric"></label>
+          </div>
+        </section>
+        <section class="card stack" style="gap: 14px; padding: 16px; box-shadow: none;" id="sec-auto" hidden>
+          <h2>Tu auto</h2>
+          <div class="grid2">
+            <label class="campo"><span class="label">Patente</span><input class="input" name="patente" style="text-transform: uppercase;"></label>
+            <label class="campo"><span class="label">Año</span><input class="input num" name="anio" inputmode="numeric"></label>
+          </div>
+          <label class="campo"><span class="label">Marca y modelo</span><input class="input" name="marca_modelo"></label>
+        </section>
+        <label class="row" style="align-items: flex-start; gap: 12px; flex-wrap: nowrap; font-size: 14px; line-height: 20px; font-weight: 500;">
+          <input type="checkbox" name="acepto" style="width: 22px; height: 22px; margin: 0; accent-color: var(--brand-strong); flex-shrink: 0;">
+          <span>Confirmo que los datos son correctos y autorizo a HAY AUTOS a usarlos para los documentos de esta operación.</span>
+        </label>
+        <div class="aviso-caja aviso-error" id="datos-error" hidden></div>
+      </form>
+    </main>
+    <div class="pie-fijo"><button type="submit" form="form-datos" class="btn btn-primary btn-big" id="confirmar">Confirmar mis datos</button></div>
+  </section>
+
+  <!-- Busco un auto que no tienen (sin DNI) -->
+  <section id="paso-busqueda" hidden style="display: contents;">
+    <header class="cliente-header"><img src="img/logo-hay-autos-blanco.png" alt="HAY AUTOS"></header>
+    <main>
+      <div class="row" style="justify-content: space-between;"><button type="button" class="btn btn-ghost" data-volver="rol" style="padding: 0; color: var(--brand-strong);">‹ Volver</button></div>
+      <div class="stack" style="gap: 6px;">
+        <h1>¿Qué auto buscás?</h1>
+        <p class="muted">Completá solo lo que te importa: lo que dejes vacío, nos da igual. Si nos entra algo así, te escribimos por WhatsApp.</p>
+      </div>
+      <form id="form-busqueda" class="stack" novalidate>
+        <section class="card stack" style="gap: 14px; padding: 16px; box-shadow: none;">
+          <div class="grid2">
+            <label class="campo"><span class="label">Marca</span><input class="input" name="marca" placeholder="Ej. Toyota"></label>
+            <label class="campo"><span class="label">Modelo</span><input class="input" name="modelo" placeholder="Ej. Hilux"></label>
+          </div>
+          <label class="campo"><span class="label">¿Qué tan flexible sos?</span><select class="input" name="flexibilidad"><option value="similares">Este modelo o parecidos</option><option value="exacto">Solo este modelo</option><option value="categoria">Cualquiera de este tipo</option></select></label>
+          <label class="campo"><span class="label">Tipo de auto</span><select class="input" name="categoria"><option value="">Elegí si no tenés un modelo en mente</option><option value="pickup">Pickup</option><option value="suv">SUV</option><option value="sedan">Sedán</option><option value="hatchback">Hatchback / auto chico</option><option value="utilitario">Utilitario</option><option value="deportivo">Deportivo</option><option value="monovolumen">Monovolumen</option></select></label>
+          <div class="grid2">
+            <label class="campo"><span class="label">Año desde</span><input class="input num" name="anio_min" inputmode="numeric" placeholder="Ej. 2018"></label>
+            <label class="campo"><span class="label">Presupuesto máximo</span><span class="row" style="flex-wrap: nowrap; gap: 6px;"><select class="input" name="moneda" style="width: 84px; flex-shrink: 0;"><option>USD</option><option>ARS</option></select><input class="input num" name="presupuesto" inputmode="numeric"></span></label>
+          </div>
+          <details class="stack"><summary class="label" style="cursor: pointer; padding: 6px 0;">Más detalles (opcional)</summary>
+            <div class="stack" style="gap: 14px; margin-top: 10px;">
+              <div class="grid2">
+                <label class="campo"><span class="label">Año hasta</span><input class="input num" name="anio_max" inputmode="numeric"></label>
+                <label class="campo"><span class="label">Km máximo</span><input class="input num" name="km_max" inputmode="numeric" placeholder="Ej. 100000"></label>
+                <label class="campo"><span class="label">Transmisión</span><select class="input" name="transmision"><option value="">Me da igual</option><option value="manual">Manual</option><option value="automatica">Automática</option></select></label>
+                <label class="campo"><span class="label">Combustible</span><select class="input" name="combustible"><option value="">Me da igual</option><option value="nafta">Nafta</option><option value="diesel">Diésel</option><option value="gnc">GNC</option><option value="hibrido">Híbrido</option><option value="electrico">Eléctrico</option></select></label>
+                <label class="campo"><span class="label">Tracción</span><select class="input" name="traccion"><option value="">Me da igual</option><option value="4x2">4x2</option><option value="4x4">4x4</option></select></label>
+                <label class="campo"><span class="label">Puertas</span><select class="input" name="puertas"><option value="">Me da igual</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></label>
+              </div>
+              <label class="campo"><span class="label">Versión</span><input class="input" name="version" placeholder="Ej. GTI, SRV, 4x4"></label>
+              <label class="campo"><span class="label">Color (si es uno solo o varios, separados por coma)</span><input class="input" name="colores" placeholder="Ej. gris, negro"></label>
+              <label class="campo"><span class="label">Algo más</span><input class="input" name="notas" placeholder="Ej. para trabajar, que sea alemán"></label>
+            </div>
+          </details>
+        </section>
+        <section class="card stack" style="gap: 14px; padding: 16px; box-shadow: none;">
+          <h2>Tus datos</h2>
+          <label class="campo"><span class="label">Nombre y apellido</span><input class="input" name="nombre" autocomplete="name"></label>
+          <label class="campo"><span class="label">WhatsApp</span><input class="input" name="telefono" type="tel" autocomplete="tel" placeholder="11 1234-5678"></label>
+          <input name="web" tabindex="-1" autocomplete="off" aria-hidden="true" style="position: absolute; left: -9999px; width: 1px; height: 1px;">
+        </section>
+        <div class="aviso-caja aviso-error" id="busqueda-error" hidden></div>
+      </form>
+    </main>
+    <div class="pie-fijo"><button type="submit" form="form-busqueda" class="btn btn-primary btn-big">Avisame si aparece</button></div>
+  </section>
+
+  <!-- Quiero vender sin dejarlo en la agencia (sin DNI) -->
+  <section id="paso-oferta" hidden style="display: contents;">
+    <header class="cliente-header"><img src="img/logo-hay-autos-blanco.png" alt="HAY AUTOS"></header>
+    <main>
+      <div class="row" style="justify-content: space-between;"><button type="button" class="btn btn-ghost" data-volver="rol" style="padding: 0; color: var(--brand-strong);">‹ Volver</button></div>
+      <div class="stack" style="gap: 6px;">
+        <h1>Contanos de tu auto</h1>
+        <p class="muted">Si aparece alguien que busca algo así, te escribimos por WhatsApp.</p>
+      </div>
+      <form id="form-oferta" class="stack" novalidate>
+        <section class="card stack" style="gap: 14px; padding: 16px; box-shadow: none;">
+          <div class="grid2">
+            <label class="campo"><span class="label">Marca</span><input class="input" name="marca" placeholder="Ej. Ford"></label>
+            <label class="campo"><span class="label">Modelo</span><input class="input" name="modelo" placeholder="Ej. F100"></label>
+            <label class="campo"><span class="label">Año</span><input class="input num" name="anio" inputmode="numeric"></label>
+            <label class="campo"><span class="label">Km</span><input class="input num" name="km" inputmode="numeric"></label>
+          </div>
+          <label class="campo"><span class="label">¿Cuánto pedís?</span><span class="row" style="flex-wrap: nowrap; gap: 6px;"><select class="input" name="moneda" style="width: 84px; flex-shrink: 0;"><option>USD</option><option>ARS</option></select><input class="input num" name="precio" inputmode="numeric" placeholder="Si no sabés, dejalo vacío"></span></label>
+          <label class="campo"><span class="label">¿Lo podrías dejar en la agencia más adelante?</span><select class="input" name="puede_dejarlo"><option value="charlar">A charlar</option><option value="si">Sí</option><option value="no">No, lo tengo que usar</option></select></label>
+          <details class="stack"><summary class="label" style="cursor: pointer; padding: 6px 0;">Más detalles (opcional)</summary>
+            <div class="stack" style="gap: 14px; margin-top: 10px;">
+              <div class="grid2">
+                <label class="campo"><span class="label">Versión</span><input class="input" name="version"></label>
+                <label class="campo"><span class="label">Color</span><input class="input" name="color"></label>
+                <label class="campo"><span class="label">Tipo de auto</span><select class="input" name="categoria"><option value="">Elegí</option><option value="pickup">Pickup</option><option value="suv">SUV</option><option value="sedan">Sedán</option><option value="hatchback">Hatchback / auto chico</option><option value="utilitario">Utilitario</option><option value="deportivo">Deportivo</option><option value="monovolumen">Monovolumen</option></select></label>
+                <label class="campo"><span class="label">Transmisión</span><select class="input" name="transmision"><option value="">Elegí</option><option value="manual">Manual</option><option value="automatica">Automática</option></select></label>
+                <label class="campo"><span class="label">Combustible</span><select class="input" name="combustible"><option value="">Elegí</option><option value="nafta">Nafta</option><option value="diesel">Diésel</option><option value="gnc">GNC</option><option value="hibrido">Híbrido</option><option value="electrico">Eléctrico</option></select></label>
+                <label class="campo"><span class="label">Puertas</span><select class="input" name="puertas"><option value="">Elegí</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></label>
+              </div>
+              <label class="campo"><span class="label">Fotos del auto (hasta 6)</span><input type="file" accept="image/*" multiple name="fotos_auto" class="input" style="padding: 10px;"></label>
+              <label class="campo"><span class="label">Algo más</span><input class="input" name="notas" placeholder="Ej. service al día, único dueño"></label>
+            </div>
+          </details>
+        </section>
+        <section class="card stack" style="gap: 14px; padding: 16px; box-shadow: none;">
+          <h2>Tus datos</h2>
+          <label class="campo"><span class="label">Nombre y apellido</span><input class="input" name="nombre" autocomplete="name"></label>
+          <label class="campo"><span class="label">WhatsApp</span><input class="input" name="telefono" type="tel" autocomplete="tel" placeholder="11 1234-5678"></label>
+          <input name="web" tabindex="-1" autocomplete="off" aria-hidden="true" style="position: absolute; left: -9999px; width: 1px; height: 1px;">
+        </section>
+        <div class="aviso-caja aviso-error" id="oferta-error" hidden></div>
+      </form>
+    </main>
+    <div class="pie-fijo"><button type="submit" form="form-oferta" class="btn btn-primary btn-big">Enviar los datos de mi auto</button></div>
+  </section>
+
+  <!-- Paso 4: gracias -->
+  <section id="paso-gracias" hidden style="display: contents;">
+    <div class="gracias-azul">
+      <img src="img/logo-hay-autos-blanco.png" alt="HAY AUTOS" style="width: 220px;">
+      <div class="tilde"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#006bc4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Listo"><path d="M5 12l5 5 9-10"/></svg></div>
+      <h1>Gracias por confiar en HAY AUTOS</h1>
+    </div>
+    <div class="stack" style="padding: 28px 24px 32px; text-align: center; gap: 20px; background: var(--surface-raised);">
+      <p style="font-size: 17px; line-height: 26px; font-weight: 500;" id="gracias-texto">Recibimos tus datos. Alguien de nuestro equipo los revisa y te escribe por WhatsApp.</p>
+      <div style="height: 1px; background: var(--line);" id="gracias-sep"></div>
+      <div class="stack" style="gap: 4px; align-items: center;" id="gracias-otra">
+        <span class="caption" style="font-size: 14px;">¿Hay otro titular o un cónyuge que tenga que firmar?</span>
+        <button type="button" class="btn" id="otra" style="color: var(--brand-strong); font-size: 16px;">Cargar los datos de otra persona</button>
+      </div>
+    </div>
+  </section>
+</div>
+</div>
+<script src="js/config.js"></script>
+<script src="js/demo.js"></script>
+<script src="js/documentos_core.js"></script>
+<script src="js/webapp_core.js"></script>
+<script src="js/cliente.js"></script>
+</body>
+</html>

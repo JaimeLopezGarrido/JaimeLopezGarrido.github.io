@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Documento de ejemplo · HAY AUTOS (demo)</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="img/logo-hay-autos.webp">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --ink: #1d232b; --muted: #5a6472; --brand: #006bc4; --line: #d9dee5; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #eef1f5; color: var(--ink); font: 15px/1.6 'Montserrat', system-ui, sans-serif; }
+  .barra { position: sticky; top: 0; display: flex; flex-wrap: wrap; gap: 8px 16px; justify-content: center; align-items: center; padding: 8px 16px; background: #1b2430; color: #e9eef5; font-size: 13px; }
+  .barra b { color: #ffd166; }
+  .barra button { background: #028cf9; color: #fff; border: none; border-radius: 6px; padding: 6px 12px; font: inherit; font-weight: 600; cursor: pointer; }
+  .hoja { position: relative; max-width: 800px; margin: 24px auto; background: #fff; padding: 56px 64px; box-shadow: 0 6px 24px rgba(0,0,0,.08); overflow: hidden; }
+  .marca { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; }
+  .marca span { transform: rotate(-28deg); font-size: 64px; font-weight: 600; color: rgba(192, 57, 43, .10); white-space: nowrap; }
+  header { display: flex; justify-content: space-between; align-items: center; gap: 16px; border-bottom: 2px solid var(--brand); padding-bottom: 16px; margin-bottom: 24px; }
+  header img { height: 72px; border-radius: 8px; }
+  h1 { font-size: 22px; margin: 0; text-align: right; }
+  h2 { font-size: 15px; text-transform: uppercase; letter-spacing: .04em; color: var(--brand); margin: 24px 0 8px; }
+  p { margin: 0 0 10px; text-align: justify; }
+  table { width: 100%; border-collapse: collapse; margin: 6px 0 10px; }
+  td { border-bottom: 1px solid var(--line); padding: 6px 4px; vertical-align: top; }
+  td:first-child { color: var(--muted); width: 36%; }
+  .firmas { display: flex; gap: 48px; margin-top: 64px; }
+  .firmas div { flex: 1; border-top: 1px solid var(--ink); padding-top: 6px; text-align: center; font-size: 13px; color: var(--muted); }
+  .nota { font-size: 12px; color: var(--muted); margin-top: 32px; text-align: center; }
+  @media (max-width: 640px) { .hoja { padding: 32px 20px; margin: 0; } .firmas { flex-direction: column; gap: 40px; } h1 { font-size: 18px; } }
+  @media print { .barra { display: none; } body { background: #fff; } .hoja { box-shadow: none; margin: 0; max-width: none; } }
+</style>
+</head>
+<body>
+<div class="barra"><span><b>Documento de ejemplo:</b> datos ficticios, sin validez legal. En la versión real se genera en Google Docs con la plantilla de la agencia.</span><button type="button" onclick="window.print()">Imprimir / guardar PDF</button></div>
+<article class="hoja" id="hoja"><div class="marca"><span>EJEMPLO · SIN VALIDEZ</span></div></article>
+<script src="js/documentos_core.js"></script>
+<script src="js/webapp_core.js"></script>
+<script>
+(function () {
+  const esc = (s) => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  let d = {};
+  try { const m = location.hash.match(/d=([^&]*)/); d = JSON.parse(decodeURIComponent(m ? m[1] : '%7B%7D')); } catch (_) { d = {}; }
+  const a = d.auto || {}, c = d.comprador || {}, v = d.vendedor || null;
+  const f = (typeof fechaPartes === 'function' && fechaPartes(d.fecha)) || null;
+  const fecha = f ? `${f.dia} de ${f.mes} de ${f.anio}` : (d.fecha || '');
+  const monto = (n, mon, est) => { try { return montoTexto(Number(n), mon || 'USD', est || 'reserva'); } catch (_) { return (mon || 'USD') + ' ' + n; } };
+  const dni = (x) => { try { return formatoDni(x) || x; } catch (_) { return x; } };
+  const pat = (x) => { try { return formatoPatente(x) || x || '—'; } catch (_) { return x || '—'; } };
+  const persona = (p) => !p ? 'HAY AUTOS (vendedor por defecto)' : p.tipo === 'juridica'
+    ? `${esc(p.nombre)} (CUIT ${esc(p.cuit || '')}), representada por ${esc((p.representante || {}).nombre || '')}${(p.representante || {}).cargo ? ', ' + esc(p.representante.cargo) : ''}`
+    : `${esc(p.nombre)}, DNI ${esc(dni(p.dni))}${p.cuil ? ', CUIL ' + esc(p.cuil) : ''}${p.estado_civil ? ', ' + esc(p.estado_civil.toLowerCase()) : ''}, con domicilio en ${esc(p.domicilio || '—')}`;
+  const autoTxt = [a.marca, a.modelo, a.version].filter(Boolean).join(' ') + (a.anio ? ', año ' + a.anio : '');
+  const filasAuto = `<table><tr><td>Unidad</td><td>${esc(a.id_unidad || '')}</td></tr><tr><td>Vehículo</td><td>${esc(autoTxt)}</td></tr><tr><td>Dominio</td><td>${esc(pat(a.dominio))}</td></tr>
+    ${a.km != null ? `<tr><td>Kilometraje</td><td>${esc(miles(a.km))} km</td></tr>` : ''}${a.chasis ? `<tr><td>Chasis</td><td>${esc(a.chasis)}</td></tr>` : ''}${a.motor ? `<tr><td>Motor</td><td>${esc(a.motor)}</td></tr>` : ''}</table>`;
+  const titulos = { reserva: 'Reserva de compra', boleto: 'Boleto de compraventa', precarga_08: 'Precarga del formulario 08' };
+  const num = 'N° ' + String(d.n || 1).padStart(4, '0');
+  document.title = `${titulos[d.tipo] || 'Documento'} ${num} · ejemplo`;
+  let cuerpo = '';
+  if (d.tipo === 'reserva') {
+    cuerpo = `<p>En la Provincia de Buenos Aires, a los ${esc(fecha)}, ${persona(c)} (en adelante, "el comprador") entrega a HAY AUTOS en concepto de reserva la suma de ${esc(monto(d.sena || 0, d.moneda_sena || 'ARS', 'reserva'))} por el siguiente vehículo:</p>${filasAuto}
+      <p>El precio total convenido es de ${esc(monto(d.precio || 0, d.moneda || 'USD', 'reserva'))}. El saldo deberá abonarse dentro de los ${esc(d.plazo_dias || 10)} días corridos, en ${esc(d.forma_pago || 'la forma acordada')}. Vencido el plazo sin que se complete el pago, la reserva quedará a favor de la agencia.</p>`;
+  } else if (d.tipo === 'boleto') {
+    cuerpo = `<p>En la Provincia de Buenos Aires, a los ${esc(fecha)}, entre ${persona(v)} (en adelante, "el vendedor") y ${persona(c)} (en adelante, "el comprador"), se celebra el presente boleto de compraventa del siguiente automotor:</p>${filasAuto}
+      <p>PRIMERA: el precio total y definitivo es de ${esc(monto(d.precio || 0, d.moneda || 'USD', 'boleto'))}, que el comprador abona en este acto ${esc(d.forma_pago ? 'en ' + d.forma_pago.toLowerCase() : 'de contado')}, sirviendo el presente de suficiente recibo.</p>
+      <p>SEGUNDA: el vehículo se entrega en el estado en que se encuentra, que el comprador declara conocer y aceptar. A partir de la entrega, el comprador asume la responsabilidad civil y penal por el uso de la unidad.</p>
+      <p>TERCERA: el vendedor se compromete a firmar la documentación necesaria para la transferencia (formulario 08) ante el Registro del Automotor que corresponda.</p>`;
+  } else {
+    cuerpo = `<p>Datos para completar el formulario 08 de transferencia (resumen de ejemplo).</p>${filasAuto}
+      <h2>Vendedor (titular)</h2><p>${persona(v)}</p><h2>Comprador</h2><p>${persona(c)}</p>
+      <p>Precio declarado: ${esc(monto(d.precio || 0, d.moneda || 'USD', 'reserva'))}.</p>`;
+  }
+  document.getElementById('hoja').insertAdjacentHTML('beforeend', `<header><img src="img/logo-hay-autos.webp" alt="HAY AUTOS"><h1>${esc(titulos[d.tipo] || 'Documento')}<br><span style="font-size: 14px; font-weight: 500; color: var(--muted);">${esc(num)} · ${esc(f ? f.corta : '')}</span></h1></header>
+    ${cuerpo}
+    <div class="firmas">${d.tipo === 'reserva' ? '<div>Comprador</div><div>HAY AUTOS</div>' : '<div>Vendedor</div><div>Comprador</div>'}</div>
+    <p class="nota">Documento generado por la demo pública de la web app de HAY AUTOS. Todos los datos son ficticios.</p>`);
+  if (/^#pdf/.test(location.hash)) setTimeout(() => window.print(), 600);
+})();
+</script>
+</body>
+</html>
