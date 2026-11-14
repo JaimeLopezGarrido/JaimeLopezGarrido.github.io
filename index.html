@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="es" data-lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jaime López Garrido · Automatización e IA aplicada</title>
+<meta name="description" content="Portfolio de Jaime López Garrido: herramientas, automatizaciones e integraciones con IA para negocios reales.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f7f6f2; --panel: #ffffff; --ink: #191b1f; --muted: #5f6570; --line: #e4e2db;
+  --accent: #2f5bd8; --accent-soft: #e8edfc; --ok: #22863a; --ok-soft: #e7f5ea; --warn: #9a6200; --warn-soft: #fbf1dc;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #131519; --panel: #1b1e24; --ink: #ecedf0; --muted: #a0a6b0; --line: #2b2f37;
+    --accent: #86a0f5; --on-accent: #10131a; --accent-soft: #222a44; --ok: #5fd07a; --ok-soft: #18301f; --warn: #f0b85a; --warn-soft: #34290f;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #131519; --panel: #1b1e24; --ink: #ecedf0; --muted: #a0a6b0; --line: #2b2f37;
+  --accent: #86a0f5; --on-accent: #10131a; --accent-soft: #222a44; --ok: #5fd07a; --ok-soft: #18301f; --warn: #f0b85a; --warn-soft: #34290f;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.65 Inter, system-ui, sans-serif; }
+a { color: var(--accent); }
+html[data-lang="es"] [lang="en"], html[data-lang="en"] [lang="es"] { display: none !important; }
+.cont { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+nav.top { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+nav.top .cont { display: flex; align-items: center; gap: 22px; height: 58px; }
+nav.top .marca { font-weight: 800; letter-spacing: -.02em; text-decoration: none; color: var(--ink); margin-right: auto; }
+nav.top a.l { color: var(--muted); text-decoration: none; font-size: 15px; }
+nav.top a.l:hover { color: var(--ink); }
+.idioma { display: flex; border: 1px solid var(--line); border-radius: 99px; overflow: hidden; }
+.idioma button { all: unset; cursor: pointer; font-size: 13px; font-weight: 600; padding: 4px 11px; color: var(--muted); }
+.idioma button.on { background: var(--ink); color: var(--bg); }
+header.hero { padding: 84px 0 56px; }
+.kicker { font-size: 14px; font-weight: 600; color: var(--accent); letter-spacing: .02em; }
+h1 { font-size: clamp(36px, 6vw, 58px); line-height: 1.05; letter-spacing: -.035em; margin: 12px 0 18px; font-weight: 800; }
+.bajada { font-size: 20px; color: var(--muted); max-width: 760px; margin: 0 0 28px; }
+.botones { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn { display: inline-block; padding: 12px 20px; border-radius: 12px; font-weight: 600; text-decoration: none; border: 1px solid var(--line); color: var(--ink); background: var(--panel); }
+.btn.pri { background: var(--accent); border-color: var(--accent); color: var(--on-accent, #fff); }
+.cifras { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 48px; }
+.cifra { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 18px 18px 16px; }
+.cifra b { display: block; font-size: 32px; letter-spacing: -.03em; line-height: 1.1; }
+.cifra span { font-size: 14px; color: var(--muted); }
+section.bloque { padding: 64px 0; border-top: 1px solid var(--line); }
+h2 { font-size: 34px; letter-spacing: -.03em; line-height: 1.15; margin: 0 0 10px; }
+.intro { color: var(--muted); max-width: 760px; margin: 0 0 32px; font-size: 18px; }
+.caso { background: var(--panel); border: 1px solid var(--line); border-radius: 20px; padding: 32px; margin-bottom: 26px; }
+.caso-cab { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
+.caso h3 { font-size: 26px; letter-spacing: -.02em; margin: 0 0 4px; line-height: 1.2; }
+.caso .sub { color: var(--muted); margin: 0; }
+.estado { font-size: 13px; font-weight: 600; padding: 5px 12px; border-radius: 99px; white-space: nowrap; }
+.estado.uso { background: var(--ok-soft); color: var(--ok); }
+.estado.val { background: var(--warn-soft); color: var(--warn); }
+.estado.dev { background: var(--accent-soft); color: var(--accent); }
+.grid2 { display: grid; grid-template-columns: 1.1fr .9fr; gap: 32px; margin-top: 24px; }
+.caso h4 { font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 22px 0 8px; }
+.caso h4:first-child { margin-top: 0; }
+.caso ul { margin: 0; padding-left: 20px; }
+.caso li { margin-bottom: 6px; }
+.decision { border-left: 3px solid var(--accent); padding: 2px 0 2px 14px; margin: 0 0 14px; }
+.decision b { display: block; }
+.decision span { color: var(--muted); font-size: 16px; }
+.stack { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.stack span { font-size: 13px; padding: 3px 10px; border: 1px solid var(--line); border-radius: 99px; color: var(--muted); }
+figure { margin: 0; }
+figure img { width: 100%; border-radius: 12px; border: 1px solid var(--line); display: block; }
+figcaption { font-size: 13px; color: var(--muted); margin-top: 6px; }
+.fotos { display: grid; grid-template-columns: 2fr 1fr; gap: 12px; }
+.metricas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.metricas div { background: var(--bg); border-radius: 12px; padding: 12px 14px; }
+.metricas b { font-size: 24px; display: block; letter-spacing: -.02em; }
+.metricas span { font-size: 13px; color: var(--muted); }
+.links { margin-top: 18px; display: flex; gap: 16px; flex-wrap: wrap; font-weight: 600; font-size: 15px; }
+.flujo { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; counter-reset: paso; }
+.paso { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 18px; position: relative; }
+.paso::before { counter-increment: paso; content: counter(paso); font: 600 13px "JetBrains Mono", monospace; color: var(--accent); }
+.paso b { display: block; margin: 6px 0 6px; line-height: 1.3; }
+.paso p { margin: 0; font-size: 15px; color: var(--muted); }
+.ejemplos { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 18px; }
+.ejemplo { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 20px; }
+.ejemplo b { display: block; margin-bottom: 4px; }
+.ejemplo p { margin: 0; color: var(--muted); font-size: 16px; }
+.demo { background: var(--panel); border: 1px solid var(--line); border-radius: 20px; padding: 28px; }
+.demo iframe { width: 100%; height: 620px; border: 1px solid var(--line); border-radius: 14px; background: var(--bg); }
+.pronto { padding: 28px; border: 1px dashed var(--line); border-radius: 14px; color: var(--muted); }
+.ruta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.ruta div { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 20px; }
+.ruta b { display: block; margin-bottom: 6px; }
+.ruta p { margin: 0; color: var(--muted); font-size: 16px; }
+footer { padding: 56px 0 72px; border-top: 1px solid var(--line); }
+footer p { color: var(--muted); }
+code { font-family: "JetBrains Mono", monospace; font-size: .88em; background: var(--accent-soft); padding: 1px 6px; border-radius: 6px; }
+@media (max-width: 860px) {
+  .cifras { grid-template-columns: repeat(2, 1fr); }
+  .grid2, .ejemplos, .ruta { grid-template-columns: 1fr; }
+  .flujo { grid-template-columns: 1fr; }
+  .metricas { grid-template-columns: repeat(3, 1fr); }
+  nav.top a.l { display: none; }
+  .caso { padding: 22px 18px; }
+  .demo { padding: 18px; }
+  .demo iframe { height: 560px; }
+  header.hero { padding: 52px 0 36px; }
+}
+</style>
+</head>
+<body>
+<nav class="top"><div class="cont">
+  <a class="marca" href="#">Jaime López Garrido</a>
+  <a class="l" href="#proyectos"><span lang="es">Proyectos</span><span lang="en">Projects</span></a>
+  <a class="l" href="#ia"><span lang="es">Cómo trabajo con IA</span><span lang="en">How I work with AI</span></a>
+  <a class="l" href="#demo">Demo</a>
+  <a class="l" href="#proximos"><span lang="es">Próximos pasos</span><span lang="en">Next steps</span></a>
+  <div class="idioma"><button data-l="es">ES</button><button data-l="en">EN</button></div>
+</div></nav>
+
+<header class="hero"><div class="cont">
+  <div class="kicker"><span lang="es">Automatización · Herramientas internas · IA aplicada</span><span lang="en">Automation · Internal tools · Applied AI</span></div>
+  <h1><span lang="es">Construyo herramientas con IA que resuelven problemas reales de operación.</span><span lang="en">I build AI-powered tools that solve real operational problems.</span></h1>
+  <p class="bajada"><span lang="es">Bots, paneles, documentos automáticos e integraciones para negocios reales, hechos con Claude Code y validados con tests, controles automáticos y evaluaciones. Entrego algo que funciona rápido y lo mejoro con el uso.</span><span lang="en">Bots, dashboards, automated documents and integrations for real businesses, built with Claude Code and validated with tests, automated checks and evals. I ship something that works fast, then iterate with real usage.</span></p>
+  <div class="botones">
+    <a class="btn pri" href="#proyectos"><span lang="es">Ver proyectos</span><span lang="en">See projects</span></a>
+    <a class="btn" href="#demo"><span lang="es">Probar el chatbot</span><span lang="en">Try the chatbot</span></a>
+    <a class="btn" href="https://github.com/JaimeLopezGarrido" target="_blank" rel="noopener">GitHub</a>
+  </div>
+  <div class="cifras">
+    <div class="cifra"><b>923</b><span lang="es">pruebas automáticas en la plataforma de HAY AUTOS</span><span lang="en">automated tests in the HAY AUTOS platform</span></div>
+    <div class="cifra"><b>838</b><span lang="es">ofertas de empleo evaluadas por mi agente diario</span><span lang="en">job posts evaluated by my daily agent</span></div>
+    <div class="cifra"><b>28</b><span lang="es">pantallas en la web app de alquiler de autos</span><span lang="en">screens in the car rental web app</span></div>
+    <div class="cifra"><b>85</b><span lang="es">tests en CI del asistente con function calling</span><span lang="en">CI tests in the function-calling assistant</span></div>
+  </div>
+</div></header>
+
+<section class="bloque" id="proyectos"><div class="cont">
+  <h2><span lang="es">Proyectos</span><span lang="en">Projects</span></h2>
+  <p class="intro"><span lang="es">Para cada uno: qué problema resuelve, qué construí, quién lo usa y en qué estado está, contado sin inflar.</span><span lang="en">For each one: the problem, what I built, who uses it and its current status, told honestly.</span></p>
+
+  <!-- HAY AUTOS -->
+  <article class="caso">
+    <div class="caso-cab">
+      <div><h3>HAY AUTOS</h3><p class="sub"><span lang="es">Automatización comercial para una agencia de compraventa de autos (Vicente López, Buenos Aires)</span><span lang="en">Sales automation for a used-car dealership (Buenos Aires, Argentina)</span></p></div>
+      <span class="estado val"><span lang="es">Cliente real · demo validada, en camino a producción</span><span lang="en">Real client · validated demo, heading to production</span></span>
+    </div>
+    <div class="grid2">
+      <div>
+        <h4><span lang="es">El problema</span><span lang="en">The problem</span></h4>
+        <p><span lang="es">El stock vivía en un Excel, las consultas de Instagram se respondían a mano y los documentos de cada venta (reserva, boleto, formulario 08) se armaban copiando datos del DNI y de la cédula del auto.</span><span lang="en">Inventory lived in a spreadsheet, Instagram inquiries were answered by hand, and every sale's paperwork (reservation, bill of sale, transfer form) was built by retyping data from IDs and car titles.</span></p>
+        <h4><span lang="es">Qué construí</span><span lang="en">What I built</span></h4>
+        <ul>
+          <li><span lang="es">Bot de Instagram que da precio, datos y fotos del stock y deriva a WhatsApp con el mensaje ya escrito.</span><span lang="en">Instagram bot that answers price, specs and photos from inventory, then hands off to WhatsApp with a pre-filled message.</span></li>
+          <li><span lang="es">Link para clientes: suben DNI y cédula con el celular y la IA los lee; el panel los vincula al auto por patente.</span><span lang="en">Client link: customers upload their ID and car title from their phone, AI extracts the data and the dashboard links it to the car by plate.</span></li>
+          <li><span lang="es">Panel web (13 pantallas): pendientes, autos, personas, operaciones, historial y accesos con Google.</span><span lang="en">Web dashboard (13 screens): pending items, cars, people, deals, history and Google sign-in access.</span></li>
+          <li><span lang="es">Documentos de venta al instante, con montos en letras y CUIL verificado.</span><span lang="en">Instant sale documents, with amounts in words and validated tax IDs.</span></li>
+          <li><span lang="es">Publicaciones automáticas: la IA ordena las fotos de Drive y arma el carrusel; historias cada 3 días.</span><span lang="en">Automated posts: AI orders the Drive photos and builds the carousel; stories every 3 days.</span></li>
+          <li><span lang="es">Radar: cruza lo que buscan los clientes con autos disponibles, con un puntaje sin IA.</span><span lang="en">Radar: matches what customers are looking for with available cars, using a non-AI score.</span></li>
+        </ul>
+        <h4><span lang="es">Estado e iteración</span><span lang="en">Status and iteration</span></h4>
+        <p><span lang="es">La demo completa corre de punta a punta y se probó en real (login, carga desde el celular, aprobación). El dueño la vio y pidió el Radar y la carga manual, que construí ese mismo día. Próximo paso: servidor propio y conectar la cuenta real de Instagram.</span><span lang="en">The full demo runs end to end and was tested for real (login, upload from a phone, approval). The owner reviewed it and asked for the Radar and manual entry, which I built that same day. Next step: own server and connecting the real Instagram account.</span></p>
+      </div>
+      <div>
+        <figure><img src="img/hayautos-pendientes.webp" alt="Panel de HAY AUTOS: pendientes" loading="lazy"><figcaption><span lang="es">Panel: lo que cargó un cliente, ya vinculado al auto del stock y validado (datos de ejemplo, difuminados).</span><span lang="en">Dashboard: what a customer uploaded, auto-linked to the car in stock and validated (sample data, blurred).</span></figcaption></figure>
+        <h4 style="margin-top:22px"><span lang="es">Decisiones</span><span lang="en">Decisions</span></h4>
+        <div class="decision"><b><span lang="es">IA solo donde suma</span><span lang="en">AI only where it adds value</span></b><span><span lang="es">Respuestas a comentarios, textos de publicaciones, montos en letras y el puntaje del Radar son código fijo: costo cero y nada inventado.</span><span lang="en">Comment replies, post captions, amounts in words and the Radar score are plain code: zero cost and nothing made up.</span></span></div>
+        <div class="decision"><b><span lang="es">Un validador que frena inventos</span><span lang="en">A validator that blocks hallucinations</span></b><span><span lang="es">Las respuestas del bot pasan por un control sin IA que bloquea datos que no salieron del stock. Cada error real (como un motor "2.4" inventado) se volvió una prueba automática.</span><span lang="en">Bot replies go through a non-AI check that blocks data not coming from inventory. Every real failure (like an invented "2.4" engine) became an automated test.</span></span></div>
+        <div class="decision"><b><span lang="es">Modelos gratuitos con respaldo</span><span lang="en">Free models with fallback</span></b><span><span lang="es">Un proveedor llegó a colgarse 207 s: cada modelo tiene tiempo máximo y otro proveedor detrás.</span><span lang="en">One provider once hung for 207 s: every model has a timeout and another provider behind it.</span></span></div>
+        <div class="stack"><span>n8n</span><span>Supabase (Postgres, RLS, Auth)</span><span>Instagram API</span><span>Google Sheets/Drive/Docs</span><span>Gemini · Groq</span><span>HTML/JS</span><span>Docker</span></div>
+      </div>
+    </div>
+  </article>
+
+  <!-- PROPER -->
+  <article class="caso">
+    <div class="caso-cab">
+      <div><h3>Proper Rent a Car</h3><p class="sub"><span lang="es">Web app de marca blanca para alquiladoras de autos + bot de Instagram (Bariloche)</span><span lang="en">White-label web app for car rental companies + Instagram bot (Bariloche, Argentina)</span></p></div>
+      <span class="estado val"><span lang="es">Cliente real · demo entregada, esperando datos reales</span><span lang="en">Real client · demo delivered, awaiting real data</span></span>
+    </div>
+    <div class="grid2">
+      <div>
+        <h4><span lang="es">El problema</span><span lang="en">The problem</span></h4>
+        <p><span lang="es">Una alquiladora chica gestiona reservas, flota, entregas y consultas fuera de horario a mano, entre WhatsApp, Instagram y planillas.</span><span lang="en">A small rental company manages bookings, fleet, handovers and after-hours inquiries by hand across WhatsApp, Instagram and spreadsheets.</span></p>
+        <h4><span lang="es">Qué construí</span><span lang="en">What I built</span></h4>
+        <ul>
+          <li><span lang="es">Panel de la agencia: reservas con disponibilidad real y cotizador, calendario, flota, pagos, entregas y devoluciones con cálculo automático de cargos, contrato en PDF.</span><span lang="en">Agency dashboard: bookings with real availability and quoting, calendar, fleet, payments, handovers with automatic charges, PDF contract.</span></li>
+          <li><span lang="es">Portal del cliente (ES/EN/PT): su reserva, cambios y extensiones, pre check-in con firma, número de vuelo.</span><span lang="en">Customer portal (ES/EN/PT): their booking, change and extension requests, pre check-in with signature, flight number.</span></li>
+          <li><span lang="es">Bot de Instagram que cotiza, pre-reserva y carga pedidos de cambio que caen en el panel.</span><span lang="en">Instagram bot that quotes, pre-books and files change requests straight into the dashboard.</span></li>
+        </ul>
+        <div class="metricas" style="margin-top:18px">
+          <div><b>28</b><span lang="es">pantallas, PC y celular</span><span lang="en">screens, desktop + mobile</span></div>
+          <div><b>104</b><span lang="es">tests de reglas de negocio</span><span lang="en">business-rule tests</span></div>
+          <div><b>38</b><span lang="es">charlas de prueba del bot</span><span lang="en">bot test conversations</span></div>
+        </div>
+        <div class="links"><a href="https://proper-demo-livid.vercel.app" target="_blank" rel="noopener"><span lang="es">Abrir la demo →</span><span lang="en">Open the demo →</span></a></div>
+      </div>
+      <div>
+        <div class="fotos">
+          <figure><img src="img/proper-panel.webp" alt="Panel de Proper" loading="lazy"></figure>
+          <figure><img src="img/proper-portal.webp" alt="Portal del cliente" loading="lazy"></figure>
+        </div>
+        <h4 style="margin-top:22px"><span lang="es">Decisiones</span><span lang="en">Decisions</span></h4>
+        <div class="decision"><b><span lang="es">La IA decide, la app calcula</span><span lang="en">AI decides, the app calculates</span></b><span><span lang="es">El modelo solo elige la acción; los precios salen del mismo motor que el panel. En las 38 charlas de prueba nunca inventó un precio.</span><span lang="en">The model only picks the action; prices come from the same engine as the dashboard. In 38 test conversations it never made up a price.</span></span></div>
+        <div class="decision"><b><span lang="es">Marca blanca desde el día 1</span><span lang="en">White-label from day one</span></b><span><span lang="es">Un solo código y una carpeta por empresa: se revende cambiando marca y configuración.</span><span lang="en">One codebase and one folder per company: resellable by swapping brand and config.</span></span></div>
+        <div class="stack"><span>Next.js</span><span>TypeScript</span><span>Vitest</span><span>Vercel</span><span>n8n</span><span>Groq · Gemini</span></div>
+      </div>
+    </div>
+  </article>
+
+  <!-- CHATBOT -->
+  <article class="caso">
+    <div class="caso-cab">
+      <div><h3><span lang="es">Asistente de atención con IA</span><span lang="en">AI customer-service assistant</span></h3><p class="sub"><span lang="es">Chatbot hecho desde cero en Python, sin frameworks que escondan la lógica</span><span lang="en">Chatbot built from scratch in Python, no frameworks hiding the logic</span></p></div>
+      <span class="estado dev"><span lang="es">En desarrollo activo · código abierto</span><span lang="en">In active development · open source</span></span>
+    </div>
+    <div class="grid2">
+      <div>
+        <h4><span lang="es">Qué hace</span><span lang="en">What it does</span></h4>
+        <ul>
+          <li><span lang="es">Function calling real: consulta disponibilidad y cotiza con el sistema, nunca calcula precios de memoria.</span><span lang="en">Real function calling: checks availability and quotes through the system, never computes prices from memory.</span></li>
+          <li><span lang="es">Router de intención: cada mensaje va por el camino más simple (las preguntas de políticas no gastan un agente).</span><span lang="en">Intent router: each message takes the simplest path (policy questions don't need the full agent).</span></li>
+          <li><span lang="es">Salida estructurada validada con Pydantic y respaldo automático entre Gemini, Groq y un modelo local.</span><span lang="en">Structured output validated with Pydantic and automatic fallback across Gemini, Groq and a local model.</span></li>
+          <li><span lang="es">RAG con citas sobre el manual de la empresa (en construcción esta semana).</span><span lang="en">RAG with citations over the company manual (being built this week).</span></li>
+        </ul>
+        <h4><span lang="es">Cómo se valida</span><span lang="en">How it's validated</span></h4>
+        <p><span lang="es">85 tests en GitHub Actions, casos difíciles (incluidos intentos de prompt injection), escaneo de secretos en cada push y decisiones documentadas como ADR.</span><span lang="en">85 tests in GitHub Actions, hard cases (including prompt-injection attempts), secret scanning on every push, and decisions documented as ADRs.</span></p>
+        <div class="links"><a href="#demo"><span lang="es">Probarlo →</span><span lang="en">Try it →</span></a><a href="https://github.com/JaimeLopezGarrido/asistente-flota-mcp" target="_blank" rel="noopener"><span lang="es">Ver el código →</span><span lang="en">See the code →</span></a></div>
+      </div>
+      <div>
+        <h4><span lang="es">Decisiones</span><span lang="en">Decisions</span></h4>
+        <div class="decision"><b><span lang="es">Primero a mano, después frameworks</span><span lang="en">By hand first, frameworks later</span></b><span><span lang="es">El loop de herramientas, el router y el fallback están escritos a mano para entender y poder depurar cada paso.</span><span lang="en">The tool loop, router and fallback are hand-written so every step can be understood and debugged.</span></span></div>
+        <div class="decision"><b><span lang="es">Fallar rápido</span><span lang="en">Fail fast</span></b><span><span lang="es">Cuando un proveedor se satura, el chat pasa al siguiente en segundos en lugar de dejar al usuario esperando.</span><span lang="en">When a provider is overloaded, the chat switches to the next one in seconds instead of leaving the user waiting.</span></span></div>
+        <div class="decision"><b><span lang="es">RAG y no fine-tuning</span><span lang="en">RAG, not fine-tuning</span></b><span><span lang="es">Las políticas y la flota cambian seguido: se consultan en el momento y se citan.</span><span lang="en">Policies and fleet change often: they're retrieved at query time and cited.</span></span></div>
+        <div class="stack"><span>Python</span><span>Pydantic</span><span>Gemini · Groq · Ollama</span><span>pytest</span><span>ruff</span><span>GitHub Actions</span></div>
+      </div>
+    </div>
+  </article>
+
+  <!-- JOB FINDER -->
+  <article class="caso">
+    <div class="caso-cab">
+      <div><h3>Job Finder</h3><p class="sub"><span lang="es">Agente que corre solo todos los días: busca ofertas, las evalúa y adapta el CV</span><span lang="en">Agent that runs on its own every day: finds job posts, scores them and tailors the resume</span></p></div>
+      <span class="estado uso"><span lang="es">En uso diario desde el 29/10</span><span lang="en">In daily use since Oct 29</span></span>
+    </div>
+    <div class="grid2">
+      <div>
+        <h4><span lang="es">Cómo funciona</span><span lang="en">How it works</span></h4>
+        <ul>
+          <li><span lang="es">Un recolector sin IA junta y filtra ofertas remotas de 9 fuentes (LinkedIn, Get on Board, Remotive, Greenhouse, Lever, etc.).</span><span lang="en">A non-AI collector gathers and filters remote job posts from 9 sources (LinkedIn, Get on Board, Remotive, Greenhouse, Lever, etc.).</span></li>
+          <li><span lang="es">Claude Code en modo headless puntúa cada oferta y arma el paquete: CV adaptado en PDF, carta y nota con brechas.</span><span lang="en">Claude Code in headless mode scores each post and builds the package: tailored PDF resume, cover letter and a gaps note.</span></li>
+          <li><span lang="es">El resumen llega a Discord; se reintenta solo si algo falla.</span><span lang="en">The summary lands in Discord; it retries on its own if something fails.</span></li>
+        </ul>
+        <div class="metricas" style="margin-top:18px">
+          <div><b>838</b><span lang="es">ofertas evaluadas</span><span lang="en">posts evaluated</span></div>
+          <div><b>55</b><span lang="es">sugeridas</span><span lang="en">shortlisted</span></div>
+          <div><b>27</b><span lang="es">CVs adaptados</span><span lang="en">tailored resumes</span></div>
+        </div>
+      </div>
+      <div>
+        <h4><span lang="es">Decisiones</span><span lang="en">Decisions</span></h4>
+        <div class="decision"><b><span lang="es">Anti-invención en código, no en el prompt</span><span lang="en">Anti-hallucination in code, not in the prompt</span></b><span><span lang="es">Antes de generar el PDF, un validador exige que cada habilidad esté en una lista blanca y que cada número exista en mi perfil. Si no, Claude corrige, pero nunca puede ampliar la lista.</span><span lang="en">Before rendering the PDF, a validator requires every skill to be on a whitelist and every number to exist in my profile. If not, Claude fixes it, but it can never extend the list.</span></span></div>
+        <div class="decision"><b><span lang="es">Nunca postula solo</span><span lang="en">It never applies on its own</span></b><span><span lang="es">Las herramientas de Claude están restringidas: prepara todo, pero la decisión de postular es humana.</span><span lang="en">Claude's tools are restricted: it prepares everything, but applying is a human decision.</span></span></div>
+        <div class="stack"><span>Python</span><span>Claude Code (headless)</span><span>Chrome headless</span><span>launchd</span><span>Discord</span></div>
+      </div>
+    </div>
+  </article>
+
+  <!-- AGENTE DE APRENDIZAJE -->
+  <article class="caso">
+    <div class="caso-cab">
+      <div><h3><span lang="es">Agente de aprendizaje</span><span lang="en">Learning agent</span></h3><p class="sub"><span lang="es">Genera mis sesiones de estudio de IA y un quiz para el celular, adaptados a cómo me va</span><span lang="en">Generates my AI study sessions and a phone quiz game, adapted to how I'm doing</span></p></div>
+      <span class="estado uso"><span lang="es">En uso diario desde el 05/11</span><span lang="en">In daily use since Nov 5</span></span>
+    </div>
+    <div class="grid2">
+      <div>
+        <h4><span lang="es">Cómo funciona</span><span lang="en">How it works</span></h4>
+        <ul>
+          <li><span lang="es">Cuando termino una sesión, Claude arma la siguiente investigando qué está vigente, con teoría, videos de profesionales, práctica en el repo, quiz y glosario.</span><span lang="en">When I finish a session, Claude builds the next one by researching what's current: theory, expert videos, hands-on work in the repo, a quiz and a glossary.</span></li>
+          <li><span lang="es">Las preguntas que erro vuelven como repaso; las sesiones se ajustan a mis comentarios.</span><span lang="en">Questions I miss come back for review; sessions adapt to my feedback.</span></li>
+          <li><span lang="es">Un juego de quiz para el celular, servido desde mi Mac, con repetición espaciada.</span><span lang="en">A phone quiz game served from my Mac, with spaced repetition.</span></li>
+        </ul>
+        <div class="metricas" style="margin-top:18px">
+          <div><b>423</b><span lang="es">preguntas generadas</span><span lang="en">questions generated</span></div>
+          <div><b>222</b><span lang="es">términos de glosario</span><span lang="en">glossary terms</span></div>
+          <div><b>17</b><span lang="es">videos verificados</span><span lang="en">verified videos</span></div>
+        </div>
+      </div>
+      <div>
+        <h4><span lang="es">Cómo valido lo que genera la IA</span><span lang="en">How I validate what the AI produces</span></h4>
+        <div class="decision"><b><span lang="es">Nada se publica sin pasar controles</span><span lang="en">Nothing ships without passing checks</span></b><span><span lang="es">Cada sesión se valida automáticamente: estructura, cantidad y forma de las preguntas, glosario por temas. Si falla, vuelve a Claude con el error para que la corrija.</span><span lang="en">Every session is validated automatically: structure, question count and format, topic-tagged glossary. If it fails, it goes back to Claude with the error to fix it.</span></span></div>
+        <div class="decision"><b><span lang="es">El código generado pasa por el linter</span><span lang="en">Generated code goes through the linter</span></b><span><span lang="es">Los archivos de la práctica se extraen y se revisan con ruff sobre una copia del repo real antes de llegarme.</span><span lang="en">The exercise files are extracted and linted with ruff on a copy of the real repo before they reach me.</span></span></div>
+        <div class="decision"><b><span lang="es">Links que existen</span><span lang="en">Links that exist</span></b><span><span lang="es">Cada video recomendado se verifica contra YouTube; los que no existen se descartan.</span><span lang="en">Every recommended video is checked against YouTube; non-existent ones are dropped.</span></span></div>
+      </div>
+    </div>
+  </article>
+</div></section>
+
+<section class="bloque" id="ia"><div class="cont">
+  <h2><span lang="es">Cómo trabajo con IA</span><span lang="en">How I work with AI</span></h2>
+  <p class="intro"><span lang="es">Uso Claude Code todos los días para construir. La clave no es confiar en la IA, sino rodearla de controles que detectan cuando se equivoca.</span><span lang="en">I use Claude Code every day to build. The key isn't trusting the AI, it's surrounding it with checks that catch it when it's wrong.</span></p>
+  <div class="flujo">
+    <div class="paso"><b><span lang="es">Entender el problema</span><span lang="en">Understand the problem</span></b><p><span lang="es">Hablo con quien lo va a usar y escribo las reglas del negocio.</span><span lang="en">I talk to whoever will use it and write down the business rules.</span></p></div>
+    <div class="paso"><b><span lang="es">Contexto para la IA</span><span lang="en">Context for the AI</span></b><p><span lang="es">Instrucciones del proyecto, decisiones y restricciones, versionadas en el repo.</span><span lang="en">Project instructions, decisions and constraints, versioned in the repo.</span></p></div>
+    <div class="paso"><b><span lang="es">Construir con Claude Code</span><span lang="en">Build with Claude Code</span></b><p><span lang="es">En pasos chicos, cada uno con su prueba.</span><span lang="en">In small steps, each with its own test.</span></p></div>
+    <div class="paso"><b><span lang="es">Validar en código</span><span lang="en">Validate in code</span></b><p><span lang="es">Tests, CI, validadores que bloquean datos inventados, evals.</span><span lang="en">Tests, CI, validators that block made-up data, evals.</span></p></div>
+    <div class="paso"><b><span lang="es">Entregar e iterar</span><span lang="en">Ship and iterate</span></b><p><span lang="es">Cada error real se convierte en una prueba nueva.</span><span lang="en">Every real-world failure becomes a new test.</span></p></div>
+  </div>
+  <div class="ejemplos">
+    <div class="ejemplo"><b><span lang="es">El bot inventó un motor</span><span lang="en">The bot made up an engine</span></b><p><span lang="es">En HAY AUTOS confirmó un motor "2.4" que no estaba cargado. Sumé un validador que bloquea cualquier dato técnico que no venga del stock, y ese mensaje quedó como prueba para siempre.</span><span lang="en">At HAY AUTOS it confirmed a "2.4" engine that wasn't in the data. I added a validator that blocks any spec not coming from inventory, and that message became a permanent test.</span></p></div>
+    <div class="ejemplo"><b><span lang="es">Un proveedor saturado</span><span lang="en">An overloaded provider</span></b><p><span lang="es">Gemini respondía "503" y el chat esperaba 2 minutos antes de pasar al respaldo. Medí, bajé los tiempos máximos y ahora cambia de proveedor en segundos.</span><span lang="en">Gemini returned "503" and the chat waited 2 minutes before falling back. I measured it, lowered the timeouts and it now switches providers in seconds.</span></p></div>
+    <div class="ejemplo"><b><span lang="es">El CV no puede mentir</span><span lang="en">The resume can't lie</span></b><p><span lang="es">En vez de pedirle a la IA "no inventes", el Job Finder rechaza en código cualquier habilidad o número que no esté en mi perfil.</span><span lang="en">Instead of asking the AI "don't make things up", Job Finder rejects in code any skill or number not in my profile.</span></p></div>
+    <div class="ejemplo"><b><span lang="es">Lecciones que no compilan</span><span lang="en">Lessons that don't lint</span></b><p><span lang="es">Dos veces me llegó código con errores de estilo. En lugar de corregirlo a mano, automaticé el control para que no vuelva a pasar.</span><span lang="en">Twice I received code with lint errors. Instead of fixing it by hand, I automated the check so it can't happen again.</span></p></div>
+  </div>
+  <div class="stack" style="margin-top:22px"><span>Claude Code</span><span>Claude API</span><span>Gemini</span><span>Groq</span><span>Ollama</span><span>n8n</span><span>Python</span><span>Next.js / TypeScript</span><span>Supabase</span><span>GitHub Actions</span><span>Docker</span></div>
+</div></section>
+
+<section class="bloque" id="demo"><div class="cont">
+  <h2><span lang="es">Probá el asistente</span><span lang="en">Try the assistant</span></h2>
+  <p class="intro"><span lang="es">Atención de una rentadora de autos (datos ficticios): preguntá por disponibilidad, precios o políticas. A la derecha vas a ver qué herramientas usó para responder.</span><span lang="en">Customer service for a car rental company (fictional data): ask about availability, prices or policies. You'll see which tools it used to answer.</span></p>
+  <div class="demo" id="demo-caja">
+    <div class="pronto"><span lang="es">La demo pública se está publicando esta semana. Mientras tanto, el código y los tests están en </span><span lang="en">The public demo is going live this week. Meanwhile, the code and tests are on </span><a href="https://github.com/JaimeLopezGarrido/asistente-flota-mcp" target="_blank" rel="noopener">GitHub</a>.</div>
+  </div>
+</div></section>
+
+<section class="bloque" id="proximos"><div class="cont">
+  <h2><span lang="es">Próximos pasos</span><span lang="en">Next steps</span></h2>
+  <div class="ruta">
+    <div><b><span lang="es">Esta semana</span><span lang="en">This week</span></b><p><span lang="es">El asistente online con RAG: responde con citas del manual y dice "no lo encuentro" cuando no hay evidencia.</span><span lang="en">The assistant online with RAG: answers citing the manual and says "I can't find it" when there's no evidence.</span></p></div>
+    <div><b><span lang="es">Próximo mes</span><span lang="en">Next month</span></b><p><span lang="es">Memoria, aprobación humana para reservas, evals en CI y observabilidad (trazas, latencia y costo por conversación).</span><span lang="en">Memory, human approval for bookings, evals in CI and observability (traces, latency and cost per conversation).</span></p></div>
+    <div><b><span lang="es">Clientes</span><span lang="en">Clients</span></b><p><span lang="es">Pasar HAY AUTOS y Proper a producción con sus datos reales y medir el impacto en tiempo ahorrado.</span><span lang="en">Move HAY AUTOS and Proper to production with real data and measure time saved.</span></p></div>
+  </div>
+</div></section>
+
+<footer><div class="cont">
+  <h2><span lang="es">Hablemos</span><span lang="en">Let's talk</span></h2>
+  <p><span lang="es">Bariloche, Argentina · trabajo remoto · español e inglés.</span><span lang="en">Bariloche, Argentina · remote · Spanish and English.</span></p>
+  <div class="botones"><a class="btn pri" href="mailto:jaime.lopez.garrido36@gmail.com">jaime.lopez.garrido36@gmail.com</a><a class="btn" href="https://github.com/JaimeLopezGarrido" target="_blank" rel="noopener">GitHub</a></div>
+</div></footer>
+
+<script>
+// Idioma: ES/EN, recordado por visitante; si el navegador está en inglés, arranca en inglés
+const raiz = document.documentElement;
+let lang = "es";
+try { lang = localStorage.getItem("lang") || (navigator.language || "es").slice(0, 2); } catch {}
+const poner = l => {
+  lang = l === "en" ? "en" : "es";
+  raiz.dataset.lang = lang; raiz.lang = lang;
+  document.querySelectorAll(".idioma button").forEach(b => b.classList.toggle("on", b.dataset.l === lang));
+  try { localStorage.setItem("lang", lang); } catch {}
+};
+document.querySelectorAll(".idioma button").forEach(b => b.onclick = () => poner(b.dataset.l));
+poner(lang);
+
+// Demo: cuando la API esté publicada, se completa DEMO_URL y aparece el chat embebido
+const DEMO_URL = "";
+if (DEMO_URL) document.getElementById("demo-caja").innerHTML = `<iframe src="${DEMO_URL}" title="Demo del asistente" loading="lazy"></iframe>`;
+</script>
+</body>
+</html>
