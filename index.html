@@ -27,13 +27,12 @@
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; background: var(--bg); }
-body { margin: 0; background: var(--bg); color: var(--ink); font: 300 17px/1.6 var(--sans); -webkit-font-smoothing: antialiased; }
+body { margin: 0; background: transparent; color: var(--ink); font: 300 17px/1.6 var(--sans); -webkit-font-smoothing: antialiased; }
 a { color: inherit; }
 html[data-lang="es"] [lang="en"], html[data-lang="en"] [lang="es"] { display: none !important; }
-/* Grilla tenue que se desvanece, como en jhey.dev */
+/* Fondo: montañas de líneas, apenas visibles para no molestar la lectura */
 body::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
-  background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-  background-size: 64px 64px; mask-image: radial-gradient(ellipse at 100% 100%, #000 0%, transparent 65%); -webkit-mask-image: radial-gradient(ellipse at 100% 100%, #000 0%, transparent 65%); }
+  background: url(img/fondo-montanas.webp) center / cover no-repeat; opacity: .085; }
 .cont { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
 .mono { font-family: var(--mono); font-weight: 500; font-size: 12.5px; letter-spacing: .06em; text-transform: uppercase; }
 .subrayado { text-decoration: underline; text-decoration-color: var(--acento); text-underline-offset: 4px; text-decoration-thickness: 1.5px; }
@@ -73,9 +72,9 @@ h2 { font-family: var(--nombre); font-weight: 600; font-size: clamp(34px, 5vw, 5
 .lead { color: var(--muted); max-width: 620px; margin: 0 0 8px; }
 
 /* Quién soy */
-.quien { display: grid; grid-template-columns: 280px 1fr; gap: 48px; align-items: start; margin-top: 40px; }
-.foto { aspect-ratio: 4 / 5; border-radius: 18px; overflow: hidden; background: var(--card); border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; color: var(--dim); }
-.foto img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(.15); }
+.quien { display: grid; grid-template-columns: 180px 1fr; gap: 44px; align-items: start; margin-top: 40px; }
+.foto { width: 180px; height: 180px; border-radius: 50%; overflow: hidden; background: #fff; box-shadow: 0 0 0 1px var(--line), 0 0 0 7px #000, 0 0 0 8px rgba(178, 107, 255, .45); }
+.foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .historia p { font-size: 18px; margin: 0 0 16px; max-width: 680px; }
 .quien.sin-foto { grid-template-columns: 1fr; }
 .quien.sin-foto .foto { display: none; }
@@ -170,7 +169,7 @@ html:not(.con-historia) [data-quien] { display: none !important; }
   header.hero .cont { padding-top: 70px; padding-bottom: 70px; }
   section.bloque { padding: 70px 0; }
   .quien, .proyecto, .chicos { grid-template-columns: 1fr; gap: 28px; }
-  .quien .foto { max-width: 260px; }
+  .quien .foto { width: 140px; height: 140px; }
   .pasos { grid-template-columns: 1fr 1fr; }
   .demo-caja iframe { height: 580px; }
   .ejemplo ol { columns: 1; }
@@ -210,8 +209,8 @@ html:not(.con-historia) [data-quien] { display: none !important; }
 <section class="bloque" id="quien" data-quien><div class="cont">
   <div class="etiqueta mono"><span lang="es">Quién soy</span><span lang="en">About me</span></div>
   <h2><span lang="es">Mi historia</span><span lang="en">My story</span></h2>
-  <div class="quien sin-foto">
-    <div class="foto" id="foto"><span class="mono">Foto</span></div>
+  <div class="quien">
+    <div class="foto" id="foto"><img src="img/jaime.webp" alt="Jaime López Garrido" width="180" height="180"></div>
     <div class="historia" id="historia">
       <p><span lang="es">Soy <span class="nombre-violeta">Jaime López Garrido</span>. Nací y crecí en San Carlos de Bariloche, en la Patagonia argentina, y durante años fui esquiador: formé parte del equipo nacional de Freeski.</span><span lang="en">I'm <span class="nombre-violeta">Jaime López Garrido</span>. I was born and raised in San Carlos de Bariloche, in Argentine Patagonia, and for years I was a skier, competing as part of Argentina's national Freeski team.</span></p>
       <p><span lang="es">Me recibí de Licenciado en Administración de Empresas en la UBA. Con el boom de la inteligencia artificial y el machine learning, mi interés por estas herramientas fue creciendo hasta convertirse en mi camino: hoy curso la Maestría en Ciencia de Datos en la Universidad Austral.</span><span lang="en">I hold a degree in Business Administration from the University of Buenos Aires. As AI and machine learning took off, my interest in these tools kept growing until it became my path: today I'm pursuing a Master's in Data Science at Universidad Austral.</span></p>
