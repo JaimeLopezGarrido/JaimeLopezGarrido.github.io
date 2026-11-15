@@ -108,6 +108,23 @@ h2 { font-family: var(--nombre); font-weight: 600; font-size: clamp(34px, 5vw, 5
 .tile.ancho { grid-column: span 2; }
 .tile.ancho .img { aspect-ratio: 16 / 8; }
 .nota { color: var(--dim); margin-top: 12px; }
+/* Cliente en un celular y panel en una ventana, centrados con el texto */
+.p-hay, .p-proper { align-items: center; grid-template-columns: .85fr 1.15fr; }
+.dispositivos { position: relative; padding: 0 0 46px 0; }
+.ventana, .celu { text-decoration: none; }
+.ventana { display: block; margin-left: 13%; border: 1px solid #2c2c2c; border-radius: 12px; overflow: hidden; background: #111; box-shadow: 0 30px 60px rgba(0,0,0,.6); transition: transform .25s, border-color .25s; }
+.ventana .barra { display: flex; align-items: center; gap: 6px; padding: 9px 12px; background: #161616; border-bottom: 1px solid #2a2a2a; }
+.ventana .barra i { width: 9px; height: 9px; border-radius: 50%; background: #3a3a3a; }
+.ventana .barra span.mono { margin-left: 10px; color: var(--dim); font-size: 10.5px; }
+.ventana img { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top left; }
+.celu { position: absolute; left: 0; bottom: 0; width: 30%; aspect-ratio: 9 / 19; border-radius: 26px; border: 6px solid #1c1c1c; outline: 1px solid #333; overflow: hidden; background: #fff; box-shadow: 0 24px 50px rgba(0,0,0,.75); transition: transform .25s; }
+.celu img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+.ventana:hover { transform: translateY(-3px); border-color: #555; }
+.celu:hover { transform: translateY(-4px) rotate(-1deg); }
+.demo-links { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; margin-top: 18px; }
+.demo-links a { text-decoration: none; color: var(--ink); border: 1px solid var(--line); border-radius: 99px; padding: 7px 14px; background: var(--card); }
+.demo-links a:hover { border-color: var(--c); }
+.demo-links .nota-demo { color: var(--dim); }
 
 .uso-personal { padding-top: 56px; }
 .subtitulo { font-family: var(--nombre); font-weight: 600; font-size: clamp(26px, 3.4vw, 34px); letter-spacing: -.035em; line-height: 1.1; margin: 0; }
@@ -175,6 +192,9 @@ html:not(.con-historia) [data-quien] { display: none !important; }
   .quien, .proyecto, .chicos { grid-template-columns: 1fr; gap: 28px; }
   .quien .foto { width: 140px; height: 140px; }
   .pasos { grid-template-columns: 1fr 1fr; }
+  .p-hay, .p-proper { grid-template-columns: 1fr; }
+  .ventana { margin-left: 18%; }
+  .celu { width: 34%; border-radius: 20px; border-width: 5px; }
   .demo-caja iframe { height: 580px; }
   .ejemplo ol { columns: 1; }
 }
@@ -241,18 +261,21 @@ html:not(.con-historia) [data-quien] { display: none !important; }
         <div class="q sol mono"><span lang="es">¿Cómo se solucionó?</span><span lang="en">How was it solved?</span></div>
         <ul class="qa-lista sol"><li><span lang="es">El cliente saca una foto de su DNI y su cédula verde desde la web app</span><span lang="en">The customer takes a photo of their ID and car registration in the web app</span></li><li><span lang="es">La IA lee los datos y quedan guardados y ordenados en Supabase</span><span lang="en">AI reads the data and it's stored, organized, in Supabase</span></li><li><span lang="es">Desde el panel, la agencia genera cualquier documento en pocos clics</span><span lang="en">From the dashboard, the agency generates any document in a few clicks</span></li></ul>
       </div>
-      <ul>
-        <li><span lang="es">Link para que el cliente cargue DNI y cédula; la IA los lee</span><span lang="en">Customer link to upload ID and car title; AI reads them</span></li>
-        <li><span lang="es">Panel con documentos de venta al instante y Radar de oportunidades</span><span lang="en">Dashboard with instant sale documents and an opportunity Radar</span></li>
-      </ul>
       <div class="stack mono">n8n · Supabase · Google Docs · Gemini · Groq</div>
     </div>
     <div>
-      <div class="probar">
-        <a class="tile" href="demos/hayautos/" target="_blank" rel="noopener"><div class="img"><img src="img/hayautos-demo-cliente.webp" alt="" loading="lazy"></div><div class="pie mono"><span lang="es">Cliente</span><span lang="en">Customer</span><span>↗</span></div></a>
-        <a class="tile" href="demos/hayautos/panel/" target="_blank" rel="noopener"><div class="img"><img src="img/hayautos-demo-panel.webp" alt="" loading="lazy"></div><div class="pie mono"><span lang="es">Panel</span><span lang="en">Dashboard</span><span>↗</span></div></a>
+      <div class="dispositivos">
+        <a class="ventana" href="demos/hayautos/panel/" target="_blank" rel="noopener" aria-label="Panel">
+          <div class="barra"><i></i><i></i><i></i><span class="mono"><span lang="es">Panel de la agencia</span><span lang="en">Agency dashboard</span></span></div>
+          <img src="img/hayautos-demo-panel.webp" alt="" loading="lazy">
+        </a>
+        <a class="celu" href="demos/hayautos/" target="_blank" rel="noopener" aria-label="Cliente"><img src="img/hayautos-demo-cliente.webp" alt="" loading="lazy"></a>
       </div>
-      <div class="nota mono"><span lang="es">Demo con datos de ejemplo</span><span lang="en">Demo with sample data</span></div>
+      <div class="demo-links mono">
+        <a href="demos/hayautos/" target="_blank" rel="noopener"><span lang="es">Cliente</span><span lang="en">Customer</span> ↗</a>
+        <a href="demos/hayautos/panel/" target="_blank" rel="noopener"><span lang="es">Panel</span><span lang="en">Dashboard</span> ↗</a>
+        <span class="nota-demo"><span lang="es">Demo con datos de ejemplo</span><span lang="en">Demo with sample data</span></span>
+      </div>
     </div>
     <details class="como" id="como-hayautos"><summary class="mono"><span lang="es">Cómo funciona</span><span lang="en">How it works</span><span class="flecha">↓</span></summary><div class="como-cuerpo"><div class="diagrama-caja"><svg class="diagrama" viewBox="0 0 980 260" role="img" aria-hidden="true"><path class="c" d="M170 49 C200 49 200 120 230 120"/><path class="c" d="M170 129 H230"/><path class="c" d="M170 209 C200 209 200 140 230 140"/><path class="c" d="M305 99 V60"/><path class="c" d="M380 129 H440"/><path class="c" d="M590 129 C620 129 620 64 650 64"/><path class="c" d="M590 129 C620 129 620 194 650 194"/><path class="c" d="M800 64 H840"/><path class="recorrido" d="M170 209 C200 209 200 140 230 140 H305 V60 V129 H440 H590 C620 129 620 64 650 64 H840 H970"/><rect class="nodo" x="10" y="24" width="160" height="50" rx="10"/><text class="t" x="90.0" y="43.0">DRIVE</text><text class="s" x="90.0" y="59.0">fotos de autos</text><rect class="nodo" x="10" y="104" width="160" height="50" rx="10"/><text class="t" x="90.0" y="123.0">PLANILLA</text><text class="s" x="90.0" y="139.0">stock</text><rect class="nodo destacado" x="10" y="184" width="160" height="50" rx="10"/><text class="t" x="90.0" y="203.0">LINK CLIENTE</text><text class="s" x="90.0" y="219.0">DNI · cédula</text><rect class="nodo" x="230" y="99" width="150" height="60" rx="10"/><text class="t" x="305.0" y="123.0">N8N</text><text class="s" x="305.0" y="139.0">flujos</text><rect class="nodo" x="230" y="4" width="150" height="56" rx="10"/><text class="t" x="305.0" y="26.0">IA</text><text class="s" x="305.0" y="42.0">lee DNI · ordena fotos</text><rect class="nodo" x="440" y="99" width="150" height="60" rx="10"/><text class="t" x="515.0" y="123.0">SUPABASE</text><text class="s" x="515.0" y="139.0">datos · permisos</text><rect class="nodo" x="650" y="34" width="150" height="60" rx="10"/><text class="t" x="725.0" y="58.0">PANEL WEB</text><text class="s" x="725.0" y="74.0">pendientes · radar</text><rect class="nodo" x="650" y="164" width="150" height="60" rx="10"/><text class="t" x="725.0" y="188.0">PUBLICACIONES</text><text class="s" x="725.0" y="204.0">carrusel · historias</text><rect class="nodo" x="840" y="34" width="130" height="60" rx="10"/><text class="t" x="905.0" y="58.0">DOCUMENTOS</text><text class="s" x="905.0" y="74.0">reserva · seña</text><circle class="punto" r="5"><animateMotion dur="5s" repeatCount="indefinite" path="M170 209 C200 209 200 140 230 140 H305 V60 V129 H440 H590 C620 129 620 64 650 64 H840 H970" keyPoints="0;1" keyTimes="0;1" calcMode="linear"/></circle></svg></div><div class="ejemplo"><div class="mono ej-titulo"><span lang="es">Ejemplo: un cliente carga su DNI y cédula</span><span lang="en">Example: a customer uploads their ID and car title</span></div><ol><li><span lang="es">Un cliente que vende su auto abre el link desde el celular y sube <b>DNI y cédula</b> (almacenamiento privado).</span><span lang="en">A customer selling their car opens the link on their phone and uploads their <b>ID and car title</b> (private storage).</span></li><li><span lang="es"><b>n8n</b> le pasa las fotos a la <b>IA</b>, que devuelve nombre, DNI, CUIL y patente en un formato fijo.</span><span lang="en"><b>n8n</b> sends the photos to the <b>AI</b>, which returns name, ID number, tax ID and plate in a fixed format.</span></li><li><span lang="es">El <b>código valida</b> sin IA: el CUIL con su dígito verificador y que el titular de la cédula sea el del DNI.</span><span lang="en">The <b>code validates</b> without AI: the tax ID check digit, and that the title holder matches the ID.</span></li><li><span lang="es">Vincula al auto del stock <b>por patente</b>, corrigiendo confusiones de lectura (O/0, B/8). Si hay dos candidatos, no adivina: lo deja para revisar.</span><span lang="en">It links the car in stock <b>by plate</b>, fixing reading mix-ups (O/0, B/8). If there are two candidates, it doesn't guess: it flags it for review.</span></li><li><span lang="es">Aparece en <b>Pendientes</b> del panel; el dueño aprueba y genera la <b>reserva o el boleto</b> al instante, con montos en letras.</span><span lang="en">It shows up in the dashboard's <b>Pending</b> list; the owner approves it and generates the <b>reservation or bill of sale</b> instantly, with amounts in words.</span></li></ol></div></div></details>
   </article>
@@ -270,19 +293,21 @@ html:not(.con-historia) [data-quien] { display: none !important; }
         <div class="q sol mono"><span lang="es">¿Cómo se solucionó?</span><span lang="en">How was it solved?</span></div>
         <ul class="qa-lista sol"><li><span lang="es">Panel para la agencia: reservas, disponibilidad y pedidos de los clientes</span><span lang="en">Agency dashboard: bookings, availability and customer requests</span></li><li><span lang="es">Web app para el cliente: entra con su DNI o pasaporte y su número de reserva</span><span lang="en">Customer web app: log in with ID or passport and booking number</span></li><li><span lang="es">Ve dónde retira y devuelve, firma el contrato, adelanta trámites y pide cambios o extras</span><span lang="en">See pickup and return, sign the contract, complete paperwork and request changes or extras</span></li></ul>
       </div>
-      <ul>
-        <li><span lang="es">Panel: reservas, calendario, flota, entregas y contratos</span><span lang="en">Dashboard: bookings, calendar, fleet, handovers and contracts</span></li>
-        <li><span lang="es">Portal del cliente en español, inglés y portugués</span><span lang="en">Customer portal in Spanish, English and Portuguese</span></li>
-        <li><span lang="es">Bot de Instagram que cotiza y pre-reserva</span><span lang="en">Instagram bot that quotes and pre-books</span></li>
-      </ul>
       <div class="stack mono">Next.js · TypeScript · Vitest · Vercel · n8n · Groq</div>
     </div>
     <div>
-      <div class="probar">
-        <a class="tile" href="https://proper-demo-livid.vercel.app/mi/entrar" target="_blank" rel="noopener"><div class="img"><img src="img/proper-portal.webp" alt="" loading="lazy"></div><div class="pie mono"><span lang="es">Portal del cliente</span><span lang="en">Customer portal</span><span>↗</span></div></a>
-        <a class="tile" href="https://proper-demo-livid.vercel.app/panel/ingreso" target="_blank" rel="noopener"><div class="img"><img src="img/proper-panel.webp" alt="" loading="lazy"></div><div class="pie mono"><span lang="es">Panel</span><span lang="en">Dashboard</span><span>↗</span></div></a>
+      <div class="dispositivos">
+        <a class="ventana" href="https://proper-demo-livid.vercel.app/panel/ingreso" target="_blank" rel="noopener" aria-label="Panel">
+          <div class="barra"><i></i><i></i><i></i><span class="mono"><span lang="es">Panel de la agencia</span><span lang="en">Agency dashboard</span></span></div>
+          <img src="img/proper-pc.webp" alt="" loading="lazy">
+        </a>
+        <a class="celu" href="https://proper-demo-livid.vercel.app/mi/entrar" target="_blank" rel="noopener" aria-label="Cliente"><img src="img/proper-cel.webp" alt="" loading="lazy"></a>
       </div>
-      <div class="nota mono"><span lang="es">Modo demo: los datos se reinician cada día</span><span lang="en">Demo mode: data resets daily</span></div>
+      <div class="demo-links mono">
+        <a href="https://proper-demo-livid.vercel.app/mi/entrar" target="_blank" rel="noopener"><span lang="es">Portal del cliente</span><span lang="en">Customer portal</span> ↗</a>
+        <a href="https://proper-demo-livid.vercel.app/panel/ingreso" target="_blank" rel="noopener"><span lang="es">Panel</span><span lang="en">Dashboard</span> ↗</a>
+        <span class="nota-demo"><span lang="es">Los datos se reinician cada día</span><span lang="en">Data resets daily</span></span>
+      </div>
     </div>
     <details class="como" id="como-proper"><summary class="mono"><span lang="es">Cómo funciona</span><span lang="en">How it works</span><span class="flecha">↓</span></summary><div class="como-cuerpo"><div class="diagrama-caja"><svg class="diagrama" viewBox="0 0 980 260" role="img" aria-hidden="true"><path class="c" d="M150 128 H180"/><path class="c" d="M320 120 C335 120 335 42 350 42"/><path class="c" d="M510 42 C535 42 535 120 560 120"/><path class="c" d="M710 128 H750"/><path class="c" d="M855 156 V196"/><path class="c" d="M560 136 C535 136 535 214 510 214"/><path class="c" d="M350 214 C300 214 270 180 250 156"/><path class="recorrido" d="M150 128 H180 H250 H320 C335 120 335 42 350 42 H510 C535 42 535 120 560 120 H750 H855 H710 H560 C535 136 535 214 510 214 H350"/><rect class="nodo" x="10" y="100" width="140" height="56" rx="10"/><text class="t" x="80.0" y="122.0">INSTAGRAM</text><text class="s" x="80.0" y="138.0">mensaje del cliente</text><rect class="nodo" x="180" y="100" width="140" height="56" rx="10"/><text class="t" x="250.0" y="122.0">N8N</text><text class="s" x="250.0" y="138.0">junta mensajes</text><rect class="nodo destacado" x="350" y="14" width="160" height="56" rx="10"/><text class="t" x="430.0" y="36.0">IA · MODO PLAN</text><text class="s" x="430.0" y="52.0">{acción, datos, texto}</text><rect class="nodo" x="350" y="186" width="160" height="56" rx="10"/><text class="t" x="430.0" y="208.0">RESPUESTA</text><text class="s" x="430.0" y="224.0">texto fijo + números</text><rect class="nodo" x="560" y="100" width="150" height="56" rx="10"/><text class="t" x="635.0" y="122.0">API DE LA APP</text><text class="s" x="635.0" y="138.0">/api/bot</text><rect class="nodo" x="750" y="100" width="210" height="56" rx="10"/><text class="t" x="855.0" y="122.0">MOTOR DE REGLAS</text><text class="s" x="855.0" y="138.0">disponibilidad · precios</text><rect class="nodo" x="750" y="196" width="210" height="50" rx="10"/><text class="t" x="855.0" y="215.0">PANEL Y PORTAL</text><text class="s" x="855.0" y="231.0">mismo motor</text><circle class="punto" r="5"><animateMotion dur="5s" repeatCount="indefinite" path="M150 128 H180 H250 H320 C335 120 335 42 350 42 H510 C535 42 535 120 560 120 H750 H855 H710 H560 C535 136 535 214 510 214 H350" keyPoints="0;1" keyTimes="0;1" calcMode="linear"/></circle></svg></div><div class="ejemplo"><div class="mono ej-titulo"><span lang="es">Ejemplo: una consulta por Instagram</span><span lang="en">Example: an Instagram inquiry</span></div><ol><li><span lang="es">Escriben por Instagram: <i>"¿Tienen auto del 20 al 25 de enero? Viajo con mi perro"</i>. <b>n8n</b> espera unos segundos para juntar mensajes seguidos.</span><span lang="en">Someone writes on Instagram: <i>"Do you have a car Jan 20–25? I'm traveling with my dog"</i>. <b>n8n</b> waits a few seconds to group consecutive messages.</span></li><li><span lang="es">La <b>IA en modo plan</b> no responde directo: devuelve qué hacer, por ejemplo <code>acción: cotizar</code>, con las fechas y <code>mascota: sí</code>.</span><span lang="en">The <b>AI in plan mode</b> doesn't answer directly: it returns what to do, e.g. <code>action: quote</code>, with the dates and <code>pet: yes</code>.</span></li><li><span lang="es">n8n llama a la <b>API de la app</b>, que calcula con el <b>mismo motor que usa el panel</b>: disponibilidad, temporada y cargo por mascota.</span><span lang="en">n8n calls the <b>app's API</b>, which calculates with the <b>same engine the dashboard uses</b>: availability, season and pet fee.</span></li><li><span lang="es">La respuesta se arma con <b>texto fijo y los números de la app</b>: la IA nunca escribe un precio. En 38 charlas de prueba no inventó ninguno.</span><span lang="en">The reply is built from <b>fixed text and the app's numbers</b>: the AI never writes a price. In 38 test conversations it never made one up.</span></li><li><span lang="es">Si el cliente pre-reserva o pide un cambio, cae en el <b>panel</b> de la agencia para aprobarlo.</span><span lang="en">If the customer pre-books or requests a change, it lands in the agency's <b>dashboard</b> for approval.</span></li></ol></div></div></details>
   </article>
@@ -298,13 +323,8 @@ html:not(.con-historia) [data-quien] { display: none !important; }
         <div class="q mono"><span lang="es">¿Cuál era el problema?</span><span lang="en">What was the problem?</span></div>
         <ul class="qa-lista prob"><li><span lang="es">Las alquiladoras no confiaban en un chatbot conectado directo a un modelo de lenguaje</span><span lang="en">Rental companies didn't trust a chatbot connected straight to a language model</span></li><li><span lang="es">Miedo a que alucine, ofrezca precios más bajos o confirme reservas imposibles</span><span lang="en">Fear it would hallucinate, offer lower prices or confirm impossible bookings</span></li></ul>
         <div class="q sol mono"><span lang="es">¿Cómo se solucionó?</span><span lang="en">How was it solved?</span></div>
-        <ul class="qa-lista sol"><li><span lang="es"><b>Router:</b> decide el camino de cada mensaje</span><span lang="en"><b>Router:</b> picks the path for each message</span></li><li><span lang="es"><b>RAG:</b> busca en el manual y cita la página</span><span lang="en"><b>RAG:</b> searches the manual and cites the page</span></li><li><span lang="es"><b>Function calling:</b> disponibilidad y precios salen siempre del sistema</span><span lang="en"><b>Function calling:</b> availability and prices always come from the system</span></li><li><span lang="es">El modelo nunca calcula un precio ni toca el calendario</span><span lang="en">The model never calculates a price or touches the calendar</span></li></ul>
+        <ul class="qa-lista sol"><li><span lang="es"><b>Router:</b> decide el camino de cada mensaje</span><span lang="en"><b>Router:</b> picks the path for each message</span></li><li><span lang="es"><b>RAG:</b> busca en el manual y cita la página</span><span lang="en"><b>RAG:</b> searches the manual and cites the page</span></li><li><span lang="es"><b>Function calling:</b> disponibilidad y precios salen siempre del sistema</span><span lang="en"><b>Function calling:</b> availability and prices always come from the system</span></li><li><span lang="es">El modelo nunca calcula un precio ni toca el calendario</span><span lang="en">The model never calculates a price or touches the calendar</span></li><li><span lang="es">La web muestra la ruta, las herramientas y las fuentes de cada respuesta</span><span lang="en">The page shows the route, tools and sources behind each answer</span></li></ul>
       </div>
-      <ul>
-        <li><span lang="es">Consulta y cotiza con herramientas reales (function calling)</span><span lang="en">Checks and quotes through real tools (function calling)</span></li>
-        <li><span lang="es">Responde con el manual citando la página (RAG)</span><span lang="en">Answers from the manual, citing the page (RAG)</span></li>
-        <li><span lang="es">Muestra la ruta, las herramientas y las fuentes de cada respuesta</span><span lang="en">Shows the route, tools and sources behind each answer</span></li>
-      </ul>
       <div class="stack mono">Python · FastAPI · RAG · Gemini · Groq · Vercel · GitHub Actions</div>
     </div>
     <div>
