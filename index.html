@@ -35,9 +35,9 @@ body::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-even
   background: url(img/fondo-montanas.webp) center / cover no-repeat; opacity: .085; }
 .cont { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
 .mono { font-family: var(--mono); font-weight: 500; font-size: 12.5px; letter-spacing: .06em; text-transform: uppercase; }
-.subrayado { text-decoration: underline; text-decoration-color: var(--acento); text-underline-offset: 4px; text-decoration-thickness: 1.5px; }
+.subrayado { text-decoration: underline; text-decoration-color: var(--violeta); text-underline-offset: 4px; text-decoration-thickness: 1.5px; }
 .subrayado:hover { color: #fff; text-decoration-thickness: 2.5px; }
-.subrayado.verde { text-decoration-color: var(--verde); }
+.subrayado.verde { text-decoration-color: var(--violeta); }
 .nombre-violeta { color: var(--violeta); font-weight: 500; }
 
 /* Barra superior */
@@ -87,7 +87,7 @@ h2 { font-family: var(--nombre); font-weight: 600; font-size: clamp(34px, 5vw, 5
 .proyecto li { padding: 8px 0; border-top: 1px solid var(--line); font-size: 16px; }
 .proyecto li:last-child { border-bottom: 1px solid var(--line); }
 .estado { color: var(--c); }
-.p-hay { --c: var(--violeta); } .p-proper { --c: var(--naranja); } .p-chat { --c: var(--celeste); } .chico { --c: var(--amarillo); }
+.p-hay, .p-proper, .p-chat, .chico { --c: var(--violeta); }
 .qa { margin: 4px 0 22px; padding-left: 14px; border-left: 1px solid var(--line); }
 .qa .q { color: var(--rojo); margin: 14px 0 6px; }
 .qa .q.sol { color: var(--verde); }
