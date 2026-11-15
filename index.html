@@ -106,8 +106,10 @@ h2 { font-family: var(--nombre); font-weight: 600; font-size: clamp(34px, 5vw, 5
 .paso b { display: block; font-weight: 500; margin-top: 10px; line-height: 1.4; }
 
 /* Demo embebida */
-.demo-caja { margin-top: 36px; }
-.demo-caja iframe { width: 100%; height: 640px; border: 1px solid var(--line); border-radius: 16px; background: #fff; }
+.demo-caja { margin-top: 0; }
+.asistente { grid-template-columns: .8fr 1.2fr; }
+[id] { scroll-margin-top: 70px; }
+.demo-caja iframe { width: 100%; height: 600px; border: 1px solid var(--line); border-radius: 16px; background: #fff; }
 
 /* Contacto */
 footer { padding: 96px 0 110px; }
@@ -139,7 +141,7 @@ html:not(.con-historia) [data-quien] { display: none !important; }
   <a class="inicio mono" href="#arriba">Jaime López Garrido</a>
   <a class="l mono" href="#quien" data-quien><span lang="es">Quién soy</span><span lang="en">About</span></a>
   <a class="l mono" href="#proyectos"><span lang="es">Proyectos</span><span lang="en">Projects</span></a>
-  <a class="l mono" href="#demo">Chatbot</a>
+  <a class="l mono" href="#asistente">Chatbot</a>
   <a class="l mono" href="#contacto"><span lang="es">Contacto</span><span lang="en">Contact</span></a>
   <div class="idioma mono"><button data-l="es">ES</button><button data-l="en">EN</button></div>
 </div></nav>
@@ -151,11 +153,11 @@ html:not(.con-historia) [data-quien] { display: none !important; }
     MSc Data Science @ Universidad Austral<br>
     Business Administration (UBA) · Bariloche, AR
   </div>
-  <p class="intro"><span lang="es">Construyo herramientas con IA para negocios reales: <a class="subrayado" href="#proyectos">bots, paneles y automatizaciones</a> que la gente usa en su día a día, y un <a class="subrayado" href="#demo">chatbot con RAG</a> que podés probar acá.</span><span lang="en">I build AI tools for real businesses: <a class="subrayado" href="#proyectos">bots, dashboards and automations</a> people use every day, and a <a class="subrayado" href="#demo">RAG chatbot</a> you can try right here.</span></p>
+  <p class="intro"><span lang="es">Construyo herramientas con IA para negocios reales: <a class="subrayado" href="#proyectos">bots, paneles y automatizaciones</a> que la gente usa en su día a día, y un <a class="subrayado" href="#asistente">chatbot con RAG</a> que podés probar acá.</span><span lang="en">I build AI tools for real businesses: <a class="subrayado" href="#proyectos">bots, dashboards and automations</a> people use every day, and a <a class="subrayado" href="#asistente">RAG chatbot</a> you can try right here.</span></p>
   <div class="enlaces mono">
     <a href="#quien" data-quien><span lang="es">Quién soy</span><span lang="en">About</span></a><span data-quien>·</span>
     <a href="#proyectos"><span lang="es">Proyectos</span><span lang="en">Projects</span></a><span>·</span>
-    <a href="#demo">Chatbot</a><span>·</span>
+    <a href="#asistente">Chatbot</a><span>·</span>
     <a href="https://github.com/JaimeLopezGarrido" target="_blank" rel="noopener">GitHub</a><span>·</span>
     <a href="#contacto"><span lang="es">Contacto</span><span lang="en">Contact</span></a>
   </div>
@@ -226,7 +228,7 @@ html:not(.con-historia) [data-quien] { display: none !important; }
 
   <hr class="linea">
 
-  <article class="proyecto">
+  <article class="proyecto asistente" id="asistente">
     <div>
       <div class="estado mono"><span lang="es">Online · código abierto</span><span lang="en">Live · open source</span></div>
       <h3><span lang="es">Asistente de atención</span><span lang="en">Customer-service assistant</span></h3>
@@ -239,10 +241,9 @@ html:not(.con-historia) [data-quien] { display: none !important; }
       <div class="stack mono">Python · FastAPI · RAG · Gemini · Groq · Vercel · GitHub Actions</div>
     </div>
     <div>
-      <div class="probar">
-        <a class="tile ancho" href="https://asistente-rentadora-demo.vercel.app/" target="_blank" rel="noopener"><div class="img"><img src="img/chatbot.webp" alt="" loading="lazy"></div><div class="pie mono"><span lang="es">Chat en vivo</span><span lang="en">Live chat</span><span>↗</span></div></a>
-      </div>
-      <div class="nota mono"><a class="subrayado" href="https://github.com/JaimeLopezGarrido/asistente-flota-mcp" target="_blank" rel="noopener"><span lang="es">Ver el código</span><span lang="en">See the code</span></a></div>
+      <p class="mono" style="color:var(--muted);margin:0 0 12px"><span lang="es">Probalo: preguntá por disponibilidad, precios o qué hacer si pinchás una goma</span><span lang="en">Try it: ask about availability, prices or what to do with a flat tire</span></p>
+      <div class="demo-caja"><iframe src="https://asistente-rentadora-demo.vercel.app/" title="Asistente" loading="lazy"></iframe></div>
+      <div class="nota mono"><a class="subrayado" href="https://asistente-rentadora-demo.vercel.app/" target="_blank" rel="noopener"><span lang="es">Abrir en pantalla completa</span><span lang="en">Open full screen</span></a> · <a class="subrayado" href="https://github.com/JaimeLopezGarrido/asistente-flota-mcp" target="_blank" rel="noopener"><span lang="es">Ver el código</span><span lang="en">See the code</span></a></div>
     </div>
   </article>
 
@@ -276,15 +277,6 @@ html:not(.con-historia) [data-quien] { display: none !important; }
     <div class="paso"><span class="n mono">04</span><b><span lang="es">Validar con tests y controles</span><span lang="en">Validate with tests and checks</span></b></div>
     <div class="paso"><span class="n mono">05</span><b><span lang="es">Entregar e iterar con el uso real</span><span lang="en">Ship and iterate with real use</span></b></div>
   </div>
-</div></section>
-
-<hr class="linea">
-
-<section class="bloque" id="demo"><div class="cont">
-  <div class="etiqueta mono"><span lang="es">Probalo</span><span lang="en">Try it</span></div>
-  <h2><span lang="es">Chateá con el asistente.</span><span lang="en">Chat with the assistant.</span></h2>
-  <p class="lead"><span lang="es">Atención de una rentadora de autos (datos ficticios). Preguntá por disponibilidad, precios o qué hacer si pinchás una goma.</span><span lang="en">Customer service for a car rental company (fictional data). Ask about availability, prices, or what to do with a flat tire.</span></p>
-  <div class="demo-caja"><iframe src="https://asistente-rentadora-demo.vercel.app/" title="Asistente" loading="lazy"></iframe></div>
 </div></section>
 
 <hr class="linea">
