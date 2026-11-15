@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es" data-lang="es">
+<html lang="es" data-lang="es" class="con-historia">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -72,7 +72,9 @@ h2 { font-family: var(--nombre); font-weight: 600; font-size: clamp(34px, 5vw, 5
 .quien { display: grid; grid-template-columns: 280px 1fr; gap: 48px; align-items: start; margin-top: 40px; }
 .foto { aspect-ratio: 4 / 5; border-radius: 18px; overflow: hidden; background: var(--card); border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; color: var(--dim); }
 .foto img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(.15); }
-.historia p { font-size: 18px; margin: 0 0 16px; }
+.historia p { font-size: 18px; margin: 0 0 16px; max-width: 680px; }
+.quien.sin-foto { grid-template-columns: 1fr; }
+.quien.sin-foto .foto { display: none; }
 
 /* Proyectos */
 .proyecto { display: grid; grid-template-columns: .9fr 1.1fr; gap: 48px; align-items: start; padding: 56px 0; }
@@ -94,7 +96,9 @@ h2 { font-family: var(--nombre); font-weight: 600; font-size: clamp(34px, 5vw, 5
 .tile.ancho .img { aspect-ratio: 16 / 8; }
 .nota { color: var(--dim); margin-top: 12px; }
 
-.chicos { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 56px 0 0; }
+.uso-personal { padding-top: 56px; }
+.subtitulo { font-family: var(--nombre); font-weight: 600; font-size: clamp(26px, 3.4vw, 34px); letter-spacing: -.035em; line-height: 1.1; margin: 0; }
+.chicos { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 28px 0 0; }
 .chico { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 26px; }
 .chico h3 { font-family: var(--nombre); font-weight: 600; font-size: 26px; letter-spacing: -.03em; margin: 12px 0 8px; }
 .chico p { color: var(--muted); margin: 0 0 14px; font-size: 16px; }
@@ -195,10 +199,12 @@ html:not(.con-historia) [data-quien] { display: none !important; }
 <section class="bloque" id="quien" data-quien><div class="cont">
   <div class="etiqueta mono"><span lang="es">Quién soy</span><span lang="en">About me</span></div>
   <h2><span lang="es">Mi historia</span><span lang="en">My story</span></h2>
-  <div class="quien">
+  <div class="quien sin-foto">
     <div class="foto" id="foto"><span class="mono">Foto</span></div>
     <div class="historia" id="historia">
-      <p><span lang="es">Texto en preparación.</span><span lang="en">Coming soon.</span></p>
+      <p><span lang="es">Soy Jaime López Garrido. Nací y crecí en San Carlos de Bariloche, en la Patagonia argentina, y durante años fui esquiador: formé parte del equipo nacional de Freeski.</span><span lang="en">I'm Jaime López Garrido. I was born and raised in San Carlos de Bariloche, in Argentine Patagonia, and for years I was a skier, competing as part of Argentina's national Freeski team.</span></p>
+      <p><span lang="es">Me recibí de Licenciado en Administración de Empresas en la UBA. Con el boom de la inteligencia artificial y el machine learning, mi interés por estas herramientas fue creciendo hasta convertirse en mi camino: hoy curso la Maestría en Ciencia de Datos en la Universidad Austral.</span><span lang="en">I hold a degree in Business Administration from the University of Buenos Aires. As AI and machine learning took off, my interest in these tools kept growing until it became my path: today I'm pursuing a Master's in Data Science at Universidad Austral.</span></p>
+      <p><span lang="es">En paralelo desarrollo soluciones con IA para clientes de forma independiente, y sigo estudiando IA y automatización por mi cuenta, con la idea de crecer y desarrollarme en el rubro.</span><span lang="en">Alongside my studies, I build AI solutions for clients as an independent developer, and I keep learning AI and automation on my own, aiming to grow and build my career in this field.</span></p>
     </div>
   </div>
 </div></section>
@@ -279,6 +285,10 @@ html:not(.con-historia) [data-quien] { display: none !important; }
 
   <hr class="linea">
 
+  <div class="uso-personal">
+    <div class="etiqueta mono"><span lang="es">Uso personal de la IA</span><span lang="en">AI in my own work</span></div>
+    <h3 class="subtitulo"><span lang="es">Herramientas que me armé y uso todos los días.</span><span lang="en">Tools I built for myself and use every day.</span></h3>
+  </div>
   <div class="chicos">
     <div class="chico">
       <div class="estado mono"><span lang="es">Uso diario</span><span lang="en">Daily use</span></div>
