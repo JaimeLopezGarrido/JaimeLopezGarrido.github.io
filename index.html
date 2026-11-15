@@ -3,143 +3,186 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Jaime López Garrido · Automatización e IA</title>
-<meta name="description" content="Herramientas, automatizaciones e integraciones con IA para negocios reales. Proyectos y demos para probar.">
+<title>Jaime López Garrido · Data Science e IA aplicada</title>
+<meta name="description" content="Jaime López Garrido: data science, automatización con IA y web apps para negocios reales. Proyectos y demos para probar.">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:title" content="Jaime López Garrido">
+<meta property="og:description" content="Data science, automatización con IA y web apps para negocios reales.">
+<meta property="og:image" content="https://jaimelopezgarrido.github.io/icono-512.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #ffffff; --soft: #f6f3ee; --line: #e9e3d8; --ink: #1a1916; --muted: #6b665c;
-  --amarillo: #fdffa2; --amarillo-ink: #635e00; --celeste: #cce6f7; --celeste-ink: #286281;
-  --durazno: #ffd8c4; --durazno-ink: #93472d; --lila: #e7defc; --lila-ink: #5b3fa0; --verde: #d9f2dc; --verde-ink: #2b6a37;
-  --grid: rgba(26, 25, 22, .045);
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #1a1916; --soft: #232220; --line: #34322d; --ink: #f3f1ec; --muted: #a8a397;
-    --amarillo: #4a4a14; --amarillo-ink: #f4f59a; --celeste: #1f3a4c; --celeste-ink: #b8dcf4;
-    --durazno: #4a2c20; --durazno-ink: #ffc9ad; --lila: #33284f; --lila-ink: #d6c8ff; --verde: #1f3a24; --verde-ink: #b9e9c0;
-    --grid: rgba(243, 241, 236, .05);
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #1a1916; --soft: #232220; --line: #34322d; --ink: #f3f1ec; --muted: #a8a397;
-  --amarillo: #4a4a14; --amarillo-ink: #f4f59a; --celeste: #1f3a4c; --celeste-ink: #b8dcf4;
-  --durazno: #4a2c20; --durazno-ink: #ffc9ad; --lila: #33284f; --lila-ink: #d6c8ff; --verde: #1f3a24; --verde-ink: #b9e9c0;
-  --grid: rgba(243, 241, 236, .05);
+  --bg: #000; --ink: #f2f2f2; --muted: #9a9a9a; --dim: #5c5c5c; --line: #262626; --card: #0b0b0b;
+  --acento: #ff5c5c; --grid: rgba(255, 255, 255, .055);
+  --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: ui-monospace, "SF Mono", "Geist Mono", Menlo, monospace;
+  --nombre: "Inter Tight", ui-sans-serif, system-ui, sans-serif;
 }
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.6 Geist, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+html { scroll-behavior: smooth; background: var(--bg); }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 300 17px/1.6 var(--sans); -webkit-font-smoothing: antialiased; }
 a { color: inherit; }
 html[data-lang="es"] [lang="en"], html[data-lang="en"] [lang="es"] { display: none !important; }
-.cont { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
-.serif { font-family: "Instrument Serif", Georgia, serif; font-weight: 400; letter-spacing: 0; }
-.resalta { font-family: "Instrument Serif", Georgia, serif; font-weight: 400; background: var(--lila); color: var(--lila-ink); padding: 0 .18em; border-radius: 4px; }
-.chip { display: inline-block; font-family: "Instrument Serif", Georgia, serif; font-size: 17px; line-height: 1.3; padding: 2px 10px; border-radius: 4px; }
-.chip.amarillo { background: var(--amarillo); color: var(--amarillo-ink); }
-.chip.celeste { background: var(--celeste); color: var(--celeste-ink); }
-.chip.durazno { background: var(--durazno); color: var(--durazno-ink); }
-.chip.verde { background: var(--verde); color: var(--verde-ink); }
+/* Grilla tenue que se desvanece, como en jhey.dev */
+body::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 64px 64px; mask-image: radial-gradient(ellipse at 100% 100%, #000 0%, transparent 65%); -webkit-mask-image: radial-gradient(ellipse at 100% 100%, #000 0%, transparent 65%); }
+.cont { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+.mono { font-family: var(--mono); font-weight: 500; font-size: 12.5px; letter-spacing: .06em; text-transform: uppercase; }
+.subrayado { text-decoration: underline; text-decoration-color: var(--acento); text-underline-offset: 4px; text-decoration-thickness: 1.5px; }
+.subrayado:hover { color: #fff; text-decoration-thickness: 2.5px; }
 
-nav.top { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--bg) 90%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
-nav.top .cont { display: flex; align-items: center; gap: 26px; height: 66px; }
-.marca { font-family: "Instrument Serif", Georgia, serif; font-size: 26px; text-decoration: none; margin-right: auto; letter-spacing: -.01em; }
-nav.top a.l { color: var(--muted); text-decoration: none; font-size: 15px; }
+/* Barra superior */
+nav.top { position: sticky; top: 0; z-index: 30; background: rgba(0, 0, 0, .78); backdrop-filter: blur(10px); }
+nav.top .cont { display: flex; align-items: center; gap: 22px; height: 60px; }
+nav.top .inicio { text-decoration: none; margin-right: auto; color: var(--ink); }
+nav.top a.l { text-decoration: none; color: var(--muted); }
 nav.top a.l:hover { color: var(--ink); }
-.idioma { display: flex; gap: 2px; font-size: 14px; }
-.idioma button { all: unset; cursor: pointer; padding: 4px 8px; border-radius: 6px; color: var(--muted); }
-.idioma button.on { color: var(--ink); background: var(--soft); }
-.btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 18px; border-radius: 10px; font-weight: 500; font-size: 15px; text-decoration: none; border: 1px solid var(--line); background: var(--bg); color: var(--ink); white-space: nowrap; }
-.btn.negro { background: var(--ink); color: var(--bg); border-color: var(--ink); }
-.btn:hover { transform: translateY(-1px); }
+.idioma { display: flex; gap: 4px; }
+.idioma button { all: unset; cursor: pointer; color: var(--dim); padding: 2px 4px; }
+.idioma button.on { color: var(--ink); }
 
-header.hero { background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px); background-size: 28px 28px; border-bottom: 1px solid var(--line); }
-header.hero .cont { padding-top: 110px; padding-bottom: 96px; text-align: center; }
-h1 { font-weight: 500; font-size: clamp(38px, 6vw, 64px); line-height: 1.08; letter-spacing: -.035em; margin: 0 auto 22px; max-width: 880px; }
-.bajada { color: var(--muted); font-size: 19px; max-width: 620px; margin: 0 auto 32px; }
-.botones { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+/* Separador que se dibuja al entrar en pantalla */
+.linea { height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.85) 20%, rgba(255,255,255,.85) 80%, transparent);
+  transform: scaleX(0); transform-origin: left; transition: transform 1.4s cubic-bezier(.2,.7,.2,1); margin: 0; border: 0; }
+.linea.visible { transform: scaleX(1); }
+@media (prefers-reduced-motion: reduce) { .linea { transform: none; transition: none; } }
 
-section.bloque { padding: 88px 0; }
-section.bloque + section.bloque { border-top: 1px solid var(--line); }
-.cab-seccion { text-align: center; margin-bottom: 48px; }
-h2 { font-weight: 500; font-size: clamp(30px, 4vw, 44px); line-height: 1.12; letter-spacing: -.03em; margin: 12px 0 0; }
+/* Portada */
+header.hero .cont { padding-top: 120px; padding-bottom: 110px; max-width: 760px; }
+h1 { font-family: var(--nombre); font-weight: 600; font-size: clamp(52px, 9vw, 84px); line-height: .98; letter-spacing: -.045em; margin: 0 0 26px; }
+.titulos { line-height: 1.75; margin-bottom: 30px; }
+.intro { font-size: 18px; max-width: 600px; margin: 0 0 30px; }
+.enlaces { display: flex; flex-wrap: wrap; gap: 6px 18px; color: var(--muted); }
+.enlaces a { text-decoration: none; }
+.enlaces a:hover { color: var(--ink); }
 
-.proyecto { display: grid; grid-template-columns: .9fr 1.1fr; gap: 48px; align-items: start; padding: 48px 0; border-top: 1px solid var(--line); }
-.proyecto:first-of-type { border-top: 0; padding-top: 0; }
-.proyecto h3 { font-weight: 500; font-size: 32px; letter-spacing: -.025em; line-height: 1.15; margin: 14px 0 10px; }
-.proyecto p { color: var(--muted); margin: 0 0 16px; }
+/* Secciones */
+section.bloque { padding: 96px 0; }
+.etiqueta { color: var(--muted); margin-bottom: 18px; }
+h2 { font-family: var(--nombre); font-weight: 600; font-size: clamp(34px, 5vw, 52px); line-height: 1.05; letter-spacing: -.04em; margin: 0 0 18px; }
+.lead { color: var(--muted); max-width: 620px; margin: 0 0 8px; }
+
+/* Quién soy */
+.quien { display: grid; grid-template-columns: 280px 1fr; gap: 48px; align-items: start; margin-top: 40px; }
+.foto { aspect-ratio: 4 / 5; border-radius: 18px; overflow: hidden; background: var(--card); border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; color: var(--dim); }
+.foto img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(.15); }
+.historia p { font-size: 18px; margin: 0 0 16px; }
+
+/* Proyectos */
+.proyecto { display: grid; grid-template-columns: .9fr 1.1fr; gap: 48px; align-items: start; padding: 56px 0; }
+.proyecto h3 { font-family: var(--nombre); font-weight: 600; font-size: 34px; letter-spacing: -.035em; line-height: 1.1; margin: 12px 0 10px; }
+.proyecto p { color: var(--muted); margin: 0 0 18px; }
 .proyecto ul { margin: 0 0 18px; padding: 0; list-style: none; }
-.proyecto li { padding: 7px 0; border-top: 1px solid var(--line); font-size: 16px; }
+.proyecto li { padding: 8px 0; border-top: 1px solid var(--line); font-size: 16px; }
 .proyecto li:last-child { border-bottom: 1px solid var(--line); }
-.stack { font-family: "Geist Mono", monospace; font-size: 13px; color: var(--muted); }
+.estado { color: var(--acento); }
+.stack { color: var(--dim); line-height: 1.8; }
 .probar { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-.tile { display: block; text-decoration: none; background: var(--soft); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; transition: transform .15s, box-shadow .15s; }
-.tile:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,.08); }
-.tile .img { aspect-ratio: 4 / 3; overflow: hidden; border-bottom: 1px solid var(--line); background: var(--bg); }
-.tile img { width: 100%; height: 100%; object-fit: cover; object-position: top left; display: block; }
-.tile .pie { display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; font-weight: 500; font-size: 15px; }
-.tile .pie span.flecha { font-family: "Geist Mono", monospace; color: var(--muted); }
+.tile { display: block; text-decoration: none; background: var(--card); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; transition: transform .2s, border-color .2s; }
+.tile:hover { transform: translateY(-3px); border-color: #555; }
+.tile .img { aspect-ratio: 4 / 3; overflow: hidden; border-bottom: 1px solid var(--line); background: #111; }
+.tile img { width: 100%; height: 100%; object-fit: cover; object-position: top left; display: block; opacity: .92; transition: opacity .2s; }
+.tile:hover img { opacity: 1; }
+.tile .pie { display: flex; justify-content: space-between; padding: 12px 14px; }
 .tile.ancho { grid-column: span 2; }
-.tile.ancho .img { aspect-ratio: 16 / 7; }
-.nota { font-size: 13px; color: var(--muted); margin-top: 10px; }
+.tile.ancho .img { aspect-ratio: 16 / 8; }
+.nota { color: var(--dim); margin-top: 12px; }
 
-.chicos { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 8px; }
-.chico { background: var(--soft); border: 1px solid var(--line); border-radius: 16px; padding: 26px; }
-.chico h3 { font-weight: 500; font-size: 24px; letter-spacing: -.02em; margin: 12px 0 8px; }
+.chicos { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 56px 0 0; }
+.chico { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 26px; }
+.chico h3 { font-family: var(--nombre); font-weight: 600; font-size: 26px; letter-spacing: -.03em; margin: 12px 0 8px; }
 .chico p { color: var(--muted); margin: 0 0 14px; font-size: 16px; }
-.dato { font-family: "Geist Mono", monospace; font-size: 14px; }
 
-.pasos { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
-.paso { background: var(--soft); border: 1px solid var(--line); border-radius: 14px; padding: 20px; }
-.paso .n { font-family: "Geist Mono", monospace; font-size: 13px; color: var(--muted); }
-.paso b { display: block; font-weight: 500; margin-top: 8px; line-height: 1.35; }
+/* Cómo trabajo */
+.pasos { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 36px; }
+.paso { border: 1px solid var(--line); border-radius: 14px; padding: 20px; background: var(--card); }
+.paso .n { color: var(--acento); }
+.paso b { display: block; font-weight: 500; margin-top: 10px; line-height: 1.4; }
 
-.demo-caja { max-width: 860px; margin: 0 auto; }
-.demo-caja iframe { width: 100%; height: 640px; border: 1px solid var(--line); border-radius: 16px; background: var(--soft); }
-.pronto { text-align: center; padding: 48px 24px; border: 1px dashed var(--line); border-radius: 16px; color: var(--muted); background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px); background-size: 24px 24px; }
+/* Demo embebida */
+.demo-caja { margin-top: 36px; }
+.demo-caja iframe { width: 100%; height: 640px; border: 1px solid var(--line); border-radius: 16px; background: #fff; }
 
-footer { border-top: 1px solid var(--line); padding: 80px 0 90px; text-align: center; }
-footer p { color: var(--muted); margin: 10px 0 26px; }
-@media (max-width: 900px) {
+/* Contacto */
+footer { padding: 96px 0 110px; }
+.redes { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 30px; max-width: 900px; }
+.red .que { overflow-wrap: anywhere; }
+.red { display: flex; align-items: center; gap: 12px; text-decoration: none; border: 1px solid var(--line); border-radius: 14px; padding: 14px 18px; background: var(--card); transition: border-color .2s, transform .2s; }
+.red:hover { border-color: #777; transform: translateY(-2px); }
+.red svg { width: 22px; height: 22px; flex: none; }
+.red span { display: block; }
+.red .que { color: var(--muted); }
+.legal { color: var(--dim); margin-top: 60px; }
+/* "Quién soy" queda oculto hasta tener el texto y la foto de Jaime */
+html:not(.con-historia) [data-quien] { display: none !important; }
+
+@media (max-width: 860px) {
   nav.top a.l { display: none; }
-  .proyecto { grid-template-columns: 1fr; gap: 26px; }
-  .chicos { grid-template-columns: 1fr; }
+  header.hero .cont { padding-top: 70px; padding-bottom: 70px; }
+  section.bloque { padding: 70px 0; }
+  .quien, .proyecto, .chicos { grid-template-columns: 1fr; gap: 28px; }
+  .quien .foto { max-width: 260px; }
   .pasos { grid-template-columns: 1fr 1fr; }
-  header.hero .cont { padding-top: 70px; padding-bottom: 64px; }
-  section.bloque { padding: 64px 0; }
   .demo-caja iframe { height: 580px; }
 }
 @media (max-width: 520px) { .probar { grid-template-columns: 1fr; } .tile.ancho { grid-column: span 1; } .pasos { grid-template-columns: 1fr; } }
 </style>
 </head>
-<body>
+<body id="arriba">
 <nav class="top"><div class="cont">
-  <a class="marca" href="#">Jaime López Garrido</a>
-  <a class="l" href="#proyectos"><span lang="es">Proyectos</span><span lang="en">Projects</span></a>
-  <a class="l" href="#como"><span lang="es">Cómo trabajo</span><span lang="en">How I work</span></a>
-  <a class="l" href="#demo">Chatbot</a>
-  <div class="idioma"><button data-l="es">ES</button><button data-l="en">EN</button></div>
-  <a class="btn negro" href="#contacto"><span lang="es">Contacto</span><span lang="en">Contact</span></a>
+  <a class="inicio mono" href="#arriba">Jaime López Garrido</a>
+  <a class="l mono" href="#quien" data-quien><span lang="es">Quién soy</span><span lang="en">About</span></a>
+  <a class="l mono" href="#proyectos"><span lang="es">Proyectos</span><span lang="en">Projects</span></a>
+  <a class="l mono" href="#demo">Chatbot</a>
+  <a class="l mono" href="#contacto"><span lang="es">Contacto</span><span lang="en">Contact</span></a>
+  <div class="idioma mono"><button data-l="es">ES</button><button data-l="en">EN</button></div>
 </div></nav>
 
 <header class="hero"><div class="cont">
-  <span class="chip amarillo"><span lang="es">Automatización · IA aplicada</span><span lang="en">Automation · Applied AI</span></span>
-  <h1 style="margin-top:22px"><span lang="es">Herramientas con IA para <span class="resalta">problemas reales.</span></span><span lang="en">AI tools for <span class="resalta">real problems.</span></span></h1>
-  <p class="bajada"><span lang="es">Bots, paneles e integraciones para negocios. Acá están los proyectos, y la mayoría se pueden probar.</span><span lang="en">Bots, dashboards and integrations for businesses. Here are the projects, and most of them you can try.</span></p>
-  <div class="botones">
-    <a class="btn negro" href="#proyectos"><span lang="es">Ver proyectos</span><span lang="en">See projects</span> →</a>
-    <a class="btn" href="https://github.com/JaimeLopezGarrido" target="_blank" rel="noopener">GitHub</a>
+  <h1>Jaime<br>López Garrido</h1>
+  <div class="titulos mono">
+    Data Scientist · AI Automation · Web Apps<br>
+    MSc Data Science @ Universidad Austral<br>
+    Business Administration (UBA) · Bariloche, AR
+  </div>
+  <p class="intro"><span lang="es">Construyo herramientas con IA para negocios reales: <a class="subrayado" href="#proyectos">bots, paneles y automatizaciones</a> que la gente usa en su día a día, y un <a class="subrayado" href="#demo">chatbot con RAG</a> que podés probar acá.</span><span lang="en">I build AI tools for real businesses: <a class="subrayado" href="#proyectos">bots, dashboards and automations</a> people use every day, and a <a class="subrayado" href="#demo">RAG chatbot</a> you can try right here.</span></p>
+  <div class="enlaces mono">
+    <a href="#quien" data-quien><span lang="es">Quién soy</span><span lang="en">About</span></a><span data-quien>·</span>
+    <a href="#proyectos"><span lang="es">Proyectos</span><span lang="en">Projects</span></a><span>·</span>
+    <a href="#demo">Chatbot</a><span>·</span>
+    <a href="https://github.com/JaimeLopezGarrido" target="_blank" rel="noopener">GitHub</a><span>·</span>
+    <a href="#contacto"><span lang="es">Contacto</span><span lang="en">Contact</span></a>
   </div>
 </div></header>
 
+<hr class="linea" data-quien>
+
+<section class="bloque" id="quien" data-quien><div class="cont">
+  <div class="etiqueta mono"><span lang="es">Quién soy</span><span lang="en">About me</span></div>
+  <h2><span lang="es">Mi historia</span><span lang="en">My story</span></h2>
+  <div class="quien">
+    <div class="foto" id="foto"><span class="mono">Foto</span></div>
+    <div class="historia" id="historia">
+      <p><span lang="es">Texto en preparación.</span><span lang="en">Coming soon.</span></p>
+    </div>
+  </div>
+</div></section>
+
+<hr class="linea">
+
 <section class="bloque" id="proyectos"><div class="cont">
-  <div class="cab-seccion"><span class="chip celeste"><span lang="es">Proyectos</span><span lang="en">Projects</span></span><h2><span lang="es">Hechos para clientes reales.</span><span lang="en">Built for real clients.</span></h2></div>
+  <div class="etiqueta mono"><span lang="es">Proyectos</span><span lang="en">Projects</span></div>
+  <h2><span lang="es">Hechos para clientes reales.</span><span lang="en">Built for real clients.</span></h2>
 
   <article class="proyecto">
     <div>
-      <span class="chip durazno"><span lang="es">Cliente real · demo</span><span lang="en">Real client · demo</span></span>
+      <div class="estado mono"><span lang="es">Cliente real · demo</span><span lang="en">Real client · demo</span></div>
       <h3>HAY AUTOS</h3>
       <p><span lang="es">Agencia de compraventa de autos en Buenos Aires.</span><span lang="en">Used-car dealership in Buenos Aires.</span></p>
       <ul>
@@ -147,20 +190,22 @@ footer p { color: var(--muted); margin: 10px 0 26px; }
         <li><span lang="es">Link para que el cliente cargue DNI y cédula; la IA los lee</span><span lang="en">Customer link to upload ID and car title; AI reads them</span></li>
         <li><span lang="es">Panel con documentos de venta al instante y Radar de oportunidades</span><span lang="en">Dashboard with instant sale documents and an opportunity Radar</span></li>
       </ul>
-      <div class="stack">n8n · Supabase · Instagram API · Google Docs · Gemini · Groq</div>
+      <div class="stack mono">n8n · Supabase · Instagram API · Google Docs · Gemini · Groq</div>
     </div>
     <div>
       <div class="probar">
-        <a class="tile" href="demos/hayautos/" target="_blank" rel="noopener"><div class="img"><img src="img/hayautos-demo-cliente.webp" onerror="this.onerror=null;this.src='img/hayautos-auto-cherokee.webp'" alt="" loading="lazy"></div><div class="pie"><span lang="es">Cliente</span><span lang="en">Customer</span><span class="flecha">↗</span></div></a>
-        <a class="tile" href="demos/hayautos/panel/" target="_blank" rel="noopener"><div class="img"><img src="img/hayautos-demo-panel.webp" onerror="this.onerror=null;this.src='img/hayautos-pendientes.webp'" alt="" loading="lazy"></div><div class="pie"><span lang="es">Panel de la agencia</span><span lang="en">Agency dashboard</span><span class="flecha">↗</span></div></a>
+        <a class="tile" href="demos/hayautos/" target="_blank" rel="noopener"><div class="img"><img src="img/hayautos-demo-cliente.webp" alt="" loading="lazy"></div><div class="pie mono"><span lang="es">Cliente</span><span lang="en">Customer</span><span>↗</span></div></a>
+        <a class="tile" href="demos/hayautos/panel/" target="_blank" rel="noopener"><div class="img"><img src="img/hayautos-demo-panel.webp" alt="" loading="lazy"></div><div class="pie mono"><span lang="es">Panel</span><span lang="en">Dashboard</span><span>↗</span></div></a>
       </div>
-      <div class="nota"><span lang="es">Versión demo con datos de ejemplo.</span><span lang="en">Demo version with sample data.</span></div>
+      <div class="nota mono"><span lang="es">Demo con datos de ejemplo</span><span lang="en">Demo with sample data</span></div>
     </div>
   </article>
 
+  <hr class="linea">
+
   <article class="proyecto">
     <div>
-      <span class="chip durazno"><span lang="es">Cliente real · demo</span><span lang="en">Real client · demo</span></span>
+      <div class="estado mono"><span lang="es">Cliente real · demo</span><span lang="en">Real client · demo</span></div>
       <h3>Proper Rent a Car</h3>
       <p><span lang="es">Alquiler de autos en Bariloche. Web de marca blanca para alquiladoras.</span><span lang="en">Car rental in Bariloche. White-label web app for rental companies.</span></p>
       <ul>
@@ -168,80 +213,101 @@ footer p { color: var(--muted); margin: 10px 0 26px; }
         <li><span lang="es">Portal del cliente en español, inglés y portugués</span><span lang="en">Customer portal in Spanish, English and Portuguese</span></li>
         <li><span lang="es">Bot de Instagram que cotiza y pre-reserva</span><span lang="en">Instagram bot that quotes and pre-books</span></li>
       </ul>
-      <div class="stack">Next.js · TypeScript · Vitest · Vercel · n8n · Groq</div>
+      <div class="stack mono">Next.js · TypeScript · Vitest · Vercel · n8n · Groq</div>
     </div>
     <div>
       <div class="probar">
-        <a class="tile" href="https://proper-demo-livid.vercel.app/mi/entrar" target="_blank" rel="noopener"><div class="img"><img src="img/proper-portal.webp" alt="" loading="lazy"></div><div class="pie"><span lang="es">Portal del cliente</span><span lang="en">Customer portal</span><span class="flecha">↗</span></div></a>
-        <a class="tile" href="https://proper-demo-livid.vercel.app/panel/ingreso" target="_blank" rel="noopener"><div class="img"><img src="img/proper-panel.webp" alt="" loading="lazy"></div><div class="pie"><span lang="es">Panel de la agencia</span><span lang="en">Agency dashboard</span><span class="flecha">↗</span></div></a>
+        <a class="tile" href="https://proper-demo-livid.vercel.app/mi/entrar" target="_blank" rel="noopener"><div class="img"><img src="img/proper-portal.webp" alt="" loading="lazy"></div><div class="pie mono"><span lang="es">Portal del cliente</span><span lang="en">Customer portal</span><span>↗</span></div></a>
+        <a class="tile" href="https://proper-demo-livid.vercel.app/panel/ingreso" target="_blank" rel="noopener"><div class="img"><img src="img/proper-panel.webp" alt="" loading="lazy"></div><div class="pie mono"><span lang="es">Panel</span><span lang="en">Dashboard</span><span>↗</span></div></a>
       </div>
-      <div class="nota"><span lang="es">Modo demo: los datos se reinician cada día.</span><span lang="en">Demo mode: data resets every day.</span></div>
+      <div class="nota mono"><span lang="es">Modo demo: los datos se reinician cada día</span><span lang="en">Demo mode: data resets daily</span></div>
     </div>
   </article>
 
+  <hr class="linea">
+
   <article class="proyecto">
     <div>
-      <span class="chip verde"><span lang="es">Online · código abierto</span><span lang="en">Live · open source</span></span>
+      <div class="estado mono"><span lang="es">Online · código abierto</span><span lang="en">Live · open source</span></div>
       <h3><span lang="es">Asistente de atención</span><span lang="en">Customer-service assistant</span></h3>
       <p><span lang="es">Chatbot hecho desde cero en Python.</span><span lang="en">Chatbot built from scratch in Python.</span></p>
       <ul>
         <li><span lang="es">Consulta y cotiza con herramientas reales (function calling)</span><span lang="en">Checks and quotes through real tools (function calling)</span></li>
-        <li><span lang="es">Respuestas con citas del manual (RAG)</span><span lang="en">Answers citing the manual (RAG)</span></li>
-        <li><span lang="es">Tests en CI y respaldo entre proveedores</span><span lang="en">CI tests and fallback across providers</span></li>
+        <li><span lang="es">Responde con el manual citando la página (RAG)</span><span lang="en">Answers from the manual, citing the page (RAG)</span></li>
         <li><span lang="es">Muestra la ruta, las herramientas y las fuentes de cada respuesta</span><span lang="en">Shows the route, tools and sources behind each answer</span></li>
       </ul>
-      <div class="stack">Python · FastAPI · Pydantic · RAG (Gemini embeddings + BM25) · Groq · Vercel · GitHub Actions</div>
+      <div class="stack mono">Python · FastAPI · RAG · Gemini · Groq · Vercel · GitHub Actions</div>
     </div>
     <div>
       <div class="probar">
-        <a class="tile ancho" href="https://asistente-rentadora-demo.vercel.app/" target="_blank" rel="noopener"><div class="img"><img src="img/chatbot.webp" alt="" loading="lazy"></div><div class="pie"><span lang="es">Chat en vivo</span><span lang="en">Live chat</span><span class="flecha">↗</span></div></a>
+        <a class="tile ancho" href="https://asistente-rentadora-demo.vercel.app/" target="_blank" rel="noopener"><div class="img"><img src="img/chatbot.webp" alt="" loading="lazy"></div><div class="pie mono"><span lang="es">Chat en vivo</span><span lang="en">Live chat</span><span>↗</span></div></a>
       </div>
-      <div class="nota"><a href="https://github.com/JaimeLopezGarrido/asistente-flota-mcp" target="_blank" rel="noopener"><span lang="es">Ver el código en GitHub</span><span lang="en">See the code on GitHub</span> ↗</a></div>
+      <div class="nota mono"><a class="subrayado" href="https://github.com/JaimeLopezGarrido/asistente-flota-mcp" target="_blank" rel="noopener"><span lang="es">Ver el código</span><span lang="en">See the code</span></a></div>
     </div>
   </article>
 
+  <hr class="linea">
+
   <div class="chicos">
     <div class="chico">
-      <span class="chip amarillo"><span lang="es">Uso diario</span><span lang="en">Daily use</span></span>
+      <div class="estado mono"><span lang="es">Uso diario</span><span lang="en">Daily use</span></div>
       <h3>Job Finder</h3>
       <p><span lang="es">Agente que cada día busca ofertas, las evalúa con Claude y adapta mi CV, sin inventar nada.</span><span lang="en">Agent that finds job posts every day, scores them with Claude and tailors my resume, without making anything up.</span></p>
-      <div class="dato"><span lang="es">838 ofertas evaluadas · desde el 29/10</span><span lang="en">838 posts evaluated · since Oct 29</span></div>
+      <div class="mono" style="color:var(--muted)"><span lang="es">838 ofertas evaluadas · desde el 29/10</span><span lang="en">838 posts evaluated · since Oct 29</span></div>
     </div>
     <div class="chico">
-      <span class="chip amarillo"><span lang="es">Uso diario</span><span lang="en">Daily use</span></span>
+      <div class="estado mono"><span lang="es">Uso diario</span><span lang="en">Daily use</span></div>
       <h3><span lang="es">Agente de aprendizaje</span><span lang="en">Learning agent</span></h3>
       <p><span lang="es">Genera mis sesiones de estudio de IA y un quiz para el celular, y valida todo lo que produce.</span><span lang="en">Generates my AI study sessions and a phone quiz game, and validates everything it produces.</span></p>
-      <div class="dato"><span lang="es">423 preguntas · 222 términos · desde el 05/11</span><span lang="en">423 questions · 222 terms · since Nov 5</span></div>
+      <div class="mono" style="color:var(--muted)"><span lang="es">423 preguntas · 222 términos · desde el 05/11</span><span lang="en">423 questions · 222 terms · since Nov 5</span></div>
     </div>
   </div>
 </div></section>
 
+<hr class="linea">
+
 <section class="bloque" id="como"><div class="cont">
-  <div class="cab-seccion"><span class="chip durazno"><span lang="es">Cómo trabajo</span><span lang="en">How I work</span></span><h2><span lang="es">IA para construir, <span class="resalta">código para validar.</span></span><span lang="en">AI to build, <span class="resalta">code to validate.</span></span></h2></div>
+  <div class="etiqueta mono"><span lang="es">Cómo trabajo</span><span lang="en">How I work</span></div>
+  <h2><span lang="es">IA para construir, código para validar.</span><span lang="en">AI to build, code to validate.</span></h2>
   <div class="pasos">
-    <div class="paso"><span class="n">01</span><b><span lang="es">Entender el problema con quien lo usa</span><span lang="en">Understand the problem with its users</span></b></div>
-    <div class="paso"><span class="n">02</span><b><span lang="es">Darle contexto y reglas a la IA</span><span lang="en">Give the AI context and rules</span></b></div>
-    <div class="paso"><span class="n">03</span><b><span lang="es">Construir con Claude Code, en pasos chicos</span><span lang="en">Build with Claude Code, in small steps</span></b></div>
-    <div class="paso"><span class="n">04</span><b><span lang="es">Validar con tests y controles</span><span lang="en">Validate with tests and checks</span></b></div>
-    <div class="paso"><span class="n">05</span><b><span lang="es">Entregar e iterar con el uso real</span><span lang="en">Ship and iterate with real use</span></b></div>
+    <div class="paso"><span class="n mono">01</span><b><span lang="es">Entender el problema con quien lo usa</span><span lang="en">Understand the problem with its users</span></b></div>
+    <div class="paso"><span class="n mono">02</span><b><span lang="es">Darle contexto y reglas a la IA</span><span lang="en">Give the AI context and rules</span></b></div>
+    <div class="paso"><span class="n mono">03</span><b><span lang="es">Construir con Claude Code, en pasos chicos</span><span lang="en">Build with Claude Code, in small steps</span></b></div>
+    <div class="paso"><span class="n mono">04</span><b><span lang="es">Validar con tests y controles</span><span lang="en">Validate with tests and checks</span></b></div>
+    <div class="paso"><span class="n mono">05</span><b><span lang="es">Entregar e iterar con el uso real</span><span lang="en">Ship and iterate with real use</span></b></div>
   </div>
 </div></section>
+
+<hr class="linea">
 
 <section class="bloque" id="demo"><div class="cont">
-  <div class="cab-seccion"><span class="chip verde"><span lang="es">Probalo</span><span lang="en">Try it</span></span><h2><span lang="es">Chateá con el asistente.</span><span lang="en">Chat with the assistant.</span></h2></div>
-  <div class="demo-caja" id="demo-caja">
-    <div class="pronto"><span class="serif" style="font-size:26px;color:var(--ink)"><span lang="es">Se publica esta semana</span><span lang="en">Going live this week</span></span><br><span lang="es">Mientras tanto, el código está en </span><span lang="en">Meanwhile, the code is on </span><a href="https://github.com/JaimeLopezGarrido/asistente-flota-mcp" target="_blank" rel="noopener">GitHub</a>.</div>
-  </div>
+  <div class="etiqueta mono"><span lang="es">Probalo</span><span lang="en">Try it</span></div>
+  <h2><span lang="es">Chateá con el asistente.</span><span lang="en">Chat with the assistant.</span></h2>
+  <p class="lead"><span lang="es">Atención de una rentadora de autos (datos ficticios). Preguntá por disponibilidad, precios o qué hacer si pinchás una goma.</span><span lang="en">Customer service for a car rental company (fictional data). Ask about availability, prices, or what to do with a flat tire.</span></p>
+  <div class="demo-caja"><iframe src="https://asistente-rentadora-demo.vercel.app/" title="Asistente" loading="lazy"></iframe></div>
 </div></section>
 
+<hr class="linea">
+
 <footer id="contacto"><div class="cont">
+  <div class="etiqueta mono"><span lang="es">Contacto</span><span lang="en">Contact</span></div>
   <h2><span lang="es">Hablemos.</span><span lang="en">Let's talk.</span></h2>
-  <p><span lang="es">Bariloche, Argentina · remoto · español e inglés</span><span lang="en">Bariloche, Argentina · remote · Spanish and English</span></p>
-  <div class="botones">
-    <a class="btn negro" href="mailto:jaime.lopez.garrido36@gmail.com">Email</a>
-    <a class="btn" href="https://www.linkedin.com/in/jaime-lopez-garrido-1b274221b" target="_blank" rel="noopener">LinkedIn</a>
-    <a class="btn" href="https://github.com/JaimeLopezGarrido" target="_blank" rel="noopener">GitHub</a>
+  <p class="lead"><span lang="es">Bariloche, Argentina · remoto · español e inglés</span><span lang="en">Bariloche, Argentina · remote · Spanish and English</span></p>
+  <div class="redes">
+    <a class="red" href="mailto:jaime.lopez.garrido36@gmail.com">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/></svg>
+      <span><span class="mono">Email</span><span class="que">jaime.lopez.garrido36@gmail.com</span></span></a>
+    <a class="red" href="https://www.linkedin.com/in/jaime-lopez-garrido-1b274221b" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+      <span><span class="mono">LinkedIn</span><span class="que">Jaime López Garrido</span></span></a>
+    <a class="red" href="https://github.com/JaimeLopezGarrido" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57l-.02-2.04c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.43.37.81 1.1.81 2.22l-.01 3.29c0 .31.21.69.82.57A12 12 0 0 0 12 .3"/></svg>
+      <span><span class="mono">GitHub</span><span class="que">JaimeLopezGarrido</span></span></a>
+    <a class="red" href="https://www.instagram.com/jaimelopezgarrido/" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.3"/><circle cx="17.6" cy="6.4" r="1" fill="currentColor" stroke="none"/></svg>
+      <span><span class="mono">Instagram</span><span class="que">@jaimelopezgarrido</span></span></a>
   </div>
+  <div class="legal mono">© 2026 Jaime López Garrido</div>
 </div></footer>
 
 <script>
@@ -258,9 +324,9 @@ const poner = l => {
 document.querySelectorAll(".idioma button").forEach(b => b.onclick = () => poner(b.dataset.l));
 poner(lang);
 
-// Chat en vivo: cuando la API del sprint E4 esté publicada, se completa DEMO_URL
-const DEMO_URL = "https://asistente-rentadora-demo.vercel.app/";
-if (DEMO_URL) document.getElementById("demo-caja").innerHTML = `<iframe src="${DEMO_URL}" title="Asistente" loading="lazy"></iframe>`;
+// Las líneas separadoras se dibujan cuando entran en pantalla
+const obs = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("visible"); obs.unobserve(e.target); } }), { threshold: 0.6 });
+document.querySelectorAll(".linea").forEach(l => obs.observe(l));
 </script>
 </body>
 </html>
