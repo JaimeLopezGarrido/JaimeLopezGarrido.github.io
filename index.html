@@ -84,6 +84,10 @@ h2 { font-family: var(--nombre); font-weight: 600; font-size: clamp(34px, 5vw, 5
 .proyecto li { padding: 8px 0; border-top: 1px solid var(--line); font-size: 16px; }
 .proyecto li:last-child { border-bottom: 1px solid var(--line); }
 .estado { color: var(--acento); }
+.qa { margin: 4px 0 22px; padding-left: 14px; border-left: 1px solid var(--line); }
+.qa .q { color: var(--acento); margin: 14px 0 6px; }
+.qa .q:first-child { margin-top: 0; }
+.proyecto .qa p { color: var(--ink); font-size: 16px; margin: 0; opacity: .88; }
 .stack { color: var(--dim); line-height: 1.8; }
 .probar { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 .tile { display: block; text-decoration: none; background: var(--card); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; transition: transform .2s, border-color .2s; }
@@ -220,6 +224,12 @@ html:not(.con-historia) [data-quien] { display: none !important; }
       <div class="estado mono"><span lang="es">Cliente real · demo</span><span lang="en">Real client · demo</span></div>
       <h3>HAY AUTOS</h3>
       <p><span lang="es">Agencia de compraventa de autos en Buenos Aires.</span><span lang="en">Used-car dealership in Buenos Aires.</span></p>
+      <div class="qa">
+        <div class="q mono"><span lang="es">¿Cuál era el problema?</span><span lang="en">What was the problem?</span></div>
+        <p><span lang="es">Cada vez que se vendía un auto, los documentos (reserva, seña, comodato) se armaban a mano en Word, copiando los datos del vendedor, del comprador y del auto, que estaban todos por separado.</span><span lang="en">Every time a car was sold, the paperwork (reservation, deposit, loan agreement) was written by hand in Word, copying the seller's, buyer's and car's details, which were all scattered.</span></p>
+        <div class="q mono"><span lang="es">¿Cómo se solucionó?</span><span lang="en">How was it solved?</span></div>
+        <p><span lang="es">El cliente, sea vendedor o comprador, saca una foto de su DNI y de la cédula verde desde la web app: la IA lee los datos y el sistema los guarda ordenados en Supabase. Después, desde el panel, la agencia genera cualquier documento al instante, con pocos clics.</span><span lang="en">The customer, buyer or seller, takes a photo of their ID and car registration in the web app: AI reads the data and the system stores it, organized, in Supabase. Then, from the dashboard, the agency generates any document instantly, in a few clicks.</span></p>
+      </div>
       <ul>
         <li><span lang="es">Bot de Instagram con los datos reales del stock</span><span lang="en">Instagram bot answering with real inventory data</span></li>
         <li><span lang="es">Link para que el cliente cargue DNI y cédula; la IA los lee</span><span lang="en">Customer link to upload ID and car title; AI reads them</span></li>
@@ -244,6 +254,12 @@ html:not(.con-historia) [data-quien] { display: none !important; }
       <div class="estado mono"><span lang="es">Cliente real · demo</span><span lang="en">Real client · demo</span></div>
       <h3>Proper Rent a Car</h3>
       <p><span lang="es">Alquiler de autos en Bariloche. Web de marca blanca para alquiladoras.</span><span lang="en">Car rental in Bariloche. White-label web app for rental companies.</span></p>
+      <div class="qa">
+        <div class="q mono"><span lang="es">¿Cuál era el problema?</span><span lang="en">What was the problem?</span></div>
+        <p><span lang="es">La alquiladora tenía toda la operación repartida en planillas de Google (disponibilidad, reservas y más), y el equipo perdía mucho tiempo respondiendo por Instagram y WhatsApp preguntas que ya había contestado: dónde se retira el auto, dónde están los documentos, qué hacer si pasa algo.</span><span lang="en">The rental company ran everything across separate Google Sheets (availability, bookings and more), and the team lost hours answering Instagram and WhatsApp questions they had already answered: where to pick up the car, where the documents are, what to do if something happens.</span></p>
+        <div class="q mono"><span lang="es">¿Cómo se solucionó?</span><span lang="en">How was it solved?</span></div>
+        <p><span lang="es">Un panel para la agencia donde maneja reservas, disponibilidad y pedidos de los clientes, y una web app para el cliente: entra con su DNI o pasaporte y su número de reserva, ve dónde retira y devuelve, firma el contrato, adelanta los trámites previos y pide cambios o extras, sin tener que escribir un mensaje.</span><span lang="en">A dashboard where the agency manages bookings, availability and customer requests, and a web app for customers: they log in with their ID or passport and booking number, see where to pick up and return, sign the contract, complete paperwork in advance and request changes or extras, without sending a single message.</span></p>
+      </div>
       <ul>
         <li><span lang="es">Panel: reservas, calendario, flota, entregas y contratos</span><span lang="en">Dashboard: bookings, calendar, fleet, handovers and contracts</span></li>
         <li><span lang="es">Portal del cliente en español, inglés y portugués</span><span lang="en">Customer portal in Spanish, English and Portuguese</span></li>
@@ -268,6 +284,12 @@ html:not(.con-historia) [data-quien] { display: none !important; }
       <div class="estado mono"><span lang="es">Online · código abierto</span><span lang="en">Live · open source</span></div>
       <h3><span lang="es">Asistente de atención</span><span lang="en">Customer-service assistant</span></h3>
       <p><span lang="es">Chatbot hecho desde cero en Python.</span><span lang="en">Chatbot built from scratch in Python.</span></p>
+      <div class="qa">
+        <div class="q mono"><span lang="es">¿Cuál era el problema?</span><span lang="en">What was the problem?</span></div>
+        <p><span lang="es">Alquiladoras como Proper no confiaban en un chatbot que conecta al cliente directo con un modelo de lenguaje: les daba miedo que alucine, ofrezca precios más bajos o confirme reservas que no podían cumplir.</span><span lang="en">Rental companies like Proper didn't trust a chatbot that connects customers straight to a language model: they were afraid it would hallucinate, offer lower prices or confirm bookings they couldn't honor.</span></p>
+        <div class="q mono"><span lang="es">¿Cómo se solucionó?</span><span lang="en">How was it solved?</span></div>
+        <p><span lang="es">Un chatbot estructurado como un flujo: primero un router decide el camino; si hace falta, consulta el manual con RAG y cita la página; y la disponibilidad y los precios salen siempre de herramientas (function calling). El modelo nunca calcula un precio ni toca el calendario: solo redacta con los datos que le da el sistema.</span><span lang="en">A chatbot structured as a workflow: first a router picks the path; when needed, it searches the manual with RAG and cites the page; and availability and prices always come from tools (function calling). The model never calculates a price or touches the calendar: it only writes with the data the system gives it.</span></p>
+      </div>
       <ul>
         <li><span lang="es">Consulta y cotiza con herramientas reales (function calling)</span><span lang="en">Checks and quotes through real tools (function calling)</span></li>
         <li><span lang="es">Responde con el manual citando la página (RAG)</span><span lang="en">Answers from the manual, citing the page (RAG)</span></li>
