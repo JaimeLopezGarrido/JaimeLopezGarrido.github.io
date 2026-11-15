@@ -14,7 +14,7 @@
 <meta property="og:image" content="https://jaimelopezgarrido.github.io/icono-512.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg: #000; --ink: #f2f2f2; --muted: #9a9a9a; --dim: #5c5c5c; --line: #262626; --card: #0b0b0b;
@@ -60,6 +60,15 @@ nav.top a.l:hover { color: var(--ink); }
 header.hero .cont { padding-top: 120px; padding-bottom: 110px; max-width: 760px; }
 h1 { font-family: var(--nombre); font-weight: 600; font-size: clamp(52px, 9vw, 84px); line-height: .98; letter-spacing: -.045em; margin: 0 0 26px; }
 .titulos { line-height: 1.75; margin-bottom: 30px; }
+/* Frase que rota, con resaltado de marcador (estilo claura) */
+.rota { font-family: var(--nombre); font-weight: 600; font-size: clamp(28px, 4vw, 40px); letter-spacing: -.035em; line-height: 1.25; margin: 0 0 26px; min-height: 1.3em; }
+.marca { position: relative; isolation: isolate; display: inline-block; padding: 0 .22em .04em; margin-left: .08em; color: #0b0b0b; font: italic 400 1.12em/1.1 "Instrument Serif", Georgia, serif; letter-spacing: 0; white-space: nowrap; }
+.marca::before { content: ""; position: absolute; inset: .06em 0 0; background: var(--fondo-marca, #d8b4fe); border-radius: 3px; transform: rotate(-1deg) scaleX(1); transform-origin: left; transition: transform .45s cubic-bezier(.6,0,.2,1), background-color 0s; z-index: -1; }
+.marca.sin-fondo::before { transform: rotate(-1deg) scaleX(0); transform-origin: right; }
+.marca .txt { position: relative; }
+.marca .txt::after { content: ""; display: inline-block; width: 2px; height: .85em; margin-left: 2px; background: currentColor; vertical-align: -.08em; animation: titila 1s steps(1) infinite; }
+@keyframes titila { 50% { opacity: 0; } }
+@media (max-width: 520px) { .rota { min-height: 2.6em; } .marca { white-space: normal; } }
 .intro { font-size: 18px; max-width: 600px; margin: 0 0 30px; }
 .enlaces { display: flex; flex-wrap: wrap; gap: 6px 18px; color: var(--muted); }
 .enlaces a { text-decoration: none; }
@@ -116,9 +125,14 @@ h2 { font-family: var(--nombre); font-weight: 600; font-size: clamp(34px, 5vw, 5
 .ventana .barra { display: flex; align-items: center; gap: 6px; padding: 9px 12px; background: #161616; border-bottom: 1px solid #2a2a2a; }
 .ventana .barra i { width: 9px; height: 9px; border-radius: 50%; background: #3a3a3a; }
 .ventana .barra span.mono { margin-left: 10px; color: var(--dim); font-size: 10.5px; }
-.ventana img { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top left; }
+.ventana img, .ventana video { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top left; }
 .celu { position: absolute; left: 0; bottom: 0; width: 30%; aspect-ratio: 9 / 19; border-radius: 26px; border: 6px solid #1c1c1c; outline: 1px solid #333; overflow: hidden; background: #fff; box-shadow: 0 24px 50px rgba(0,0,0,.75); transition: transform .25s; }
-.celu img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+.celu img, .celu video { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+/* Al pasar el mouse, aviso de que se puede abrir la demo */
+.ventana { position: relative; }
+.ventana .abrir, .celu .abrir { position: absolute; z-index: 2; left: 50%; bottom: 14px; transform: translate(-50%, 8px); opacity: 0; transition: opacity .25s, transform .25s; background: rgba(0,0,0,.82); color: #fff; border: 1px solid #444; border-radius: 99px; padding: 6px 12px; white-space: nowrap; font-size: 11px; pointer-events: none; }
+.ventana:hover .abrir, .celu:hover .abrir { opacity: 1; transform: translate(-50%, 0); }
+.ventana .abrir { bottom: 18px; left: 62%; }
 .ventana:hover { transform: translateY(-3px); border-color: #555; }
 .celu:hover { transform: translateY(-4px) rotate(-1deg); }
 .demo-links { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; margin-top: 18px; }
@@ -171,6 +185,16 @@ h2 { font-family: var(--nombre); font-weight: 600; font-size: clamp(34px, 5vw, 5
 .asistente { grid-template-columns: 1fr 1fr; align-items: center; }
 /* El chat del asistente dentro de un celular */
 .telefono { position: relative; width: 340px; max-width: 100%; height: 690px; margin: 0 auto; border-radius: 46px; border: 11px solid #1c1c1c; outline: 1px solid #333; overflow: hidden; background: #efeae2; box-shadow: 0 30px 70px rgba(0,0,0,.7); }
+/* Cursor guiado (estilo claura): va hasta una respuesta rápida y arranca la charla de ejemplo */
+.con-cursor { position: relative; }
+.cursor-guia { position: absolute; left: 0; top: 0; z-index: 5; pointer-events: none; opacity: 0; transition: transform 1.3s cubic-bezier(.65,0,.25,1), opacity .4s; }
+.cursor-guia.ve { opacity: 1; }
+.cursor-guia svg { width: 26px; height: 26px; display: block; filter: drop-shadow(0 3px 6px rgba(0,0,0,.45)); }
+.cursor-guia .etq { position: absolute; left: 22px; top: 26px; white-space: nowrap; background: #111; color: #fff; border: 1px solid #333; font: 500 12.5px var(--sans); padding: 6px 10px; border-radius: 8px; }
+.cursor-guia .onda { position: absolute; left: -9px; top: -9px; width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--violeta); opacity: 0; }
+.cursor-guia.clic .onda { animation: onda .6s ease-out; }
+.cursor-guia.clic svg { transform: scale(.85); transition: transform .12s; }
+@keyframes onda { from { opacity: 1; transform: scale(.4); } to { opacity: 0; transform: scale(2.6); } }
 .telefono iframe { width: 100%; height: calc(100% - 34px); border: 0; display: block; }
 .telefono .estatus { height: 34px; background: #008069; color: #fff; display: flex; align-items: center; justify-content: space-between; padding: 0 22px 0 26px; font: 600 13px -apple-system, system-ui, sans-serif; }
 .telefono .iconos { display: flex; align-items: flex-end; gap: 2px; }
@@ -229,6 +253,7 @@ html:not(.con-historia) [data-quien] { display: none !important; }
     MSc Data Science @ Universidad Austral<br>
     Business Administration (UBA) · Bariloche, AR
   </div>
+  <p class="rota"><span lang="es">Agentes que</span><span lang="en">Agents that</span> <span class="marca" id="marca"><span class="txt" id="marca-txt">responden consultas.</span></span></p>
   <p class="intro"><span lang="es">Construyo herramientas con IA para negocios reales: <a class="subrayado" href="#proyectos">bots, paneles y automatizaciones</a>, y un <a class="subrayado verde" href="#asistente">chatbot con RAG</a> que podés probar acá.</span><span lang="en">I build AI tools for real businesses: <a class="subrayado" href="#proyectos">bots, dashboards and automations</a>, and a <a class="subrayado verde" href="#asistente">RAG chatbot</a> you can try right here.</span></p>
   <div class="enlaces mono">
     <a href="#quien" data-quien><span lang="es">Quién soy</span><span lang="en">About</span></a><span data-quien>·</span>
@@ -277,9 +302,9 @@ html:not(.con-historia) [data-quien] { display: none !important; }
       <div class="dispositivos">
         <a class="ventana" href="demos/hayautos/panel/" target="_blank" rel="noopener" aria-label="Panel">
           <div class="barra"><i></i><i></i><i></i><span class="mono"><span lang="es">Panel de la agencia</span><span lang="en">Agency dashboard</span></span></div>
-          <img src="img/hayautos-demo-panel.webp" alt="" loading="lazy">
+          <video muted loop playsinline preload="none" poster="video/hayautos-panel.webp" data-auto><source src="video/hayautos-panel.webm" type="video/webm"><source src="video/hayautos-panel.mp4" type="video/mp4"></video><span class="abrir mono"><span lang="es">Abrir demo ↗</span><span lang="en">Open demo ↗</span></span>
         </a>
-        <a class="celu" href="demos/hayautos/" target="_blank" rel="noopener" aria-label="Cliente"><img src="img/hayautos-demo-cliente.webp" alt="" loading="lazy"></a>
+        <a class="celu" href="demos/hayautos/" target="_blank" rel="noopener" aria-label="Cliente"><video muted loop playsinline preload="none" poster="video/hayautos-cliente.webp" data-auto><source src="video/hayautos-cliente.webm" type="video/webm"><source src="video/hayautos-cliente.mp4" type="video/mp4"></video><span class="abrir mono"><span lang="es">Abrir demo ↗</span><span lang="en">Open demo ↗</span></span></a>
       </div>
       <div class="demo-links mono">
         <a href="demos/hayautos/" target="_blank" rel="noopener"><span lang="es">Cliente</span><span lang="en">Customer</span> ↗</a>
@@ -309,9 +334,9 @@ html:not(.con-historia) [data-quien] { display: none !important; }
       <div class="dispositivos">
         <a class="ventana" href="https://proper-demo-livid.vercel.app/panel/ingreso" target="_blank" rel="noopener" aria-label="Panel">
           <div class="barra"><i></i><i></i><i></i><span class="mono"><span lang="es">Panel de la agencia</span><span lang="en">Agency dashboard</span></span></div>
-          <img src="img/proper-pc.webp" alt="" loading="lazy">
+          <video muted loop playsinline preload="none" poster="video/proper-panel.webp" data-auto><source src="video/proper-panel.webm" type="video/webm"><source src="video/proper-panel.mp4" type="video/mp4"></video><span class="abrir mono"><span lang="es">Abrir demo ↗</span><span lang="en">Open demo ↗</span></span>
         </a>
-        <a class="celu" href="https://proper-demo-livid.vercel.app/mi/entrar" target="_blank" rel="noopener" aria-label="Cliente"><img src="img/proper-cel.webp" alt="" loading="lazy"></a>
+        <a class="celu" href="https://proper-demo-livid.vercel.app/mi/entrar" target="_blank" rel="noopener" aria-label="Cliente"><video muted loop playsinline preload="none" poster="video/proper-portal.webp" data-auto><source src="video/proper-portal.webm" type="video/webm"><source src="video/proper-portal.mp4" type="video/mp4"></video><span class="abrir mono"><span lang="es">Abrir demo ↗</span><span lang="en">Open demo ↗</span></span></a>
       </div>
       <div class="demo-links mono">
         <a href="https://proper-demo-livid.vercel.app/mi/entrar" target="_blank" rel="noopener"><span lang="es">Portal del cliente</span><span lang="en">Customer portal</span> ↗</a>
@@ -339,7 +364,10 @@ html:not(.con-historia) [data-quien] { display: none !important; }
     </div>
     <div>
       <p class="mono" style="color:var(--muted);margin:0 auto 16px;text-align:center;max-width:340px"><span lang="es">Probalo: preguntá por disponibilidad, precios o qué hacer si pinchás una goma</span><span lang="en">Try it: ask about availability, prices or what to do with a flat tire</span></p>
-      <div class="telefono"><div class="estatus"><span>9:41</span><div class="isla"></div><span class="iconos"><i></i><i></i><i></i><b></b></span></div><iframe src="https://asistente-rentadora-demo.vercel.app/" title="Chat con el asistente" loading="lazy"></iframe></div>
+      <div class="con-cursor">
+      <div class="cursor-guia" id="cursor-guia" aria-hidden="true"><span class="onda"></span><svg viewBox="0 0 24 24"><path d="M4 2.5 20 11l-7 1.8L9.6 20z" fill="#b26bff" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="etq"><span lang="es">Mirá cómo responde</span><span lang="en">See how it answers</span></span></div>
+      <div class="telefono" id="telefono"><div class="estatus"><span>9:41</span><div class="isla"></div><span class="iconos"><i></i><i></i><i></i><b></b></span></div><iframe id="chat-demo" src="https://asistente-rentadora-demo.vercel.app/?demo=1" title="Chat con el asistente" loading="lazy"></iframe></div>
+      </div>
       <div class="nota mono" style="text-align:center"><a class="subrayado" href="https://asistente-rentadora-demo.vercel.app/" target="_blank" rel="noopener"><span lang="es">Abrir en pantalla completa</span><span lang="en">Open full screen</span></a> · <a class="subrayado" href="https://github.com/JaimeLopezGarrido/asistente-flota-mcp" target="_blank" rel="noopener"><span lang="es">Ver el código</span><span lang="en">See the code</span></a></div>
     </div>
     <details class="como" id="como-asistente"><summary class="mono"><span lang="es">Cómo funciona</span><span lang="en">How it works</span><span class="flecha">↓</span></summary><div class="como-cuerpo"><div class="diagrama-caja"><svg class="diagrama" viewBox="0 0 980 300" role="img" aria-hidden="true"><path class="c" d="M130 150 H160"/><path class="c" d="M300 150 H330"/><path class="c" d="M470 150 C495 150 495 39 520 39"/><path class="c" d="M470 150 C495 150 495 109 520 109"/><path class="c" d="M470 150 C495 150 495 179 520 179"/><path class="c" d="M470 150 C495 150 495 249 520 249"/><path class="c" d="M730 39 C755 39 755 140 780 140"/><path class="c" d="M730 109 C755 109 755 145 780 145"/><path class="c" d="M730 179 C755 179 755 155 780 155"/><path class="c" d="M730 249 C755 249 755 160 780 160"/><path class="c punteada" d="M395 240 V175"/><path class="c punteada" d="M490 263 C505 263 505 230 520 230"/><path class="recorrido" d="M130 150 H470 C495 150 495 39 520 39 H730 C755 39 755 140 780 140 H970"/><rect class="nodo" x="10" y="125" width="120" height="50" rx="10"/><text class="t" x="70.0" y="144.0">NAVEGADOR</text><text class="s" x="70.0" y="160.0">chat web</text><rect class="nodo" x="160" y="125" width="140" height="50" rx="10"/><text class="t" x="230.0" y="144.0">API /CHAT</text><text class="s" x="230.0" y="160.0">sesión · límites</text><rect class="nodo" x="330" y="125" width="140" height="50" rx="10"/><text class="t" x="400.0" y="144.0">ROUTER</text><text class="s" x="400.0" y="160.0">1 llamada LLM</text><rect class="nodo destacado" x="520" y="14" width="210" height="50" rx="10"/><text class="t" x="625.0" y="33.0">POLÍTICAS + MANUAL</text><text class="s" x="625.0" y="49.0">RAG híbrido · cita pág.</text><rect class="nodo" x="520" y="84" width="210" height="50" rx="10"/><text class="t" x="625.0" y="103.0">AGENTE</text><text class="s" x="625.0" y="119.0">disponibilidad · cotizar</text><rect class="nodo" x="520" y="154" width="210" height="50" rx="10"/><text class="t" x="625.0" y="173.0">RECLAMO</text><text class="s" x="625.0" y="189.0">respuesta fija · humano</text><rect class="nodo" x="520" y="224" width="210" height="50" rx="10"/><text class="t" x="625.0" y="243.0">FUERA DE ALCANCE</text><text class="s" x="625.0" y="259.0">respuesta fija</text><rect class="nodo" x="780" y="115" width="190" height="70" rx="10"/><text class="t" x="875.0" y="144.0">VALIDACIÓN</text><text class="s" x="875.0" y="160.0">esquema · citas · fuentes</text><rect class="nodo" x="300" y="240" width="190" height="46" rx="10"/><text class="t" x="395.0" y="257.0">MODELOS</text><text class="s" x="395.0" y="273.0">groq → groq 120b → gemini</text><circle class="punto" r="5"><animateMotion dur="5s" repeatCount="indefinite" path="M130 150 H470 C495 150 495 39 520 39 H730 C755 39 755 140 780 140 H970" keyPoints="0;1" keyTimes="0;1" calcMode="linear"/></circle></svg></div><div class="ejemplo"><div class="mono ej-titulo"><span lang="es">Ejemplo: "¿Qué hago si pincho una goma?"</span><span lang="en">Example: "What do I do if I get a flat tire?"</span></div><ol><li><span lang="es">Alguien escribe <i>"¿Qué hago si pincho una goma?"</i>. La API la recibe y controla los límites por visitante y por conversación.</span><span lang="en">Someone types <i>"What do I do if I get a flat tire?"</i>. The API receives it and checks the per-visitor and per-conversation limits.</span></li><li><span lang="es">El <b>router</b> (una llamada al modelo con salida en JSON) la clasifica como <b>política</b>: no hace falta el agente con herramientas.</span><span lang="en">The <b>router</b> (one model call with JSON output) classifies it as a <b>policy</b> question: the tool-using agent isn't needed.</span></li><li><span lang="es">El <b>RAG</b> busca en el manual: embeddings de la pregunta + búsqueda por palabras. Encuentra la <b>página 7</b> (similitud 0,74; lo que no tiene relación queda debajo de 0,62 y se descarta).</span><span lang="en"><b>RAG</b> searches the manual: question embeddings + keyword search. It finds <b>page 7</b> (similarity 0.74; anything unrelated stays below 0.62 and is discarded).</span></li><li><span lang="es">El modelo responde en un formato fijo que lo obliga a decir qué páginas usó (<code>paginas_manual: [7]</code>). Si falla un proveedor, pasa al siguiente en segundos.</span><span lang="en">The model answers in a fixed format that forces it to state which pages it used (<code>paginas_manual: [7]</code>). If a provider fails, it switches to the next one in seconds.</span></li><li><span lang="es">El <b>código valida</b>: si el texto no trae la cita, la agrega; arma las fuentes con el fragmento original. La web muestra la respuesta, la ruta y la fuente <b>[pág. 7]</b>.</span><span lang="en">The <b>code validates</b>: if the text lacks the citation, it adds it, and builds the sources from the original passage. The page shows the answer, the route and the source <b>[p. 7]</b>.</span></li></ol></div></div></details>
@@ -432,6 +460,67 @@ addEventListener("scroll", () => { if (!pendiente) { pendiente = true; requestAn
 addEventListener("resize", () => { medir(); mover(); });
 addEventListener("load", () => { medir(); mover(); });
 medir(); mover();
+
+// Frase que rota: borra, cambia el color del marcador y escribe la siguiente
+const FRASES = {
+  es: ["responden consultas.", "leen documentos.", "cotizan alquileres.", "arman contratos.", "buscan trabajo por mí."],
+  en: ["answer customers.", "read documents.", "quote rentals.", "draft contracts.", "job-hunt for me."],
+};
+const COLORES = ["#d8b4fe", "#bbf7d0", "#fef08a", "#fed7aa", "#bae6fd"];
+const marca = document.getElementById("marca"), marcaTxt = document.getElementById("marca-txt");
+const espera = ms => new Promise(r => setTimeout(r, ms));
+async function rotar() {
+  let i = 0;
+  for (;;) {
+    marca.style.setProperty("--fondo-marca", COLORES[i % COLORES.length]);
+    marcaTxt.textContent = FRASES[lang][i % FRASES[lang].length];
+    if (quieto) { await espera(3000); i++; continue; }
+    await espera(2600);
+    while (marcaTxt.textContent.length) { marcaTxt.textContent = marcaTxt.textContent.slice(0, -1); await espera(28); }
+    marca.classList.add("sin-fondo"); await espera(420);
+    i++;
+    marca.style.setProperty("--fondo-marca", COLORES[i % COLORES.length]);
+    marca.classList.remove("sin-fondo"); await espera(380);
+    for (const letra of FRASES[lang][i % FRASES[lang].length]) { marcaTxt.textContent += letra; await espera(55); }
+  }
+}
+rotar();
+
+// Cursor guiado: cuando el teléfono entra en pantalla, va hasta la primera respuesta rápida del chat y "hace clic".
+// El chat (con ?demo=1) avisa dónde está ese botón; si el chat no avisa, el cursor no aparece.
+const chat = document.getElementById("chat-demo"), cursor = document.getElementById("cursor-guia");
+let destino = null, visto = false, hecho = false;
+addEventListener("message", e => {
+  if (e.source !== chat.contentWindow || e.data?.tipo !== "demo-listo") return;
+  destino = e.data; guiar();
+});
+new IntersectionObserver((es, o) => { if (es[0].isIntersecting) { visto = true; o.disconnect(); setTimeout(guiar, 600); } }, { threshold: 0.6 }).observe(document.getElementById("telefono"));
+async function guiar() {
+  if (hecho || !visto || !destino) return;
+  hecho = true;
+  const caja = cursor.parentElement.getBoundingClientRect(), fr = chat.getBoundingClientRect();
+  const x = fr.left - caja.left + destino.x + destino.w * 0.35, y = fr.top - caja.top + destino.y + destino.h * 0.6;
+  if (quieto) { chat.contentWindow.postMessage({ tipo: "demo-click" }, "*"); return; }
+  cursor.style.transition = "none";
+  cursor.style.transform = `translate(${fr.left - caja.left - 70}px, ${fr.top - caja.top + fr.height * 0.35}px)`;
+  await espera(30);
+  cursor.style.transition = ""; cursor.classList.add("ve");
+  await espera(500);
+  cursor.style.transform = `translate(${x}px, ${y}px)`;
+  await espera(1700);
+  cursor.classList.add("clic");
+  chat.contentWindow.postMessage({ tipo: "demo-click" }, "*");
+  await espera(1400);
+  cursor.classList.remove("ve");
+}
+
+// Videos de las demos: se cargan y reproducen solo mientras están en pantalla
+const vio = new IntersectionObserver(es => es.forEach(e => {
+  const v = e.target;
+  if (e.isIntersecting && !quieto) { if (v.preload === "none") { v.preload = "auto"; v.load(); } v.play().catch(() => {}); }
+  else v.pause();
+}), { threshold: 0.25 });
+document.querySelectorAll("video[data-auto]").forEach(v => vio.observe(v));
 
 // Las líneas separadoras se dibujan cuando entran en pantalla
 const obs = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("visible"); obs.unobserve(e.target); } }), { threshold: 0.6 });
