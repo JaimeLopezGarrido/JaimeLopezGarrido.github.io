@@ -30,9 +30,9 @@ html { scroll-behavior: smooth; background: var(--bg); }
 body { margin: 0; background: transparent; color: var(--ink); font: 300 17px/1.6 var(--sans); -webkit-font-smoothing: antialiased; }
 a { color: inherit; }
 html[data-lang="es"] [lang="en"], html[data-lang="en"] [lang="es"] { display: none !important; }
-/* Fondo: montañas de líneas, apenas visibles para no molestar la lectura */
-body::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
-  background: url(img/fondo-montanas.webp) center / cover no-repeat; opacity: .085; }
+/* Fondo: montañas de líneas, apenas visibles. Se mueve más lento que el contenido (parallax) */
+#fondo { position: fixed; left: 0; top: 0; width: 100%; height: 100vh; z-index: -1; pointer-events: none;
+  background: url(img/fondo-montanas.webp) center top / cover no-repeat; opacity: .085; will-change: transform; }
 .cont { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
 .mono { font-family: var(--mono); font-weight: 500; font-size: 12.5px; letter-spacing: .06em; text-transform: uppercase; }
 .subrayado { text-decoration: underline; text-decoration-color: var(--violeta); text-underline-offset: 4px; text-decoration-thickness: 1.5px; }
@@ -178,6 +178,7 @@ html:not(.con-historia) [data-quien] { display: none !important; }
 </style>
 </head>
 <body id="arriba">
+<div id="fondo" aria-hidden="true"></div>
 <nav class="top"><div class="cont">
   <a class="inicio mono" href="#arriba">Jaime López Garrido</a>
   <a class="l mono" href="#quien" data-quien><span lang="es">Quién soy</span><span lang="en">About</span></a>
@@ -382,6 +383,21 @@ const poner = l => {
 };
 document.querySelectorAll(".idioma button").forEach(b => b.onclick = () => poner(b.dataset.l));
 poner(lang);
+
+// Parallax del fondo: avanza al 12 % de la velocidad del scroll. La capa mide lo justo para no mostrar su borde
+const fondo = document.getElementById("fondo");
+const VELOCIDAD = 0.12;
+const quieto = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const medir = () => {
+  const recorrido = Math.max(0, document.documentElement.scrollHeight - innerHeight) * (quieto ? 0 : VELOCIDAD);
+  fondo.style.height = (innerHeight + recorrido) + "px";
+};
+let pendiente = false;
+const mover = () => { fondo.style.transform = `translate3d(0, ${-scrollY * (quieto ? 0 : VELOCIDAD)}px, 0)`; pendiente = false; };
+addEventListener("scroll", () => { if (!pendiente) { pendiente = true; requestAnimationFrame(mover); } }, { passive: true });
+addEventListener("resize", () => { medir(); mover(); });
+addEventListener("load", () => { medir(); mover(); });
+medir(); mover();
 
 // Las líneas separadoras se dibujan cuando entran en pantalla
 const obs = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("visible"); obs.unobserve(e.target); } }), { threshold: 0.6 });
