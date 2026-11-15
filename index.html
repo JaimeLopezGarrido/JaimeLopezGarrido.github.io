@@ -181,19 +181,20 @@ footer p { color: var(--muted); margin: 10px 0 26px; }
 
   <article class="proyecto">
     <div>
-      <span class="chip verde"><span lang="es">En desarrollo · código abierto</span><span lang="en">In development · open source</span></span>
+      <span class="chip verde"><span lang="es">Online · código abierto</span><span lang="en">Live · open source</span></span>
       <h3><span lang="es">Asistente de atención</span><span lang="en">Customer-service assistant</span></h3>
       <p><span lang="es">Chatbot hecho desde cero en Python.</span><span lang="en">Chatbot built from scratch in Python.</span></p>
       <ul>
         <li><span lang="es">Consulta y cotiza con herramientas reales (function calling)</span><span lang="en">Checks and quotes through real tools (function calling)</span></li>
         <li><span lang="es">Respuestas con citas del manual (RAG)</span><span lang="en">Answers citing the manual (RAG)</span></li>
         <li><span lang="es">Tests en CI y respaldo entre proveedores</span><span lang="en">CI tests and fallback across providers</span></li>
+        <li><span lang="es">Muestra la ruta, las herramientas y las fuentes de cada respuesta</span><span lang="en">Shows the route, tools and sources behind each answer</span></li>
       </ul>
-      <div class="stack">Python · Pydantic · FastAPI · Gemini · Groq · GitHub Actions</div>
+      <div class="stack">Python · FastAPI · Pydantic · RAG (Gemini embeddings + BM25) · Groq · Vercel · GitHub Actions</div>
     </div>
     <div>
       <div class="probar">
-        <a class="tile ancho" href="#demo"><div class="img pronto" style="display:flex;align-items:center;justify-content:center;border:0;border-radius:0"><span class="serif" style="font-size:28px;color:var(--ink)"><span lang="es">Probalo acá abajo</span><span lang="en">Try it below</span></span></div><div class="pie"><span lang="es">Chat en vivo</span><span lang="en">Live chat</span><span class="flecha">↓</span></div></a>
+        <a class="tile ancho" href="https://asistente-rentadora-demo.vercel.app/" target="_blank" rel="noopener"><div class="img"><img src="img/chatbot.webp" alt="" loading="lazy"></div><div class="pie"><span lang="es">Chat en vivo</span><span lang="en">Live chat</span><span class="flecha">↗</span></div></a>
       </div>
       <div class="nota"><a href="https://github.com/JaimeLopezGarrido/asistente-flota-mcp" target="_blank" rel="noopener"><span lang="es">Ver el código en GitHub</span><span lang="en">See the code on GitHub</span> ↗</a></div>
     </div>
@@ -258,7 +259,7 @@ document.querySelectorAll(".idioma button").forEach(b => b.onclick = () => poner
 poner(lang);
 
 // Chat en vivo: cuando la API del sprint E4 esté publicada, se completa DEMO_URL
-const DEMO_URL = "";
+const DEMO_URL = "https://asistente-rentadora-demo.vercel.app/";
 if (DEMO_URL) document.getElementById("demo-caja").innerHTML = `<iframe src="${DEMO_URL}" title="Asistente" loading="lazy"></iframe>`;
 </script>
 </body>
