@@ -78,23 +78,21 @@ pasos_chat = [
 ]
 
 # ---------- HAY AUTOS ----------
-hay = svg(980, 300, [
-    (10, 14, 160, 50, 'INSTAGRAM', 'mensajes · comentarios'),
-    (10, 84, 160, 50, 'DRIVE', 'fotos de autos'),
-    (10, 154, 160, 50, 'PLANILLA', 'stock'),
-    (10, 224, 160, 50, 'LINK CLIENTE', 'DNI · cédula', True),
-    (230, 119, 150, 60, 'N8N', 'flujos'),
-    (230, 14, 150, 60, 'IA', 'lee DNI · ordena fotos'),
-    (440, 119, 150, 60, 'SUPABASE', 'datos · permisos'),
-    (650, 54, 150, 60, 'PANEL WEB', 'pendientes · radar'),
-    (650, 184, 150, 60, 'PUBLICACIONES', 'carrusel · historias'),
-    (840, 54, 130, 60, 'DOCUMENTOS', 'reserva · boleto'),
+hay = svg(980, 260, [
+    (10, 24, 160, 50, 'DRIVE', 'fotos de autos'),
+    (10, 104, 160, 50, 'PLANILLA', 'stock'),
+    (10, 184, 160, 50, 'LINK CLIENTE', 'DNI · cédula', True),
+    (230, 99, 150, 60, 'N8N', 'flujos'),
+    (230, 4, 150, 56, 'IA', 'lee DNI · ordena fotos'),
+    (440, 99, 150, 60, 'SUPABASE', 'datos · permisos'),
+    (650, 34, 150, 60, 'PANEL WEB', 'pendientes · radar'),
+    (650, 164, 150, 60, 'PUBLICACIONES', 'carrusel · historias'),
+    (840, 34, 130, 60, 'DOCUMENTOS', 'reserva · seña'),
 ], [
-    'M170 39 C200 39 200 140 230 140', 'M170 109 C200 109 200 145 230 145',
-    'M170 179 C200 179 200 155 230 155', 'M170 249 C200 249 200 160 230 160',
-    'M305 119 V74', 'M380 149 H440',
-    'M590 149 C620 149 620 84 650 84', 'M590 149 C620 149 620 214 650 214', 'M800 84 H840',
-], 'M170 249 C200 249 200 160 230 160 H305 V74 V149 H440 H590 C620 149 620 84 650 84 H840 H970')
+    'M170 49 C200 49 200 120 230 120', 'M170 129 H230', 'M170 209 C200 209 200 140 230 140',
+    'M305 99 V60', 'M380 129 H440',
+    'M590 129 C620 129 620 64 650 64', 'M590 129 C620 129 620 194 650 194', 'M800 64 H840',
+], 'M170 209 C200 209 200 140 230 140 H305 V60 V129 H440 H590 C620 129 620 64 650 64 H840 H970')
 
 pasos_hay = [
     ('Un cliente que vende su auto abre el link desde el celular y sube <b>DNI y cédula</b> (almacenamiento privado).',

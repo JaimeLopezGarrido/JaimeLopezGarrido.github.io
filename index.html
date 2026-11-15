@@ -19,6 +19,8 @@
 :root {
   --bg: #000; --ink: #f2f2f2; --muted: #9a9a9a; --dim: #5c5c5c; --line: #262626; --card: #0b0b0b;
   --acento: #ff5c5c; --grid: rgba(255, 255, 255, .055);
+  --rojo: #ff5c5c; --verde: #4ade80; --violeta: #b26bff; --amarillo: #facc15; --naranja: #fb923c; --celeste: #38bdf8;
+  --c: var(--acento);
   --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono: ui-monospace, "SF Mono", "Geist Mono", Menlo, monospace;
   --nombre: "Inter Tight", ui-sans-serif, system-ui, sans-serif;
@@ -36,6 +38,8 @@ body::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-even
 .mono { font-family: var(--mono); font-weight: 500; font-size: 12.5px; letter-spacing: .06em; text-transform: uppercase; }
 .subrayado { text-decoration: underline; text-decoration-color: var(--acento); text-underline-offset: 4px; text-decoration-thickness: 1.5px; }
 .subrayado:hover { color: #fff; text-decoration-thickness: 2.5px; }
+.subrayado.verde { text-decoration-color: var(--verde); }
+.nombre-violeta { color: var(--violeta); font-weight: 500; }
 
 /* Barra superior */
 nav.top { position: sticky; top: 0; z-index: 30; background: rgba(0, 0, 0, .78); backdrop-filter: blur(10px); }
@@ -83,9 +87,11 @@ h2 { font-family: var(--nombre); font-weight: 600; font-size: clamp(34px, 5vw, 5
 .proyecto ul { margin: 0 0 18px; padding: 0; list-style: none; }
 .proyecto li { padding: 8px 0; border-top: 1px solid var(--line); font-size: 16px; }
 .proyecto li:last-child { border-bottom: 1px solid var(--line); }
-.estado { color: var(--acento); }
+.estado { color: var(--c); }
+.p-hay { --c: var(--violeta); } .p-proper { --c: var(--naranja); } .p-chat { --c: var(--celeste); } .chico { --c: var(--amarillo); }
 .qa { margin: 4px 0 22px; padding-left: 14px; border-left: 1px solid var(--line); }
-.qa .q { color: var(--acento); margin: 14px 0 6px; }
+.qa .q { color: var(--rojo); margin: 14px 0 6px; }
+.qa .q.sol { color: var(--verde); }
 .qa .q:first-child { margin-top: 0; }
 .proyecto .qa p { color: var(--ink); font-size: 16px; margin: 0; opacity: .88; }
 .stack { color: var(--dim); line-height: 1.8; }
@@ -111,23 +117,23 @@ h2 { font-family: var(--nombre); font-weight: 600; font-size: clamp(34px, 5vw, 5
 .como { grid-column: 1 / -1; border: 1px solid var(--line); border-radius: 16px; background: var(--card); margin-top: 8px; }
 .como summary { list-style: none; cursor: pointer; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; color: var(--ink); }
 .como summary::-webkit-details-marker { display: none; }
-.como summary .flecha { transition: transform .3s; color: var(--acento); }
+.como summary .flecha { transition: transform .3s; color: var(--c); }
 .como[open] summary .flecha { transform: rotate(180deg); }
 .como summary:hover { color: #fff; }
 .como-cuerpo { padding: 4px 20px 26px; display: grid; grid-template-columns: 1fr; gap: 26px; }
 .diagrama-caja { overflow-x: auto; }
 .diagrama { width: 100%; min-width: 560px; height: auto; display: block; }
 .diagrama .nodo { fill: #0d0d0d; stroke: #3a3a3a; stroke-width: 1; }
-.diagrama .nodo.destacado { stroke: var(--acento); }
+.diagrama .nodo.destacado { stroke: var(--c); }
 .diagrama .t { fill: var(--ink); font: 600 12px var(--mono); letter-spacing: .05em; text-anchor: middle; }
 .diagrama .s { fill: var(--muted); font: 400 10.5px var(--mono); text-anchor: middle; }
 .diagrama .c { fill: none; stroke: #333; stroke-width: 1.2; }
 .diagrama .c.punteada { stroke-dasharray: 3 4; }
-.diagrama .recorrido { fill: none; stroke: var(--acento); stroke-width: 1.4; stroke-opacity: .35; stroke-dasharray: 4 6; animation: fluir 1.2s linear infinite; }
-.diagrama .punto { fill: var(--acento); filter: drop-shadow(0 0 6px var(--acento)); }
+.diagrama .recorrido { fill: none; stroke: var(--c); stroke-width: 1.4; stroke-opacity: .35; stroke-dasharray: 4 6; animation: fluir 1.2s linear infinite; }
+.diagrama .punto { fill: var(--c); filter: drop-shadow(0 0 6px var(--c)); }
 @keyframes fluir { to { stroke-dashoffset: -20; } }
 @media (prefers-reduced-motion: reduce) { .diagrama .recorrido { animation: none; } .diagrama .punto { display: none; } }
-.ejemplo .ej-titulo { color: var(--acento); margin-bottom: 12px; }
+.ejemplo .ej-titulo { color: var(--c); margin-bottom: 12px; }
 .ejemplo ol { margin: 0; padding-left: 20px; columns: 2; column-gap: 40px; }
 .proyecto .ejemplo li { margin-bottom: 12px; color: var(--muted); font-size: 15px; line-height: 1.55; border: 0; padding: 0; break-inside: avoid; }
 .ejemplo li b, .ejemplo li i { color: var(--ink); }
@@ -137,6 +143,7 @@ h2 { font-family: var(--nombre); font-weight: 600; font-size: clamp(34px, 5vw, 5
 .pasos { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 36px; }
 .paso { border: 1px solid var(--line); border-radius: 14px; padding: 20px; background: var(--card); }
 .paso .n { color: var(--acento); }
+.paso:nth-child(1) .n { color: var(--amarillo); } .paso:nth-child(2) .n { color: var(--verde); } .paso:nth-child(3) .n { color: var(--violeta); } .paso:nth-child(4) .n { color: var(--rojo); } .paso:nth-child(5) .n { color: var(--naranja); }
 .paso b { display: block; font-weight: 500; margin-top: 10px; line-height: 1.4; }
 
 /* Demo embebida */
@@ -188,7 +195,7 @@ html:not(.con-historia) [data-quien] { display: none !important; }
     MSc Data Science @ Universidad Austral<br>
     Business Administration (UBA) · Bariloche, AR
   </div>
-  <p class="intro"><span lang="es">Construyo herramientas con IA para negocios reales: <a class="subrayado" href="#proyectos">bots, paneles y automatizaciones</a> que la gente usa en su día a día, y un <a class="subrayado" href="#asistente">chatbot con RAG</a> que podés probar acá.</span><span lang="en">I build AI tools for real businesses: <a class="subrayado" href="#proyectos">bots, dashboards and automations</a> people use every day, and a <a class="subrayado" href="#asistente">RAG chatbot</a> you can try right here.</span></p>
+  <p class="intro"><span lang="es">Construyo herramientas con IA para negocios reales: <a class="subrayado" href="#proyectos">bots, paneles y automatizaciones</a> que la gente usa en su día a día, y un <a class="subrayado verde" href="#asistente">chatbot con RAG</a> que podés probar acá.</span><span lang="en">I build AI tools for real businesses: <a class="subrayado" href="#proyectos">bots, dashboards and automations</a> people use every day, and a <a class="subrayado verde" href="#asistente">RAG chatbot</a> you can try right here.</span></p>
   <div class="enlaces mono">
     <a href="#quien" data-quien><span lang="es">Quién soy</span><span lang="en">About</span></a><span data-quien>·</span>
     <a href="#proyectos"><span lang="es">Proyectos</span><span lang="en">Projects</span></a><span>·</span>
@@ -206,7 +213,7 @@ html:not(.con-historia) [data-quien] { display: none !important; }
   <div class="quien sin-foto">
     <div class="foto" id="foto"><span class="mono">Foto</span></div>
     <div class="historia" id="historia">
-      <p><span lang="es">Soy Jaime López Garrido. Nací y crecí en San Carlos de Bariloche, en la Patagonia argentina, y durante años fui esquiador: formé parte del equipo nacional de Freeski.</span><span lang="en">I'm Jaime López Garrido. I was born and raised in San Carlos de Bariloche, in Argentine Patagonia, and for years I was a skier, competing as part of Argentina's national Freeski team.</span></p>
+      <p><span lang="es">Soy <span class="nombre-violeta">Jaime López Garrido</span>. Nací y crecí en San Carlos de Bariloche, en la Patagonia argentina, y durante años fui esquiador: formé parte del equipo nacional de Freeski.</span><span lang="en">I'm <span class="nombre-violeta">Jaime López Garrido</span>. I was born and raised in San Carlos de Bariloche, in Argentine Patagonia, and for years I was a skier, competing as part of Argentina's national Freeski team.</span></p>
       <p><span lang="es">Me recibí de Licenciado en Administración de Empresas en la UBA. Con el boom de la inteligencia artificial y el machine learning, mi interés por estas herramientas fue creciendo hasta convertirse en mi camino: hoy curso la Maestría en Ciencia de Datos en la Universidad Austral.</span><span lang="en">I hold a degree in Business Administration from the University of Buenos Aires. As AI and machine learning took off, my interest in these tools kept growing until it became my path: today I'm pursuing a Master's in Data Science at Universidad Austral.</span></p>
       <p><span lang="es">En paralelo desarrollo soluciones con IA para clientes de forma independiente, y sigo estudiando IA y automatización por mi cuenta, con la idea de crecer y desarrollarme en el rubro.</span><span lang="en">Alongside my studies, I build AI solutions for clients as an independent developer, and I keep learning AI and automation on my own, aiming to grow and build my career in this field.</span></p>
     </div>
@@ -219,7 +226,7 @@ html:not(.con-historia) [data-quien] { display: none !important; }
   <div class="etiqueta mono"><span lang="es">Proyectos</span><span lang="en">Projects</span></div>
   <h2><span lang="es">Hechos para clientes reales.</span><span lang="en">Built for real clients.</span></h2>
 
-  <article class="proyecto">
+  <article class="proyecto p-hay">
     <div>
       <div class="estado mono"><span lang="es">Cliente real · demo</span><span lang="en">Real client · demo</span></div>
       <h3>HAY AUTOS</h3>
@@ -227,15 +234,14 @@ html:not(.con-historia) [data-quien] { display: none !important; }
       <div class="qa">
         <div class="q mono"><span lang="es">¿Cuál era el problema?</span><span lang="en">What was the problem?</span></div>
         <p><span lang="es">Cada vez que se vendía un auto, los documentos (reserva, seña, comodato) se armaban a mano en Word, copiando los datos del vendedor, del comprador y del auto, que estaban todos por separado.</span><span lang="en">Every time a car was sold, the paperwork (reservation, deposit, loan agreement) was written by hand in Word, copying the seller's, buyer's and car's details, which were all scattered.</span></p>
-        <div class="q mono"><span lang="es">¿Cómo se solucionó?</span><span lang="en">How was it solved?</span></div>
+        <div class="q sol mono"><span lang="es">¿Cómo se solucionó?</span><span lang="en">How was it solved?</span></div>
         <p><span lang="es">El cliente, sea vendedor o comprador, saca una foto de su DNI y de la cédula verde desde la web app: la IA lee los datos y el sistema los guarda ordenados en Supabase. Después, desde el panel, la agencia genera cualquier documento al instante, con pocos clics.</span><span lang="en">The customer, buyer or seller, takes a photo of their ID and car registration in the web app: AI reads the data and the system stores it, organized, in Supabase. Then, from the dashboard, the agency generates any document instantly, in a few clicks.</span></p>
       </div>
       <ul>
-        <li><span lang="es">Bot de Instagram con los datos reales del stock</span><span lang="en">Instagram bot answering with real inventory data</span></li>
         <li><span lang="es">Link para que el cliente cargue DNI y cédula; la IA los lee</span><span lang="en">Customer link to upload ID and car title; AI reads them</span></li>
         <li><span lang="es">Panel con documentos de venta al instante y Radar de oportunidades</span><span lang="en">Dashboard with instant sale documents and an opportunity Radar</span></li>
       </ul>
-      <div class="stack mono">n8n · Supabase · Instagram API · Google Docs · Gemini · Groq</div>
+      <div class="stack mono">n8n · Supabase · Google Docs · Gemini · Groq</div>
     </div>
     <div>
       <div class="probar">
@@ -244,12 +250,12 @@ html:not(.con-historia) [data-quien] { display: none !important; }
       </div>
       <div class="nota mono"><span lang="es">Demo con datos de ejemplo</span><span lang="en">Demo with sample data</span></div>
     </div>
-    <details class="como" id="como-hayautos"><summary class="mono"><span lang="es">Cómo funciona</span><span lang="en">How it works</span><span class="flecha">↓</span></summary><div class="como-cuerpo"><div class="diagrama-caja"><svg class="diagrama" viewBox="0 0 980 300" role="img" aria-hidden="true"><path class="c" d="M170 39 C200 39 200 140 230 140"/><path class="c" d="M170 109 C200 109 200 145 230 145"/><path class="c" d="M170 179 C200 179 200 155 230 155"/><path class="c" d="M170 249 C200 249 200 160 230 160"/><path class="c" d="M305 119 V74"/><path class="c" d="M380 149 H440"/><path class="c" d="M590 149 C620 149 620 84 650 84"/><path class="c" d="M590 149 C620 149 620 214 650 214"/><path class="c" d="M800 84 H840"/><path class="recorrido" d="M170 249 C200 249 200 160 230 160 H305 V74 V149 H440 H590 C620 149 620 84 650 84 H840 H970"/><rect class="nodo" x="10" y="14" width="160" height="50" rx="10"/><text class="t" x="90.0" y="33.0">INSTAGRAM</text><text class="s" x="90.0" y="49.0">mensajes · comentarios</text><rect class="nodo" x="10" y="84" width="160" height="50" rx="10"/><text class="t" x="90.0" y="103.0">DRIVE</text><text class="s" x="90.0" y="119.0">fotos de autos</text><rect class="nodo" x="10" y="154" width="160" height="50" rx="10"/><text class="t" x="90.0" y="173.0">PLANILLA</text><text class="s" x="90.0" y="189.0">stock</text><rect class="nodo destacado" x="10" y="224" width="160" height="50" rx="10"/><text class="t" x="90.0" y="243.0">LINK CLIENTE</text><text class="s" x="90.0" y="259.0">DNI · cédula</text><rect class="nodo" x="230" y="119" width="150" height="60" rx="10"/><text class="t" x="305.0" y="143.0">N8N</text><text class="s" x="305.0" y="159.0">flujos</text><rect class="nodo" x="230" y="14" width="150" height="60" rx="10"/><text class="t" x="305.0" y="38.0">IA</text><text class="s" x="305.0" y="54.0">lee DNI · ordena fotos</text><rect class="nodo" x="440" y="119" width="150" height="60" rx="10"/><text class="t" x="515.0" y="143.0">SUPABASE</text><text class="s" x="515.0" y="159.0">datos · permisos</text><rect class="nodo" x="650" y="54" width="150" height="60" rx="10"/><text class="t" x="725.0" y="78.0">PANEL WEB</text><text class="s" x="725.0" y="94.0">pendientes · radar</text><rect class="nodo" x="650" y="184" width="150" height="60" rx="10"/><text class="t" x="725.0" y="208.0">PUBLICACIONES</text><text class="s" x="725.0" y="224.0">carrusel · historias</text><rect class="nodo" x="840" y="54" width="130" height="60" rx="10"/><text class="t" x="905.0" y="78.0">DOCUMENTOS</text><text class="s" x="905.0" y="94.0">reserva · boleto</text><circle class="punto" r="5"><animateMotion dur="5s" repeatCount="indefinite" path="M170 249 C200 249 200 160 230 160 H305 V74 V149 H440 H590 C620 149 620 84 650 84 H840 H970" keyPoints="0;1" keyTimes="0;1" calcMode="linear"/></circle></svg></div><div class="ejemplo"><div class="mono ej-titulo"><span lang="es">Ejemplo: un cliente carga su DNI y cédula</span><span lang="en">Example: a customer uploads their ID and car title</span></div><ol><li><span lang="es">Un cliente que vende su auto abre el link desde el celular y sube <b>DNI y cédula</b> (almacenamiento privado).</span><span lang="en">A customer selling their car opens the link on their phone and uploads their <b>ID and car title</b> (private storage).</span></li><li><span lang="es"><b>n8n</b> le pasa las fotos a la <b>IA</b>, que devuelve nombre, DNI, CUIL y patente en un formato fijo.</span><span lang="en"><b>n8n</b> sends the photos to the <b>AI</b>, which returns name, ID number, tax ID and plate in a fixed format.</span></li><li><span lang="es">El <b>código valida</b> sin IA: el CUIL con su dígito verificador y que el titular de la cédula sea el del DNI.</span><span lang="en">The <b>code validates</b> without AI: the tax ID check digit, and that the title holder matches the ID.</span></li><li><span lang="es">Vincula al auto del stock <b>por patente</b>, corrigiendo confusiones de lectura (O/0, B/8). Si hay dos candidatos, no adivina: lo deja para revisar.</span><span lang="en">It links the car in stock <b>by plate</b>, fixing reading mix-ups (O/0, B/8). If there are two candidates, it doesn't guess: it flags it for review.</span></li><li><span lang="es">Aparece en <b>Pendientes</b> del panel; el dueño aprueba y genera la <b>reserva o el boleto</b> al instante, con montos en letras.</span><span lang="en">It shows up in the dashboard's <b>Pending</b> list; the owner approves it and generates the <b>reservation or bill of sale</b> instantly, with amounts in words.</span></li></ol></div></div></details>
+    <details class="como" id="como-hayautos"><summary class="mono"><span lang="es">Cómo funciona</span><span lang="en">How it works</span><span class="flecha">↓</span></summary><div class="como-cuerpo"><div class="diagrama-caja"><svg class="diagrama" viewBox="0 0 980 260" role="img" aria-hidden="true"><path class="c" d="M170 49 C200 49 200 120 230 120"/><path class="c" d="M170 129 H230"/><path class="c" d="M170 209 C200 209 200 140 230 140"/><path class="c" d="M305 99 V60"/><path class="c" d="M380 129 H440"/><path class="c" d="M590 129 C620 129 620 64 650 64"/><path class="c" d="M590 129 C620 129 620 194 650 194"/><path class="c" d="M800 64 H840"/><path class="recorrido" d="M170 209 C200 209 200 140 230 140 H305 V60 V129 H440 H590 C620 129 620 64 650 64 H840 H970"/><rect class="nodo" x="10" y="24" width="160" height="50" rx="10"/><text class="t" x="90.0" y="43.0">DRIVE</text><text class="s" x="90.0" y="59.0">fotos de autos</text><rect class="nodo" x="10" y="104" width="160" height="50" rx="10"/><text class="t" x="90.0" y="123.0">PLANILLA</text><text class="s" x="90.0" y="139.0">stock</text><rect class="nodo destacado" x="10" y="184" width="160" height="50" rx="10"/><text class="t" x="90.0" y="203.0">LINK CLIENTE</text><text class="s" x="90.0" y="219.0">DNI · cédula</text><rect class="nodo" x="230" y="99" width="150" height="60" rx="10"/><text class="t" x="305.0" y="123.0">N8N</text><text class="s" x="305.0" y="139.0">flujos</text><rect class="nodo" x="230" y="4" width="150" height="56" rx="10"/><text class="t" x="305.0" y="26.0">IA</text><text class="s" x="305.0" y="42.0">lee DNI · ordena fotos</text><rect class="nodo" x="440" y="99" width="150" height="60" rx="10"/><text class="t" x="515.0" y="123.0">SUPABASE</text><text class="s" x="515.0" y="139.0">datos · permisos</text><rect class="nodo" x="650" y="34" width="150" height="60" rx="10"/><text class="t" x="725.0" y="58.0">PANEL WEB</text><text class="s" x="725.0" y="74.0">pendientes · radar</text><rect class="nodo" x="650" y="164" width="150" height="60" rx="10"/><text class="t" x="725.0" y="188.0">PUBLICACIONES</text><text class="s" x="725.0" y="204.0">carrusel · historias</text><rect class="nodo" x="840" y="34" width="130" height="60" rx="10"/><text class="t" x="905.0" y="58.0">DOCUMENTOS</text><text class="s" x="905.0" y="74.0">reserva · seña</text><circle class="punto" r="5"><animateMotion dur="5s" repeatCount="indefinite" path="M170 209 C200 209 200 140 230 140 H305 V60 V129 H440 H590 C620 129 620 64 650 64 H840 H970" keyPoints="0;1" keyTimes="0;1" calcMode="linear"/></circle></svg></div><div class="ejemplo"><div class="mono ej-titulo"><span lang="es">Ejemplo: un cliente carga su DNI y cédula</span><span lang="en">Example: a customer uploads their ID and car title</span></div><ol><li><span lang="es">Un cliente que vende su auto abre el link desde el celular y sube <b>DNI y cédula</b> (almacenamiento privado).</span><span lang="en">A customer selling their car opens the link on their phone and uploads their <b>ID and car title</b> (private storage).</span></li><li><span lang="es"><b>n8n</b> le pasa las fotos a la <b>IA</b>, que devuelve nombre, DNI, CUIL y patente en un formato fijo.</span><span lang="en"><b>n8n</b> sends the photos to the <b>AI</b>, which returns name, ID number, tax ID and plate in a fixed format.</span></li><li><span lang="es">El <b>código valida</b> sin IA: el CUIL con su dígito verificador y que el titular de la cédula sea el del DNI.</span><span lang="en">The <b>code validates</b> without AI: the tax ID check digit, and that the title holder matches the ID.</span></li><li><span lang="es">Vincula al auto del stock <b>por patente</b>, corrigiendo confusiones de lectura (O/0, B/8). Si hay dos candidatos, no adivina: lo deja para revisar.</span><span lang="en">It links the car in stock <b>by plate</b>, fixing reading mix-ups (O/0, B/8). If there are two candidates, it doesn't guess: it flags it for review.</span></li><li><span lang="es">Aparece en <b>Pendientes</b> del panel; el dueño aprueba y genera la <b>reserva o el boleto</b> al instante, con montos en letras.</span><span lang="en">It shows up in the dashboard's <b>Pending</b> list; the owner approves it and generates the <b>reservation or bill of sale</b> instantly, with amounts in words.</span></li></ol></div></div></details>
   </article>
 
   <hr class="linea">
 
-  <article class="proyecto">
+  <article class="proyecto p-proper">
     <div>
       <div class="estado mono"><span lang="es">Cliente real · demo</span><span lang="en">Real client · demo</span></div>
       <h3>Proper Rent a Car</h3>
@@ -257,7 +263,7 @@ html:not(.con-historia) [data-quien] { display: none !important; }
       <div class="qa">
         <div class="q mono"><span lang="es">¿Cuál era el problema?</span><span lang="en">What was the problem?</span></div>
         <p><span lang="es">La alquiladora tenía toda la operación repartida en planillas de Google (disponibilidad, reservas y más), y el equipo perdía mucho tiempo respondiendo por Instagram y WhatsApp preguntas que ya había contestado: dónde se retira el auto, dónde están los documentos, qué hacer si pasa algo.</span><span lang="en">The rental company ran everything across separate Google Sheets (availability, bookings and more), and the team lost hours answering Instagram and WhatsApp questions they had already answered: where to pick up the car, where the documents are, what to do if something happens.</span></p>
-        <div class="q mono"><span lang="es">¿Cómo se solucionó?</span><span lang="en">How was it solved?</span></div>
+        <div class="q sol mono"><span lang="es">¿Cómo se solucionó?</span><span lang="en">How was it solved?</span></div>
         <p><span lang="es">Un panel para la agencia donde maneja reservas, disponibilidad y pedidos de los clientes, y una web app para el cliente: entra con su DNI o pasaporte y su número de reserva, ve dónde retira y devuelve, firma el contrato, adelanta los trámites previos y pide cambios o extras, sin tener que escribir un mensaje.</span><span lang="en">A dashboard where the agency manages bookings, availability and customer requests, and a web app for customers: they log in with their ID or passport and booking number, see where to pick up and return, sign the contract, complete paperwork in advance and request changes or extras, without sending a single message.</span></p>
       </div>
       <ul>
@@ -279,7 +285,7 @@ html:not(.con-historia) [data-quien] { display: none !important; }
 
   <hr class="linea">
 
-  <article class="proyecto asistente" id="asistente">
+  <article class="proyecto asistente p-chat" id="asistente">
     <div>
       <div class="estado mono"><span lang="es">Online · código abierto</span><span lang="en">Live · open source</span></div>
       <h3><span lang="es">Asistente de atención</span><span lang="en">Customer-service assistant</span></h3>
@@ -287,7 +293,7 @@ html:not(.con-historia) [data-quien] { display: none !important; }
       <div class="qa">
         <div class="q mono"><span lang="es">¿Cuál era el problema?</span><span lang="en">What was the problem?</span></div>
         <p><span lang="es">Alquiladoras como Proper no confiaban en un chatbot que conecta al cliente directo con un modelo de lenguaje: les daba miedo que alucine, ofrezca precios más bajos o confirme reservas que no podían cumplir.</span><span lang="en">Rental companies like Proper didn't trust a chatbot that connects customers straight to a language model: they were afraid it would hallucinate, offer lower prices or confirm bookings they couldn't honor.</span></p>
-        <div class="q mono"><span lang="es">¿Cómo se solucionó?</span><span lang="en">How was it solved?</span></div>
+        <div class="q sol mono"><span lang="es">¿Cómo se solucionó?</span><span lang="en">How was it solved?</span></div>
         <p><span lang="es">Un chatbot estructurado como un flujo: primero un router decide el camino; si hace falta, consulta el manual con RAG y cita la página; y la disponibilidad y los precios salen siempre de herramientas (function calling). El modelo nunca calcula un precio ni toca el calendario: solo redacta con los datos que le da el sistema.</span><span lang="en">A chatbot structured as a workflow: first a router picks the path; when needed, it searches the manual with RAG and cites the page; and availability and prices always come from tools (function calling). The model never calculates a price or touches the calendar: it only writes with the data the system gives it.</span></p>
       </div>
       <ul>
