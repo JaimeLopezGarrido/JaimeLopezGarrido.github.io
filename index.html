@@ -57,7 +57,9 @@ nav.top a.l:hover { color: var(--ink); }
 @media (prefers-reduced-motion: reduce) { .linea { transform: none; transition: none; } }
 
 /* Portada */
-header.hero .cont { padding-top: 120px; padding-bottom: 110px; max-width: 760px; }
+/* La portada ocupa toda la pantalla: lo de abajo aparece recién al bajar */
+header.hero { min-height: calc(100vh - 60px); min-height: calc(100svh - 60px); display: flex; align-items: center; }
+header.hero .cont { width: 100%; padding-top: 48px; padding-bottom: 64px; max-width: 760px; }
 h1 { font-family: var(--nombre); font-weight: 600; font-size: clamp(52px, 9vw, 84px); line-height: .98; letter-spacing: -.045em; margin: 0 0 26px; }
 .titulos { line-height: 1.75; margin-bottom: 30px; }
 /* Frase que rota, con resaltado de marcador (estilo claura) */
@@ -221,7 +223,7 @@ html:not(.con-historia) [data-quien] { display: none !important; }
 
 @media (max-width: 860px) {
   nav.top a.l { display: none; }
-  header.hero .cont { padding-top: 70px; padding-bottom: 70px; }
+  header.hero .cont { padding-top: 32px; padding-bottom: 48px; }
   section.bloque { padding: 70px 0; }
   .quien, .proyecto, .chicos { grid-template-columns: 1fr; gap: 28px; }
   .quien .foto { width: 140px; height: 140px; }
@@ -463,10 +465,10 @@ medir(); mover();
 
 // Frase que rota: borra, cambia el color del marcador y escribe la siguiente
 const FRASES = {
-  es: ["responden consultas.", "leen documentos.", "cotizan alquileres.", "arman contratos.", "buscan trabajo por mí."],
-  en: ["answer customers.", "read documents.", "quote rentals.", "draft contracts.", "job-hunt for me."],
+  es: ["responden consultas.", "leen documentos.", "cotizan alquileres.", "arman contratos."],
+  en: ["answer customers.", "read documents.", "quote rentals.", "draft contracts."],
 };
-const COLORES = ["#d8b4fe", "#bbf7d0", "#fef08a", "#fed7aa", "#bae6fd"];
+const COLORES = ["#d8b4fe", "#bbf7d0", "#fef08a", "#fed7aa"];
 const marca = document.getElementById("marca"), marcaTxt = document.getElementById("marca-txt");
 const espera = ms => new Promise(r => setTimeout(r, ms));
 async function rotar() {
