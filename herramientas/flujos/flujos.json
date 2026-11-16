@@ -1,0 +1,14 @@
+{
+  "hayautos": {
+    "es": "flowchart LR\n  C[Cliente: fotos de DNI y cédula] --> N[n8n]\n  N --> IA[IA lee los datos]:::destacado\n  IA -->|JSON fijo| V[Código valida CUIL y patente]\n  V --> DB[(Supabase)]\n  PL[Planilla de stock] -->|cada 5 min| DB\n  DB --> P[Panel: aprobar]\n  P --> D[Reserva y boleto en PDF]",
+    "en": "flowchart LR\n  C[Customer: ID and title photos] --> N[n8n]\n  N --> IA[AI reads the data]:::destacado\n  IA -->|fixed JSON| V[Code checks tax ID and plate]\n  V --> DB[(Supabase)]\n  PL[Inventory sheet] -->|every 5 min| DB\n  DB --> P[Dashboard: approve]\n  P --> D[Reservation and bill of sale PDF]"
+  },
+  "proper": {
+    "es": "flowchart LR\n  IG[Instagram] -->|webhook de Meta| N[n8n: junta mensajes 15 s]\n  N --> IA[IA en modo plan: acción + datos en JSON]:::destacado\n  IA --> N\n  N -->|/api/bot| APP[API de la app Next.js]\n  APP --> M[Motor de reglas: disponibilidad, temporada, cargos]\n  M --> APP\n  APP -->|números| N\n  N -->|texto fijo + números de la app| IG\n  APP --> PANEL[Panel: pedidos para aprobar]",
+    "en": "flowchart LR\n  IG[Instagram] -->|Meta webhook| N[n8n: groups messages 15 s]\n  N --> IA[AI in plan mode: action + data as JSON]:::destacado\n  IA --> N\n  N -->|/api/bot| APP[Next.js app API]\n  APP --> M[Rules engine: availability, season, fees]\n  M --> APP\n  APP -->|numbers| N\n  N -->|fixed text + the app's numbers| IG\n  APP --> PANEL[Dashboard: requests to approve]"
+  },
+  "asistente": {
+    "es": "flowchart LR\n  W[Navegador] -->|POST /chat| API[FastAPI: sesión y límites]\n  API --> R{{Router: 1 llamada}}\n  R -->|política| RAG[RAG híbrido: embeddings + BM25]:::destacado\n  R -->|cotización| AG[Agente con herramientas]\n  R -->|reclamo| H[Respuesta fija: deriva a persona]\n  R -->|fuera de alcance| F[Respuesta fija]\n  AG --> T[disponibilidad · cotizar · políticas · manual]\n  RAG --> VAL[Validación: esquema Pydantic + cita de página]\n  T --> VAL\n  VAL --> W",
+    "en": "flowchart LR\n  W[Browser] -->|POST /chat| API[FastAPI: session and limits]\n  API --> R{{Router: 1 call}}\n  R -->|policy| RAG[Hybrid RAG: embeddings + BM25]:::destacado\n  R -->|quote| AG[Tool-using agent]\n  R -->|complaint| H[Fixed reply: hand off to a person]\n  R -->|out of scope| F[Fixed reply]\n  AG --> T[availability · quote · policies · manual]\n  RAG --> VAL[Validation: Pydantic schema + page citation]\n  T --> VAL\n  VAL --> W"
+  }
+}

@@ -1,6 +1,8 @@
 """Genera los bloques "Cómo funciona" (diagrama SVG animado + ejemplo paso a paso) y los inserta en index.html.
 
 Uso: python3 herramientas/diagramas.py
+OJO: los diagramas ahora los dibuja herramientas/flujos/render.mjs (Mermaid). Si corrés este script,
+volvé a correr ese después para no perder los flujos nuevos.
 Cada diagrama: cajas (x, y, ancho, alto, título, subtítulo), conexiones (paths SVG) y un "recorrido":
 el camino que hace un ejemplo real, por el que viaja un punto rojo.
 """
