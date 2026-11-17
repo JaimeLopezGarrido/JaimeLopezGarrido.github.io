@@ -98,6 +98,12 @@ const encabezado = (titulo, sub, derecha = '') => `<div class="encabezado"><div 
 const OP = crearOportunidades({ sb, yo, CFG, $, esc, toast, fallo, encabezado, icono, nombreAuto, precio, fechaCorta, ruta: () => ruta() });
 
 // ── Pendientes ───────────────────────────────────────────────────────────────
+// Si el cliente cargó los datos a mano (sin fotos), no se marcan como error las fotos que faltan: se avisa una sola vez
+function avisosDeCarga(x) {
+  const lista = x.avisos || [];
+  if (Object.keys(x.fotos || {}).length) return lista;
+  return [{ tipo: 'aviso', texto: 'Cargado a mano, sin fotos: revisá los datos' }].concat(lista.filter((a) => !/^Falta (el frente|el dorso|la cédula)/.test(a.texto)));
+}
 async function vistaPendientes(c) {
   const [{ data: cargas, error }, { data: autos }] = await Promise.all([
     sb.from('cargas').select('*').eq('agencia_id', yo.agencia).eq('estado', 'nueva').order('creado', { ascending: false }),
@@ -126,7 +132,7 @@ async function vistaPendientes(c) {
       <div class="row" style="gap: 24px; align-items: flex-start;"><div class="row" style="gap: 8px;">${fotos}</div>
         <dl class="dl grow" style="flex: 1 1 380px;">${d.tipo_persona === 'juridica' ? dato('CUIT', d.cuit) + dato('Representante', [d.nombre, d.cargo].filter(Boolean).join(' · ')) + dato('Domicilio de la empresa', d.domicilio_empresa) : ''}${dato('DNI', formatoDni(d.dni))}${dato('CUIL', d.cuil)}${dato('Estado civil', d.estado_civil)}${d.conyuge_nombre ? dato('Cónyuge', d.conyuge_nombre + (d.conyuge_dni ? ' · DNI ' + (formatoDni(d.conyuge_dni) || d.conyuge_dni) : '')) : ''}${x.rol === 'otro' ? dato('Titular', [d.titular_nombre, d.titular_dni ? 'DNI ' + (formatoDni(d.titular_dni) || d.titular_dni) : ''].filter(Boolean).join(' · ')) : ''}${dato('Celular', d.telefono)}${dato('Email', d.email)}${dato('Domicilio', d.domicilio)}${x.rol === 'vendedor' ? dato('Patente', d.patente) + dato('Auto (cédula)', [d.marca_modelo, d.anio].filter(Boolean).join(' ')) : ''}</dl></div>
       ${vinculo}
-      <div class="row">${(x.avisos || []).map(chipAviso).join('')}<span class="grow"></span>
+      <div class="row">${avisosDeCarga(x).map(chipAviso).join('')}<span class="grow"></span>
         <button type="button" class="btn btn-ghost" data-descartar="${x.id}">Descartar</button>
         <button type="button" class="btn btn-primary" data-aprobar="${x.id}">Aprobar</button></div>
     </article>`;

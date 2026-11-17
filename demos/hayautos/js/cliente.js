@@ -111,13 +111,24 @@
     b.innerHTML = 'Leer mis datos'; b.disabled = false;
   });
 
+  // Sin fotos: se crea la carga vacía (n8n, modo 'manual', sin IA) y el cliente escribe todo en el paso 3
+  $('#a-mano').addEventListener('click', async () => {
+    const b = $('#a-mano'); error('#fotos-error', '');
+    const antes = b.innerHTML; b.disabled = true; b.innerHTML = '<span class="cargando" aria-hidden="true"></span> Preparando el formulario…';
+    try {
+      estado.carga = await llamar({ accion: 'leer', modo: 'manual', rol: estado.rol, turnstile: estado.robot });
+      llenar(estado.carga); mostrar('revisar');
+    } catch (e) { error('#fotos-error', e.message); if (window.turnstile) window.turnstile.reset('#robot'); }
+    b.innerHTML = antes; b.disabled = false;
+  });
+
   // ── Paso 3: revisar lo leído ──
   function llenar(c) {
     const f = $('#form-datos'), d = c.dni || {}, ce = c.cedula || {};
     f.nombre.value = d.nombre || ''; f.dni.value = d.dni ? formatoDni(d.dni) || d.dni : '';
     f.nacimiento.value = /^\d{4}-\d\d-\d\d$/.test(d.fecha_nacimiento || '') ? d.fecha_nacimiento : '';
     const ci = cuilInfo(d.cuil, d.dni);
-    f.cuil.value = ci.ok ? ci.formateado : cuilSugerido(d.dni, d.sexo);
+    f.cuil.value = ci.ok ? ci.formateado : (d.dni ? cuilSugerido(d.dni, d.sexo) : '');
     f.domicilio.value = d.domicilio || ''; f.telefono.value = ''; f.email.value = ''; f.acepto.checked = false;
     const emp = estado.tipo === 'juridica', otro = estado.rol === 'otro';
     $('#sec-empresa').hidden = !emp; $('#sec-relacion').hidden = !otro; $('#sec-civil').hidden = emp || otro;
@@ -128,7 +139,8 @@
     const vende = estado.rol === 'vendedor';
     $('#sec-auto').hidden = !vende;
     if (vende) { f.patente.value = ce.dominio || ''; f.anio.value = ce.anio || ''; f.marca_modelo.value = [ce.marca, ce.modelo].filter(Boolean).join(' '); }
-    $('#revisar-sub').textContent = d.legible === false ? 'No pudimos leer bien tu DNI: completá los datos a mano.' : 'Los leímos de tus fotos. Si algo está mal, corregilo antes de confirmar.';
+    $('#revisar-sub').textContent = c.manual ? 'Completá tus datos tal como figuran en tu DNI' + (vende ? ' y en la cédula del auto.' : '.')
+      : d.legible === false ? 'No pudimos leer bien tu DNI: completá los datos a mano.' : 'Los leímos de tus fotos. Si algo está mal, corregilo antes de confirmar.';
     error('#datos-error', ''); notaCuil();
   }
   function notaCuil() {

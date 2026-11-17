@@ -367,6 +367,12 @@
     if (/leer/.test(ruta) || accion === 'leer') {
       await espera(1500);                       // "la IA está leyendo"
       if (b.modo === 'panel') return { ok: true, dni: { ...LECTURA_PANEL } };
+      if (b.modo === 'manual') {                // "Cargar los datos a mano": carga vacía, sin fotos ni lectura
+        const id = uid(), token = uid();
+        tabla('cargas').push({ id, agencia_id: AG, rol: b.rol, estado: 'leida', token_hash: token, fotos: {}, leido_dni: null, leido_cedula: b.rol === 'vendedor' ? { legible: true, a_mano: true } : null, datos: null, avisos: [], creado: ahora() });
+        guardar();
+        return { ok: true, carga_id: id, token, dni: {}, cedula: null, manual: true };
+      }
       // Las fotos quedan en este navegador (memoria/sessionStorage): no se suben a ningún lado
       const id = uid(), token = uid(), fotos = {};
       Object.entries(b.fotos || {}).forEach(([k, v]) => { if (v) { const r = `${AG}/cargas/${id}/${k}.jpg`; BLOBS[r] = v; fotos[k] = r; } });
