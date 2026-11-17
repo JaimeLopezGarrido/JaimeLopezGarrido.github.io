@@ -130,7 +130,10 @@
             <label class="campo"><span class="label">Nacimiento</span><input class="input" name="nacimiento" type="date"></label>
           </div>
           <label class="campo"><span class="label">CUIL</span><input class="input num" name="cuil" inputmode="numeric" placeholder="20-12345678-9"><span class="nota" id="nota-cuil"></span></label>
-          <label class="campo"><span class="label">Domicilio</span><input class="input" name="domicilio" autocomplete="street-address"></label>
+          <label class="campo"><span class="label">Domicilio real</span><input class="input" name="domicilio" autocomplete="street-address" placeholder="Donde vivís hoy: calle, número, localidad"></label>
+          <button type="button" class="btn btn-ghost" style="align-self: flex-start; min-height: 32px; padding: 0 4px; color: var(--brand-strong);" data-copiar-dom="real">↓ Mismo que el legal</button>
+          <label class="campo"><span class="label">Domicilio legal</span><input class="input" name="domicilio_legal" placeholder="El que figura en tu DNI"><span class="caption">El que figura en tu DNI.</span></label>
+          <button type="button" class="btn btn-ghost" style="align-self: flex-start; min-height: 32px; padding: 0 4px; color: var(--brand-strong);" data-copiar-dom="legal">↑ Mismo que el real</button>
           <label class="campo"><span class="label">Celular</span><input class="input" name="telefono" type="tel" autocomplete="tel" placeholder="11 1234-5678" required><span class="caption">Para avisarte por WhatsApp cuando esté todo listo.</span></label>
           <label class="campo"><span class="label">Email</span><input class="input" name="email" type="email" autocomplete="email" placeholder="nombre@mail.com"></label>
         </section>

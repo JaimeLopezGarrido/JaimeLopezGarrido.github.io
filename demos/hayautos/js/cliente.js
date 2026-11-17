@@ -129,7 +129,8 @@
     f.nacimiento.value = /^\d{4}-\d\d-\d\d$/.test(d.fecha_nacimiento || '') ? d.fecha_nacimiento : '';
     const ci = cuilInfo(d.cuil, d.dni);
     f.cuil.value = ci.ok ? ci.formateado : (d.dni ? cuilSugerido(d.dni, d.sexo) : '');
-    f.domicilio.value = d.domicilio || ''; f.telefono.value = ''; f.email.value = ''; f.acepto.checked = false;
+    // El DNI trae el domicilio LEGAL; el real lo completa el cliente (o toca "Mismo que el legal")
+    f.domicilio_legal.value = d.domicilio || ''; f.domicilio.value = ''; f.telefono.value = ''; f.email.value = ''; f.acepto.checked = false;
     const emp = estado.tipo === 'juridica', otro = estado.rol === 'otro';
     $('#sec-empresa').hidden = !emp; $('#sec-relacion').hidden = !otro; $('#sec-civil').hidden = emp || otro;
     $('#titulo-tus-datos').textContent = emp ? 'Tus datos (representante)' : 'Tus datos';
@@ -159,6 +160,12 @@
   $('#form-datos').cuit.addEventListener('input', notaCuit);
   $('#form-datos').estado_civil.addEventListener('change', (e) => { $('#sec-conyuge').hidden = !/casad|convivencial/i.test(e.target.value); });
   $('#form-datos').cuil.addEventListener('input', notaCuil);
+  // "Mismo que el legal" / "Mismo que el real": copia un domicilio en el otro
+  document.querySelectorAll('[data-copiar-dom]').forEach((b) => b.addEventListener('click', () => {
+    const f = $('#form-datos'), destino = b.dataset.copiarDom === 'real' ? f.domicilio : f.domicilio_legal, origen = destino === f.domicilio ? f.domicilio_legal : f.domicilio;
+    if (!origen.value.trim()) { error('#datos-error', destino === f.domicilio ? 'Primero completá el domicilio legal.' : 'Primero completá el domicilio real.'); return; }
+    destino.value = origen.value; error('#datos-error', '');
+  }));
   $('#form-datos').dni.addEventListener('input', notaCuil);
 
   $('#form-datos').addEventListener('submit', async (ev) => {
@@ -167,6 +174,8 @@
     const faltan = [];
     if (!f.nombre.value.trim()) faltan.push('tu nombre y apellido');
     if (!formatoDni(f.dni.value)) faltan.push('un DNI válido');
+    if (!f.domicilio.value.trim()) faltan.push('tu domicilio real');
+    if (!f.domicilio_legal.value.trim()) faltan.push('tu domicilio legal');
     if (!f.telefono.value.replace(/\D/g, '')) faltan.push('tu celular');
     if (estado.tipo === 'juridica') {
       if (!f.razon_social.value.trim()) faltan.push('la razón social');
@@ -181,7 +190,7 @@
     if (!f.acepto.checked) return error('#datos-error', 'Marcá la casilla para confirmar que los datos son correctos.');
     b.disabled = true; b.innerHTML = '<span class="cargando" aria-hidden="true"></span> Enviando…';
     try {
-      const datos = Object.fromEntries(['nombre', 'dni', 'nacimiento', 'cuil', 'domicilio', 'telefono', 'email', 'patente', 'anio', 'marca_modelo', 'razon_social', 'cuit', 'cargo',
+      const datos = Object.fromEntries(['nombre', 'dni', 'nacimiento', 'cuil', 'domicilio', 'domicilio_legal', 'telefono', 'email', 'patente', 'anio', 'marca_modelo', 'razon_social', 'cuit', 'cargo',
         'domicilio_empresa', 'estado_civil', 'conyuge_nombre', 'conyuge_dni', 'titular_nombre', 'titular_dni'].map((k) => [k, f[k].value.trim()]));
       datos.tipo_persona = estado.tipo; datos.relacion = estado.relacion;
       await llamar({ accion: 'confirmar', carga_id: estado.carga.carga_id, token: estado.carga.token, datos });

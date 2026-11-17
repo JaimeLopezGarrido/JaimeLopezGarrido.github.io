@@ -314,7 +314,7 @@
         else Object.assign(p, { nombre: d.razon_social || p.nombre, representante: rep, estado: 'verificada' });
       } else {
         p = dni && tabla('personas').find((x) => x.dni === dni);
-        const fila = { tipo: 'fisica', nombre: d.nombre, dni, cuil: d.cuil || (p && p.cuil) || null, sexo: (c.leido_dni && c.leido_dni.sexo) || null, nacimiento: d.nacimiento || null, domicilio: d.domicilio || (p && p.domicilio), telefono: d.telefono || (p && p.telefono), email: d.email || (p && p.email) || null,
+        const fila = { tipo: 'fisica', nombre: d.nombre, dni, cuil: d.cuil || (p && p.cuil) || null, sexo: (c.leido_dni && c.leido_dni.sexo) || null, nacimiento: d.nacimiento || null, domicilio: d.domicilio || (p && p.domicilio), domicilio_legal: d.domicilio_legal || (p && p.domicilio_legal) || null, telefono: d.telefono || (p && p.telefono), email: d.email || (p && p.email) || null,
           estado_civil: d.estado_civil || (p && p.estado_civil) || null, conyuge: d.conyuge_nombre ? { nombre: d.conyuge_nombre, dni: String(d.conyuge_dni || '').replace(/\D/g, '') } : (p && p.conyuge) || null,
           relacion: c.rol === 'otro' ? { tipo: d.relacion, titular_nombre: d.titular_nombre, titular_dni: d.titular_dni } : (p && p.relacion) || null, estado: 'verificada' };
         if (p) Object.assign(p, fila); else { p = { id: uid(), agencia_id: AG, creado: ahora(), ...fila }; tabla('personas').push(p); }

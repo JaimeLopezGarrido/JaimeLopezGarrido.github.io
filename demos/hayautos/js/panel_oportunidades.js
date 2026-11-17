@@ -177,7 +177,8 @@ export function crearOportunidades(ctx) {
         <button type="button" class="btn btn-primary" data-leer disabled>Leer</button></div>
       <div class="grid2">${campo('Nombre y apellido', 'nombre', '')}${campo('DNI', 'dni', '', 'inputmode="numeric"')}</div>
       <div class="grid2">${campo('CUIL', 'cuil', '', 'inputmode="numeric"')}${campo('Nacimiento', 'nacimiento', '', 'type="date"')}</div>
-      ${campo('Domicilio', 'domicilio', '')}
+      <div class="grid2">${campo('Domicilio real', 'domicilio', '')}${campo('Domicilio legal (el del DNI)', 'domicilio_legal', '')}</div>
+      <div class="row" style="gap: 8px;"><button type="button" class="btn btn-ghost" data-copiar-dom="real">← Real = mismo que el legal</button><button type="button" class="btn btn-ghost" data-copiar-dom="legal">Legal = mismo que el real →</button></div>
       <div class="grid2">${campo('Celular', 'telefono', '', 'type="tel"')}${campo('Email', 'email', '', 'type="email"')}</div>
       <div class="stack" style="gap: 14px;" data-civil><div class="grid2">${campoSel('Estado civil', 'estado_civil', CIV, '', 'Elegí')}<span></span></div>
         <div class="grid2" data-cony hidden>${campo('Cónyuge: nombre', 'conyuge_nombre', '')}${campo('Cónyuge: DNI', 'conyuge_dni', '', 'inputmode="numeric"')}</div></div>
@@ -197,7 +198,7 @@ export function crearOportunidades(ctx) {
           representante: { nombre: g('nombre'), dni, cuil: ci.ok ? ci.formateado : null, cargo: g('cargo') || null } };
       } else {
         if (rol !== 'otro' && !g('estado_civil')) throw new Error('Elegí el estado civil (lo pide el 08).');
-        fila = { tipo, nombre: g('nombre'), dni, cuil: ci.ok ? ci.formateado : null, nacimiento: g('nacimiento') || null, domicilio: g('domicilio'), telefono: g('telefono'), email: g('email') || null,
+        fila = { tipo, nombre: g('nombre'), dni, cuil: ci.ok ? ci.formateado : null, nacimiento: g('nacimiento') || null, domicilio: g('domicilio'), domicilio_legal: g('domicilio_legal') || null, telefono: g('telefono'), email: g('email') || null,
           estado_civil: g('estado_civil') || null, conyuge: g('conyuge_nombre') ? { nombre: g('conyuge_nombre'), dni: g('conyuge_dni').replace(/\D/g, '') } : null,
           relacion: rol === 'otro' ? { tipo: g('relacion'), titular_nombre: g('titular_nombre') } : null };
       }
@@ -227,7 +228,7 @@ export function crearOportunidades(ctx) {
         if (d.nombre) f.elements.nombre.value = d.nombre;
         if (d.dni) f.elements.dni.value = formatoDni(d.dni) || d.dni;
         if (/^\d{4}-\d\d-\d\d$/.test(d.fecha_nacimiento || '')) f.elements.nacimiento.value = d.fecha_nacimiento;
-        if (d.domicilio) f.elements.domicilio.value = d.domicilio;
+        if (d.domicilio) f.elements.domicilio_legal.value = d.domicilio;   // el DNI trae el domicilio legal
         const c = cuilInfo(d.cuil, d.dni); f.elements.cuil.value = c.ok ? c.formateado : cuilSugerido(d.dni, d.sexo);
       } catch (_) { toast('No se pudo leer: completalo a mano'); }
       b.textContent = 'Leer'; b.disabled = false;
@@ -399,3 +400,11 @@ export function crearOportunidades(ctx) {
 
   return { olvidar, vistaInicio, vistaRadar, contactos, contarMatchesNuevos, contarInteresados, interesados, verInteresados, abrirAuto, abrirPersona };
 }
+
+// "Cargar persona": botones para copiar el domicilio real en el legal y al revés
+document.addEventListener('click', (e) => {
+  const b = e.target.closest('[data-copiar-dom]'); if (!b || !b.form && !b.closest('form')) return;
+  const f = b.closest('form'); if (!f || !f.elements.domicilio_legal) return;
+  const [destino, origen] = b.dataset.copiarDom === 'real' ? [f.elements.domicilio, f.elements.domicilio_legal] : [f.elements.domicilio_legal, f.elements.domicilio];
+  if (origen.value.trim()) destino.value = origen.value;
+});

@@ -96,7 +96,8 @@ function avisosCarga({ rol, dni, cedula, datos, fotos }) {
   if (dni && !dni.legible) av('La foto del DNI no se pudo leer bien');
   if (dni && dni.legible) {
     const norm = (k, x) => (k === 'dni' ? String(x).replace(/\D/g, '') : _palabrasW(x).join(' '));
-    const corr = [['nombre', 'el nombre'], ['dni', 'el DNI'], ['domicilio', 'el domicilio']].filter(([k]) => dni[k] && d[k] && norm(k, dni[k]) !== norm(k, d[k]));
+    const dd = { ...d, domicilio: d.domicilio_legal || d.domicilio };   // el DNI trae el domicilio legal
+    const corr = [['nombre', 'el nombre'], ['dni', 'el DNI'], ['domicilio', 'el domicilio']].filter(([k]) => dni[k] && dd[k] && norm(k, dni[k]) !== norm(k, dd[k]));
     corr.forEach(([, t]) => av(`Corrigió ${t} que leímos del DNI`));
   }
   if (rol === 'vendedor' && cedula && cedula.legible) {
@@ -107,6 +108,8 @@ function avisosCarga({ rol, dni, cedula, datos, fotos }) {
   }
   if (rol === 'vendedor' && cedula && !cedula.legible) av('La cédula no se pudo leer bien');
   if (!d.telefono) av('Sin celular');
+  if (d.tipo_persona !== 'juridica' && !d.domicilio) av('Falta el domicilio real');
+  if (d.tipo_persona !== 'juridica' && !d.domicilio_legal) av('Falta el domicilio legal');
   return out;
 }
 
