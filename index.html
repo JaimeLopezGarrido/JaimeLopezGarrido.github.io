@@ -488,6 +488,35 @@ html:not(.con-historia) [data-quien] { display: none !important; }
       </div>
     </div>
   </article>
+
+  <hr class="linea">
+
+  <article class="proyecto p-dato" id="series">
+    <div>
+      <div class="estado mono"><span lang="es">Maestría · equipo de 5</span><span lang="en">Master's · team of 5</span></div>
+      <h3><span lang="es">Salar de Callacao: series temporales</span><span lang="en">Salar de Callacao: time series</span></h3>
+      <p><span lang="es">Pronóstico de nieve, agua y vegetación en una cuenca de la Puna salteña.</span><span lang="en">Forecasting snow, water and vegetation in a high-Andes basin in Salta, Argentina.</span></p>
+      <div class="qa">
+        <div class="q mono"><span lang="es">¿Cuál era el problema?</span><span lang="en">What was the problem?</span></div>
+        <ul class="qa-lista prob"><li><span lang="es">Una cuenca cerrada de la Puna sin estaciones de medición cerca: solo hay imágenes satelitales</span><span lang="en">A closed basin in the Puna with no nearby weather stations: only satellite imagery</span></li><li><span lang="es">Series muy estacionales y con años extremos, sobre todo la nieve</span><span lang="en">Highly seasonal series with extreme years, especially snow</span></li><li><span lang="es">Había que saber qué tipo de modelo pronostica mejor cada una</span><span lang="en">We needed to know which kind of model forecasts each one best</span></li></ul>
+        <div class="q sol mono"><span lang="es">¿Cómo se solucionó?</span><span lang="en">How was it solved?</span></div>
+        <ul class="qa-lista sol"><li><span lang="es"><b>Series desde Google Earth Engine:</b> superficie de nieve (Landsat, 1986–2025, 471 meses), de agua y vegetación (Sentinel-2, desde 2016)</span><span lang="en"><b>Series from Google Earth Engine:</b> snow cover (Landsat, 1986–2025, 471 months), surface water and vegetation (Sentinel-2, since 2016)</span></li><li><span lang="es"><b>TP1, modelos clásicos:</b> SARIMA con metodología Box-Jenkins y un VAR para ver si las series se explican entre sí</span><span lang="en"><b>Part 1, classical models:</b> SARIMA with the Box-Jenkins method and a VAR to test whether the series explain each other</span></li><li><span lang="es"><b>TP final, 24 modelos en 5 familias:</b> Random Forest, LightGBM, LSTM, N-BEATS, Prophet y AutoML, con datos externos de El Niño (NOAA) y temperatura y lluvia (NASA)</span><span lang="en"><b>Final project, 24 models in 5 families:</b> Random Forest, LightGBM, LSTM, N-BEATS, Prophet and AutoML, with external data on El Niño (NOAA) and temperature and rainfall (NASA)</span></li><li><span lang="es"><b>Un ganador por serie:</b> Random Forest en agua (MASE 0,55 contra 0,66 del mejor modelo clásico), en nieve, N-BEATS entre los modelos reproducibles (0,17 contra 0,26 del SARIMA) y N-BEATSx con temperatura en vegetación, el único que le ganó al pronóstico ingenuo</span><span lang="en"><b>One winner per series:</b> Random Forest for water (MASE 0.55 vs. 0.66 for the best classical model), for snow, N-BEATS among reproducible models (0.17 vs. 0.26 for SARIMA) and N-BEATSx with temperature for vegetation, the only one that beat the naive forecast</span></li></ul>
+      </div>
+      <div class="stack mono">Python · statsmodels · skforecast · LightGBM · NeuralForecast (N-BEATS) · Prophet · NeuralProphet · AutoTS</div>
+    </div>
+    <div>
+      <div class="dispositivos solo">
+        <a class="ventana" href="demos/series/" target="_blank" rel="noopener" aria-label="Tablero" data-goatcounter-click="demo-series">
+          <div class="barra"><i></i><i></i><i></i><span class="mono"><span lang="es">Tablero de pronósticos</span><span lang="en">Forecast dashboard</span></span></div>
+          <video muted loop playsinline preload="none" poster="video/series.webp" data-auto><source src="video/series.webm" type="video/webm"><source src="video/series.mp4" type="video/mp4"></video><span class="abrir mono"><span lang="es">Abrir tablero ↗</span><span lang="en">Open dashboard ↗</span></span>
+        </a>
+      </div>
+      <div class="demo-links mono">
+        <a href="demos/series/" target="_blank" rel="noopener" data-goatcounter-click="demo-series"><span lang="es">Abrir el tablero</span><span lang="en">Open the dashboard</span> ↗</a>
+        <span class="nota-demo"><span lang="es">Equipo: Analía Alé, Diego Farfán, Jaime López Garrido, Gabriel Martina, Lucía Pereyra Huertas</span><span lang="en">Team: Analía Alé, Diego Farfán, Jaime López Garrido, Gabriel Martina, Lucía Pereyra Huertas</span></span>
+      </div>
+    </div>
+  </article>
   </div>
 </div></section>
 
