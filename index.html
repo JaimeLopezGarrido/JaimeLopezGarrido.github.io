@@ -143,6 +143,18 @@ h2 { font-family: var(--nombre); font-weight: 600; font-size: clamp(34px, 5vw, 5
 .demo-links .nota-demo { color: var(--dim); }
 
 .uso-personal { padding-top: 56px; }
+/* Solapas de Proyectos: AI & Automatizaciones / Data Science */
+.solapas { display: inline-flex; gap: 4px; padding: 4px; margin: 4px 0 30px; border: 1px solid var(--line); border-radius: 99px; background: var(--card); }
+.solapas button { all: unset; cursor: pointer; padding: 9px 18px; border-radius: 99px; color: var(--muted); font-size: 12.5px; letter-spacing: .06em; text-transform: uppercase; transition: background .25s, color .25s; }
+.solapas button:hover { color: var(--ink); }
+.solapas button[aria-selected="true"] { background: var(--violeta); color: #0b0b0b; }
+.solapas button:focus-visible { outline: 2px solid var(--violeta); outline-offset: 2px; }
+.panel-proy { animation: aparecer .45s ease both; }
+@keyframes aparecer { from { opacity: 0; transform: translateY(8px); } }
+@media (prefers-reduced-motion: reduce) { .panel-proy { animation: none; } }
+.p-dato { --c: var(--violeta); align-items: center; grid-template-columns: .85fr 1.15fr; }
+.dispositivos.solo { padding-bottom: 0; }
+.dispositivos.solo .ventana { margin-left: 0; }
 .subtitulo { font-family: var(--nombre); font-weight: 600; font-size: clamp(26px, 3.4vw, 34px); letter-spacing: -.035em; line-height: 1.1; margin: 0; }
 .chicos { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 28px 0 0; }
 .chico { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 26px; }
@@ -242,7 +254,7 @@ html:not(.con-historia) [data-quien] { display: none !important; }
   .quien, .proyecto, .chicos { grid-template-columns: 1fr; gap: 28px; }
   .quien .foto { width: 140px; height: 140px; }
   .pasos { grid-template-columns: 1fr 1fr; }
-  .p-hay, .p-proper { grid-template-columns: 1fr; }
+  .p-hay, .p-proper, .p-dato { grid-template-columns: 1fr; }
   .ventana { margin-left: 18%; }
   .celu { width: 34%; border-radius: 20px; border-width: 5px; }
   .telefono { width: min(340px, 88vw); height: 640px; }
@@ -301,6 +313,11 @@ html:not(.con-historia) [data-quien] { display: none !important; }
 
 <section class="bloque" id="proyectos"><div class="cont">
   <div class="etiqueta mono"><span lang="es">Proyectos</span><span lang="en">Projects</span></div>
+  <div class="solapas mono" role="tablist" aria-label="Tipo de proyecto">
+    <button type="button" role="tab" id="tab-ai" aria-controls="panel-ai" aria-selected="true" data-solapa="ai">AI &amp; <span lang="es">Automatizaciones</span><span lang="en">Automation</span></button>
+    <button type="button" role="tab" id="tab-datos" aria-controls="panel-datos" aria-selected="false" data-solapa="datos">Data Science</button>
+  </div>
+  <div class="panel-proy" id="panel-ai" role="tabpanel" aria-labelledby="tab-ai">
   <h2><span lang="es">Hechos para clientes reales.</span><span lang="en">Built for real clients.</span></h2>
 
   <article class="proyecto p-hay">
@@ -410,6 +427,67 @@ html:not(.con-historia) [data-quien] { display: none !important; }
       <p><span lang="es">Genera mis sesiones de estudio de IA y un quiz para el celular, y valida todo lo que produce.</span><span lang="en">Generates my AI study sessions and a phone quiz game, and validates everything it produces.</span></p>
       <div class="mono" style="color:var(--muted)"><span lang="es">423 preguntas · 222 términos · desde el 05/11</span><span lang="en">423 questions · 222 terms · since Nov 5</span></div>
     </div>
+  </div>
+  </div>
+
+  <div class="panel-proy" id="panel-datos" role="tabpanel" aria-labelledby="tab-datos" hidden>
+  <h2><span lang="es">Datos, modelos y tableros.</span><span lang="en">Data, models and dashboards.</span></h2>
+
+  <article class="proyecto p-dato" id="webmining">
+    <div>
+      <div class="estado mono"><span lang="es">Maestría · equipo de 5</span><span lang="en">Master's · team of 5</span></div>
+      <h3><span lang="es">Arbolado urbano en CABA</span><span lang="en">Urban trees in Buenos Aires</span></h3>
+      <p><span lang="es">TP final de Web Mining: el reclamo no mide la necesidad.</span><span lang="en">Web Mining final project: complaints don't measure need.</span></p>
+      <div class="qa">
+        <div class="q mono"><span lang="es">¿Cuál era el problema?</span><span lang="en">What was the problem?</span></div>
+        <ul class="qa-lista prob"><li><span lang="es">La Ciudad atiende el arbolado según los reclamos de los vecinos</span><span lang="en">The city manages street trees based on residents' complaints</span></li><li><span lang="es">Pero hay barrios con mucho calor y poca vegetación que casi no reclaman</span><span lang="en">But some areas with high heat and little vegetation barely complain</span></li><li><span lang="es">Esa necesidad queda invisible si solo se miran los reclamos</span><span lang="en">That need stays invisible if you only look at complaints</span></li></ul>
+        <div class="q sol mono"><span lang="es">¿Cómo se solucionó?</span><span lang="en">How was it solved?</span></div>
+        <ul class="qa-lista sol"><li><span lang="es"><b>Web mining sobre 16 fuentes:</b> Google Earth Engine (235 imágenes satelitales), datos abiertos de la Ciudad (190.581 reclamos y 354.795 árboles), Censo 2022, OpenStreetMap y APIs de geocodificación</span><span lang="en"><b>Web mining across 16 sources:</b> Google Earth Engine (235 satellite images), city open data (190,581 complaints and 354,795 trees), 2022 Census, OpenStreetMap and geocoding APIs</span></li><li><span lang="es"><b>Índice de necesidad</b> por radio censal: calor, vegetación y árboles por habitante, con la temperatura afinada de 100 a 20 m con LightGBM</span><span lang="en"><b>Need index</b> per census tract: heat, vegetation and trees per resident, with surface temperature refined from 100 to 20 m using LightGBM</span></li><li><span lang="es"><b>Modelo de reclamos esperables</b> (binomial negativa): 448 radios "en silencio", con necesidad alta y reclamo bajo, donde viven 320.773 personas, y 52 zonas de intervención</span><span lang="en"><b>Expected-complaints model</b> (negative binomial): 448 "silent" tracts with high need and low complaints, home to 320,773 people, and 52 intervention zones</span></li></ul>
+      </div>
+      <div class="stack mono">Python · Google Earth Engine · GeoPandas · DuckDB · statsmodels · LightGBM · Leaflet</div>
+    </div>
+    <div>
+      <div class="dispositivos solo">
+        <a class="ventana" href="demos/webmining/" target="_blank" rel="noopener" aria-label="Tablero" data-goatcounter-click="demo-webmining">
+          <div class="barra"><i></i><i></i><i></i><span class="mono"><span lang="es">Tablero con el mapa de la Ciudad</span><span lang="en">Dashboard with the city map</span></span></div>
+          <video muted loop playsinline preload="none" poster="video/webmining.webp" data-auto><source src="video/webmining.webm" type="video/webm"><source src="video/webmining.mp4" type="video/mp4"></video><span class="abrir mono"><span lang="es">Abrir tablero ↗</span><span lang="en">Open dashboard ↗</span></span>
+        </a>
+      </div>
+      <div class="demo-links mono">
+        <a href="demos/webmining/" target="_blank" rel="noopener" data-goatcounter-click="demo-webmining"><span lang="es">Abrir el tablero</span><span lang="en">Open the dashboard</span> ↗</a>
+        <span class="nota-demo"><span lang="es">Equipo: Analía Alé, Diego Farfán, Jaime López Garrido, Gabriel Martina, Lucía Pereyra Huertas</span><span lang="en">Team: Analía Alé, Diego Farfán, Jaime López Garrido, Gabriel Martina, Lucía Pereyra Huertas</span></span>
+      </div>
+    </div>
+  </article>
+
+  <hr class="linea">
+
+  <article class="proyecto p-dato" id="northwind">
+    <div>
+      <div class="estado mono"><span lang="es">Maestría · equipo de 5</span><span lang="en">Master's · team of 5</span></div>
+      <h3>Northwind DWA</h3>
+      <p><span lang="es">Data Warehouse analítico con pipeline reproducible y tablero.</span><span lang="en">Analytical data warehouse with a reproducible pipeline and dashboard.</span></p>
+      <div class="qa">
+        <div class="q mono"><span lang="es">¿Cuál era el problema?</span><span lang="en">What was the problem?</span></div>
+        <ul class="qa-lista prob"><li><span lang="es">Las ventas de Northwind, una distribuidora de alimentos (la base de ejemplo clásica), estaban en archivos crudos, pensados para registrar pedidos y no para analizarlos</span><span lang="en">Sales for Northwind, a food distributor (the classic sample database), lived in raw files built to record orders, not to analyze them</span></li><li><span lang="es">Además llegaba una segunda ingesta con novedades que había que integrar sin perder la historia</span><span lang="en">A second batch of new data had to be integrated without losing history</span></li><li><span lang="es">Sin controles de calidad ni historia de los cambios, no se podía confiar en los números</span><span lang="en">With no quality checks or change history, the numbers couldn't be trusted</span></li></ul>
+        <div class="q sol mono"><span lang="es">¿Cómo se solucionó?</span><span lang="en">How was it solved?</span></div>
+        <ul class="qa-lista sol"><li><span lang="es"><b>Pipeline por capas</b> con 29 scripts en 5 etapas, de los CSV crudos a la publicación, reproducible con un solo comando</span><span lang="en"><b>Layered pipeline</b> with 29 scripts in 5 stages, from raw CSVs to publishing, reproducible with a single command</span></li><li><span lang="es"><b>Esquema estrella</b> con 2.169 líneas de venta (836 órdenes de 21 países) e historial de cambios SCD2</span><span lang="en"><b>Star schema</b> with 2,169 sales lines (836 orders from 21 countries) and SCD2 change history</span></li><li><span lang="es"><b>86 controles de calidad</b>: si alguno rechaza, la carga se frena. Cada ejecución queda registrada para auditoría</span><span lang="en"><b>86 quality checks</b>: if one fails, the load stops. Every run is logged for auditing</span></li><li><span lang="es"><b>Tablero</b> con 3 productos de datos: ventas, clientes y productos</span><span lang="en"><b>Dashboard</b> with 3 data products: sales, customers and products</span></li></ul>
+      </div>
+      <div class="stack mono">SQL · SQLite · Python · Streamlit · Plotly</div>
+    </div>
+    <div>
+      <div class="dispositivos solo">
+        <a class="ventana" href="demos/northwind/" target="_blank" rel="noopener" aria-label="Tablero" data-goatcounter-click="demo-northwind">
+          <div class="barra"><i></i><i></i><i></i><span class="mono"><span lang="es">Tablero del Data Warehouse</span><span lang="en">Data warehouse dashboard</span></span></div>
+          <video muted loop playsinline preload="none" poster="video/northwind.webp" data-auto><source src="video/northwind.webm" type="video/webm"><source src="video/northwind.mp4" type="video/mp4"></video><span class="abrir mono"><span lang="es">Abrir tablero ↗</span><span lang="en">Open dashboard ↗</span></span>
+        </a>
+      </div>
+      <div class="demo-links mono">
+        <a href="demos/northwind/" target="_blank" rel="noopener" data-goatcounter-click="demo-northwind"><span lang="es">Abrir el tablero</span><span lang="en">Open the dashboard</span> ↗</a>
+        <span class="nota-demo"><span lang="es">Versión web del tablero original en Streamlit · Equipo: Analía Alé, Diego Farfán, Jaime López Garrido, Gabriel Martina, Lucía Pereyra Huertas</span><span lang="en">Web version of the original Streamlit dashboard · Team: Analía Alé, Diego Farfán, Jaime López Garrido, Gabriel Martina, Lucía Pereyra Huertas</span></span>
+      </div>
+    </div>
+  </article>
   </div>
 </div></section>
 
@@ -531,6 +609,26 @@ async function guiar() {
   await espera(1400);
   cursor.classList.remove("ve");
 }
+
+// Solapas de Proyectos. Un link a algo de la otra solapa (por ejemplo #asistente o #data-science) la abre sola
+const solapas = [...document.querySelectorAll('[data-solapa]')];
+function abrirSolapa(nombre) {
+  solapas.forEach((b) => {
+    const on = b.dataset.solapa === nombre;
+    b.setAttribute('aria-selected', on);
+    document.getElementById('panel-' + b.dataset.solapa).hidden = !on;
+  });
+  document.querySelectorAll('#panel-' + nombre + ' .linea').forEach((l) => l.classList.add('visible'));
+}
+solapas.forEach((b) => b.addEventListener('click', () => abrirSolapa(b.dataset.solapa)));
+function solapaDelHash() {
+  const h = location.hash.slice(1);
+  if (h === 'data-science') { abrirSolapa('datos'); document.getElementById('proyectos').scrollIntoView(); return; }
+  const destino = h && document.getElementById(h), panel = destino && destino.closest('.panel-proy');
+  if (panel && panel.hidden) { abrirSolapa(panel.id.replace('panel-', '')); destino.scrollIntoView(); }
+}
+addEventListener('hashchange', solapaDelHash);
+solapaDelHash();
 
 // Videos de las demos: se cargan y reproducen solo mientras están en pantalla
 const vio = new IntersectionObserver(es => es.forEach(e => {
